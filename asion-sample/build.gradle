@@ -1,0 +1,74 @@
+/**
+ *
+ */
+apply plugin: "io.spring.dependency-management"
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework:spring-framework-bom:${springVersion}"
+        mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
+        mavenBom "io.spring.platform:platform-bom:${platformBomVersion}"
+    }
+}
+
+project("asion-sample-shared") {
+    dependencies {
+//        compile project(":asion-base")
+        compile("org.asion:asion-base:${version}")
+    }
+}
+
+project("asion-sample-core") {
+    apply plugin: "spring-boot"
+    dependencies {
+//        compile project(path: ":asion-sample:asion-sample-shared")
+        compile("org.asion:asion-sample-shared:${version}")
+
+        compile("org.springframework:spring-context-support")
+        compile("org.springframework.boot:spring-boot-starter-jdbc")
+        compile("mysql:mysql-connector-java")
+        compile('com.h2database:h2')
+
+        testCompile("org.springframework.boot:spring-boot-starter-test")
+        testCompile("org.unitils:unitils-bom:3.4.2")
+    }
+}
+
+project("asion-sample-server") {
+    apply plugin: "spring-boot"
+
+    dependencies {
+//        compile project(path: ":asion-sample:asion-sample-core")
+        compile("org.asion:asion-sample-core:${version}")
+        compile("org.springframework.boot:spring-boot-starter-actuator")
+        compile("org.springframework.boot:spring-boot-starter-jdbc")
+        compile("mysql:mysql-connector-java")
+        compile('com.h2database:h2')
+
+        compile("org.springframework.boot:spring-boot-starter-web")
+        compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+        compile("org.webjars:bootstrap:3.3.6")
+        compile("org.webjars:jquery:2.2.3")
+
+//        testCompile("org.springframework.boot:spring-boot-starter-test")
+    }
+
+    bootRepackage {
+        mainClass = 'org.asion.sample.AsionSampleServerApplication'
+    }
+
+    // noinspection GroovyAssignabilityCheck
+    jar {
+        manifest {
+            attributes 'Created-By': "${System.getProperty("java.version")} (${System.getProperty("java.specification.vendor")})",
+                    'Implementation-Title': project.name,
+                    'Implementation-Version': project.version
+        }
+        from("${rootProject.projectDir}/src/dist") {
+            include "license.txt"
+            include "notice.txt"
+            into "META-INF"
+            expand(copyright: new Date().format("yyyy"), version: project.version)
+        }
+    }
+}

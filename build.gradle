@@ -1,0 +1,78 @@
+/**
+ * 构建的配置
+ */
+buildscript {
+    ext {
+        springBootVersion = '1.3.3.RELEASE'
+    }
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
+    dependencies {
+        classpath "io.spring.gradle:dependency-management-plugin:0.5.6.RELEASE"
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+/**
+ * allprojects configuration
+ */
+configure(allprojects) { project ->
+    group = "org.asion"
+    version = qualifyVersionIfNecessary(version)
+
+    apply plugin: 'idea'
+
+    ext {
+        springVersion = '4.2.5.RELEASE'
+        platformBomVersion = '2.0.3.RELEASE'
+    }
+}
+
+/**
+ * subprojects configuration
+ */
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'maven'
+
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
+
+    dependencies {
+        testCompile 'junit:junit:4.12'
+    }
+}
+
+/**
+ * rootProject configuration
+ */
+configure(rootProject) {
+    description = "Asion System"
+
+    apply plugin: 'groovy'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.13'
+}
+
+/*
+ * Support publication of artifacts versioned by topic branch.
+ * CI builds supply `-P BRANCH_NAME=<TOPIC>` to gradle at build time.
+ * If <TOPIC> starts with 'SPR-', change version
+ *     from BUILD-SNAPSHOT => <TOPIC>-SNAPSHOT
+ *     e.g. 3.2.1.BUILD-SNAPSHOT => 3.2.1.SPR-1234-SNAPSHOT
+ */
+def qualifyVersionIfNecessary(version) {
+    if (rootProject.hasProperty("BRANCH_NAME")) {
+        def qualifier = rootProject.getProperty("BRANCH_NAME")
+        if (qualifier.startsWith("SPR-")) {
+            return version.replace('BUILD', qualifier)
+        }
+    }
+    return version
+}

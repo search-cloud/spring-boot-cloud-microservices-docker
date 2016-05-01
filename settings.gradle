@@ -1,0 +1,9 @@
+
+//include "shared", "api", "services:webservice", "services:shared"
+include 'asion-base'
+include 'asion-sample',
+        "asion-sample:asion-sample-shared",
+        "asion-sample:asion-sample-core",
+        "asion-sample:asion-sample-server"
+
+
