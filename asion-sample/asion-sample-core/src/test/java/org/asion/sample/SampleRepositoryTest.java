@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
  */
 @SpringApplicationContext("/appContext-unit.xml")
 @DataSet(
-        "../../../database/dataset/asion_sample_sample.xml"
+        "/database/dataset/asion_sample_sample.xml"
 )
 public class SampleRepositoryTest extends UnitilsJUnit4 {
 

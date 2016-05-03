@@ -1,27 +1,26 @@
 /**
- *
+ * asion-sample's sub projects configuration
  */
-apply plugin: "io.spring.dependency-management"
+subprojects {
+    apply plugin: "io.spring.dependency-management"
 
-dependencyManagement {
-    imports {
-        mavenBom "org.springframework:spring-framework-bom:${springVersion}"
-        mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
-        mavenBom "io.spring.platform:platform-bom:${platformBomVersion}"
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework:spring-framework-bom:${springVersion}"
+            mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
+            mavenBom "io.spring.platform:platform-bom:${platformBomVersion}"
+        }
     }
 }
 
 project("asion-sample-shared") {
     dependencies {
-//        compile project(":asion-base")
         compile("org.asion:asion-base:${version}")
     }
 }
 
 project("asion-sample-core") {
-    apply plugin: "spring-boot"
     dependencies {
-//        compile project(path: ":asion-sample:asion-sample-shared")
         compile("org.asion:asion-sample-shared:${version}")
 
         compile("org.springframework:spring-context-support")
@@ -30,7 +29,7 @@ project("asion-sample-core") {
         compile('com.h2database:h2')
 
         testCompile("org.springframework.boot:spring-boot-starter-test")
-        testCompile("org.unitils:unitils-bom:3.4.2")
+        testCompile("org.unitils:unitils-bom:${unitilsBom}")
     }
 }
 
@@ -38,7 +37,6 @@ project("asion-sample-server") {
     apply plugin: "spring-boot"
 
     dependencies {
-//        compile project(path: ":asion-sample:asion-sample-core")
         compile("org.asion:asion-sample-core:${version}")
         compile("org.springframework.boot:spring-boot-starter-actuator")
         compile("org.springframework.boot:spring-boot-starter-jdbc")

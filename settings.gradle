@@ -1,9 +1,15 @@
 
 //include "shared", "api", "services:webservice", "services:shared"
 include 'asion-base'
+
+// sample
 include 'asion-sample',
         "asion-sample:asion-sample-shared",
         "asion-sample:asion-sample-core",
         "asion-sample:asion-sample-server"
 
-
+// search
+include 'asion-search',
+        "asion-search:asion-search-shared",
+        "asion-search:asion-search-core",
+        "asion-search:asion-search-server"

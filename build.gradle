@@ -27,11 +27,12 @@ configure(allprojects) { project ->
     ext {
         springVersion = '4.2.5.RELEASE'
         platformBomVersion = '2.0.3.RELEASE'
+        unitilsBom = '3.4.2'
     }
 }
 
 /**
- * subprojects configuration
+ * asion-projects's sub projects configuration
  */
 subprojects {
     apply plugin: 'java'
