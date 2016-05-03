@@ -42,10 +42,6 @@ subprojects {
         mavenLocal()
         jcenter()
     }
-
-    dependencies {
-        testCompile 'junit:junit:4.12'
-    }
 }
 
 /**
