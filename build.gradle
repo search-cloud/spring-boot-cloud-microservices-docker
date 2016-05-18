@@ -16,7 +16,7 @@ buildscript {
 }
 
 /**
- * allprojects configuration
+ * All projects configuration
  */
 configure(allprojects) { project ->
     group = "org.asion"
@@ -37,6 +37,9 @@ configure(allprojects) { project ->
 subprojects {
     apply plugin: 'java'
     apply plugin: 'maven'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
 
     repositories {
         mavenLocal()
