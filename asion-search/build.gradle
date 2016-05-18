@@ -1,0 +1,83 @@
+/**
+ * asion-search's subprojects
+ */
+subprojects {
+    apply plugin: "io.spring.dependency-management"
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework:spring-framework-bom:${springVersion}"
+            mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
+            mavenBom "io.spring.platform:platform-bom:${platformBomVersion}"
+        }
+    }
+}
+
+project("asion-search-shared") {
+    dependencies {
+        compile("org.asion:asion-base:${version}")
+
+        compile("org.springframework:spring-context-support")
+        compile("org.springframework.boot:spring-boot-starter-jdbc")
+        compile("org.springframework.boot:spring-boot-starter-data-elasticsearch")
+        compile("org.springframework.data:spring-data-elasticsearch:2.0.1.RELEASE")
+        compile("org.elasticsearch:elasticsearch:2.2.0")
+    }
+}
+
+project("asion-search-core") {
+
+    dependencies {
+        compile("org.asion:asion-search-shared:${version}")
+
+        compile("org.springframework:spring-context-support")
+        compile("org.springframework.boot:spring-boot-starter-jdbc")
+        compile("org.springframework.data:spring-data-jpa")
+        compile("org.springframework.data:spring-data-elasticsearch:2.0.1.RELEASE")
+        compile("org.elasticsearch:elasticsearch:2.2.0")
+
+        compile("mysql:mysql-connector-java")
+        compile('com.h2database:h2')
+
+        testCompile("org.springframework.boot:spring-boot-starter-test")
+        testCompile("org.unitils:unitils-bom:${unitilsBom}")
+    }
+}
+
+project("asion-search-server") {
+    apply plugin: "spring-boot"
+
+    dependencies {
+        compile("org.asion:asion-search-core:${version}")
+        compile("org.springframework.boot:spring-boot-starter-actuator")
+        compile("org.springframework.boot:spring-boot-starter-jdbc")
+        compile("mysql:mysql-connector-java")
+        compile('com.h2database:h2')
+
+        compile("org.springframework.boot:spring-boot-starter-web")
+        compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+        compile("org.webjars:bootstrap:3.3.6")
+        compile("org.webjars:jquery:2.2.3")
+
+//        testCompile("org.springframework.boot:spring-boot-starter-test")
+    }
+
+    bootRepackage {
+        mainClass = 'org.asion.sample.AsionElasticsearchServerApplication'
+    }
+
+    // noinspection GroovyAssignabilityCheck
+    jar {
+        manifest {
+            attributes 'Created-By': "${System.getProperty("java.version")} (${System.getProperty("java.specification.vendor")})",
+                    'Implementation-Title': project.name,
+                    'Implementation-Version': project.version
+        }
+        from("${rootProject.projectDir}/src/dist") {
+            include "license.txt"
+            include "notice.txt"
+            into "META-INF"
+            expand(copyright: new Date().format("yyyy"), version: project.version)
+        }
+    }
+}

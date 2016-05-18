@@ -1,0 +1,40 @@
+#mysql:
+#    image: mysql:5.6.23
+#    ports:
+#      - "1006:3306"
+#    environment:
+#       MYSQL_ROOT_PASSWORD: asion
+#       MYSQL_DATABASE: asion_search
+
+
+
+
+# elasticsearch docker images
+# docker run -d -p 9200:9200 -p 9300:9300 --name asion-elasticsearch elasticsearch:2.2.0
+# node 0
+elasticsearch0:
+  image: elasticsearch:2.2.0
+  ports:
+    - "30768:9200"
+    - "30769:9300"
+
+# node 1
+elasticsearch1:
+  image: elasticsearch:2.2.0
+  ports:
+    - "31768:9200"
+    - "31769:9300"
+
+# node 2
+elasticsearch2:
+  image: elasticsearch:2.2.0
+  ports:
+    - "32768:9200"
+    - "32769:9300"
+
+# node 3
+elasticsearch3:
+  image: elasticsearch:2.2.0
+  ports:
+    - "33768:9200"
+    - "33769:9300"
