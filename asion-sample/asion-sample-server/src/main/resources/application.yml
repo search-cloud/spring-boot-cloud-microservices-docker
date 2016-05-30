@@ -1,6 +1,6 @@
 # server config
 server:
-  port: 9999
+  port: 9909
 
 # Allow Thymeleaf templates to be reloaded at dev time
 spring:
@@ -12,13 +12,20 @@ spring:
     username: root
     password: asion
     driverClassName: com.mysql.jdbc.Driver
-    test-on-borrow: false
-    test-on-return: false
-    test-while-idle: true
-    max-wait: 30000
-    validation-query: SELECT 1
-    time-between-eviction-runs-millis: 20000
-    min-evictable-idle-time-millis: 28700
+    dbcp:
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: true
+      max-wait: 30000
+      validation-query: SELECT 1
+      time-between-eviction-runs-millis: 20000
+      min-evictable-idle-time-millis: 28700
+
+  dubbo:
+    app: dubbo-account-provider
+    registry: redis://dubbo.ytx.net:5050
+    protocol: dubbo
+    port: 9908
 
 logging:
   level:

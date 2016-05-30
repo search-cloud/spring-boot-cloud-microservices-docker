@@ -6,7 +6,9 @@ include 'asion-base'
 include 'asion-sample',
         "asion-sample:asion-sample-shared",
         "asion-sample:asion-sample-core",
-        "asion-sample:asion-sample-server"
+        "asion-sample:asion-sample-server",
+        "asion-sample:asion-sample-web",
+        "asion-sample:spring-boot-starter-asion-sample"
 
 // search
 include 'asion-search',

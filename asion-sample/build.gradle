@@ -8,7 +8,7 @@ subprojects {
         imports {
             mavenBom "org.springframework:spring-framework-bom:${springVersion}"
             mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
-            mavenBom "io.spring.platform:platform-bom:${platformBomVersion}"
+//            mavenBom "io.spring.platform:platform-bom:${platformBomVersion}"
         }
     }
 }
@@ -16,6 +16,19 @@ subprojects {
 project("asion-sample-shared") {
     dependencies {
         compile("org.asion:asion-base:${version}")
+    }
+}
+
+/**
+ * spring boot starter asion sample
+ */
+project("spring-boot-starter-asion-sample") {
+    dependencies {
+        compile("org.asion:asion-sample-shared:${version}")
+
+        compile("org.mvnsearch.spring.boot:spring-boot-starter-dubbo:1.0.0-SNAPSHOT")
+        compile("org.springframework.boot:spring-boot-starter-actuator")
+        compile("org.springframework.boot:spring-boot-configuration-processor")
     }
 }
 
@@ -38,21 +51,60 @@ project("asion-sample-server") {
 
     dependencies {
         compile("org.asion:asion-sample-core:${version}")
+        compile("org.mvnsearch.spring.boot:spring-boot-starter-dubbo:1.0.0-SNAPSHOT")
+        compile("org.springframework.cloud:spring-cloud-starter-eureka:1.1.0.RELEASE")
         compile("org.springframework.boot:spring-boot-starter-actuator")
         compile("org.springframework.boot:spring-boot-starter-jdbc")
         compile("mysql:mysql-connector-java")
         compile('com.h2database:h2')
+        compile('redis.clients:jedis')
 
         compile("org.springframework.boot:spring-boot-starter-web")
         compile("org.springframework.boot:spring-boot-starter-thymeleaf")
-        compile("org.webjars:bootstrap:3.3.6")
-        compile("org.webjars:jquery:2.2.3")
+//        compile("org.webjars:bootstrap:3.3.6")
+//        compile("org.webjars:jquery:2.2.3")
 
 //        testCompile("org.springframework.boot:spring-boot-starter-test")
     }
 
     bootRepackage {
         mainClass = 'org.asion.sample.AsionSampleServerApplication'
+    }
+
+    // noinspection GroovyAssignabilityCheck
+    jar {
+        manifest {
+            attributes 'Created-By': "${System.getProperty("java.version")} (${System.getProperty("java.specification.vendor")})",
+                    'Implementation-Title': project.name,
+                    'Implementation-Version': project.version
+        }
+        from("${rootProject.projectDir}/src/dist") {
+            include "license.txt"
+            include "notice.txt"
+            into "META-INF"
+            expand(copyright: new Date().format("yyyy"), version: project.version)
+        }
+    }
+}
+
+project("asion-sample-web") {
+    apply plugin: "spring-boot"
+
+    dependencies {
+        //
+        compile("org.asion:spring-boot-starter-asion-sample:${version}")
+
+        compile('redis.clients:jedis')
+        compile("org.springframework.boot:spring-boot-starter-actuator")
+        compile("org.springframework.boot:spring-boot-starter-web")
+        compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+        compile("org.webjars:bootstrap:3.3.6")
+        compile("org.webjars:jquery:2.2.3")
+        compile("org.sitemesh:sitemesh:3.0.1")
+    }
+
+    bootRepackage {
+        mainClass = 'org.asion.sample.AsionSampleWebApplication'
     }
 
     // noinspection GroovyAssignabilityCheck

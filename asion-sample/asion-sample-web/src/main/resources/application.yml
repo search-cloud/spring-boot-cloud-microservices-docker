@@ -1,0 +1,18 @@
+# server config
+server:
+  port: 9980
+
+# Allow Thymeleaf templates to be reloaded at dev time
+spring:
+  thymeleaf.cache: false
+  application:
+    name: asion-sample-web
+  dubbo:
+    app: asion-sample-web
+    registry: redis://dubbo.ytx.net:5050
+    protocol: dubbo
+
+logging:
+  level:
+    root: info
+  file: asion-sample-web.log

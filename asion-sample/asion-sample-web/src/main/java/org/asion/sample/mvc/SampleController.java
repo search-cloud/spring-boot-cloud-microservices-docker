@@ -1,7 +1,7 @@
 package org.asion.sample.mvc;
 
 import org.asion.sample.Sample;
-import org.asion.sample.SampleRepository;
+import org.asion.sample.SampleManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -15,41 +15,42 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 
 /**
- * @author Rob Winch
- * @author Doo-Hwan Kwak
+ * Sample controller.
+ * @author Asion.
+ * @since 16/5/29.
  */
 @Controller
-@RequestMapping("/")
+@RequestMapping("/sample/")
 public class SampleController {
 
     @Autowired
-    private SampleRepository sampleRepository;
+    private SampleManager sampleManager;
 
-    @RequestMapping
+    @RequestMapping("list")
     public ModelAndView list() {
-        Iterable<Sample> samples = sampleRepository.findAll();
-        return new ModelAndView("samples/list", "samples", samples);
+        Iterable<Sample> samples = sampleManager.findAll();
+        return new ModelAndView("sample/list", "samples", samples);
     }
 
     @RequestMapping("{id}")
     public ModelAndView view(@PathVariable("id") Long id) {
-        Sample sample = sampleRepository.findOne(id);
-        return new ModelAndView("samples/view", "sample", sample);
+        Sample sample = sampleManager.findOne(id);
+        return new ModelAndView("sample/view", "sample", sample);
     }
 
     @RequestMapping(params = "form", method = RequestMethod.GET)
     public String createForm(@ModelAttribute Sample sample) {
-        return "samples/form";
+        return "sample/form";
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "create",method = RequestMethod.POST)
     public ModelAndView create(@Valid Sample sample, BindingResult result, RedirectAttributes redirect) {
         if (result.hasErrors()) {
-            return new ModelAndView("samples/form", "formErrors", result.getAllErrors());
+            return new ModelAndView("sample/form", "formErrors", result.getAllErrors());
         }
-        sample = sampleRepository.save(sample);
+        sample = sampleManager.save(sample);
         redirect.addFlashAttribute("globalSample", "Successfully save a new sample");
-        return new ModelAndView("redirect:/{sample.id}", "sample.id", sample.getId());
+        return new ModelAndView("redirect:sample/{sample.id}", "sample.id", sample.getId());
     }
 
     @RequestMapping("foo")
@@ -59,15 +60,15 @@ public class SampleController {
 
     @RequestMapping(value = "delete/{id}")
     public ModelAndView delete(@PathVariable("id") Long id) {
-        sampleRepository.delete(id);
-        Iterable<Sample> samples = sampleRepository.findAll();
-        return new ModelAndView("samples/list", "samples", samples);
+        sampleManager.delete(id);
+        Iterable<Sample> samples = sampleManager.findAll();
+        return new ModelAndView("sample/list", "samples", samples);
     }
 
     @RequestMapping(value = "modify/{id}", method = RequestMethod.GET)
     public ModelAndView modifyForm(@PathVariable("id") Long id) {
-        Sample sample = sampleRepository.findOne(id);
-        return new ModelAndView("samples/form", "sample", sample);
+        Sample sample = sampleManager.findOne(id);
+        return new ModelAndView("sample/form", "sample", sample);
     }
 
 }
