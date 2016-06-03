@@ -23,7 +23,7 @@ spring:
 
   dubbo:
     app: dubbo-account-provider
-    registry: redis://dubbo.ytx.net:5050
+    registry: redis://dubbo.asion.org:5050
     protocol: dubbo
     port: 9908
 

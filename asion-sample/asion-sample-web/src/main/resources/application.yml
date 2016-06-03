@@ -9,7 +9,7 @@ spring:
     name: asion-sample-web
   dubbo:
     app: asion-sample-web
-    registry: redis://dubbo.ytx.net:5050
+    registry: redis://dubbo.asion.org:5050
     protocol: dubbo
 
 logging:
