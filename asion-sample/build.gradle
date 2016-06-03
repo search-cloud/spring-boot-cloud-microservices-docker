@@ -100,6 +100,7 @@ project("asion-sample-web") {
         compile("org.springframework.boot:spring-boot-starter-thymeleaf")
         compile("org.webjars:bootstrap:3.3.6")
         compile("org.webjars:jquery:2.2.3")
+        compile('org.webjars:jquery-validation:1.15.0')
         compile("org.sitemesh:sitemesh:3.0.1")
     }
 
