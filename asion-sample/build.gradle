@@ -1,18 +1,6 @@
 /**
  * asion-sample's sub projects configuration
  */
-subprojects {
-    apply plugin: "io.spring.dependency-management"
-
-    dependencyManagement {
-        imports {
-            mavenBom "org.springframework:spring-framework-bom:${springVersion}"
-            mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
-//            mavenBom "io.spring.platform:platform-bom:${platformBomVersion}"
-        }
-    }
-}
-
 project("asion-sample-shared") {
     dependencies {
         compile("org.asion:asion-base:${version}")

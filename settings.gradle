@@ -1,6 +1,11 @@
+rootProject.name = 'asion-projects'
 
-//include "shared", "api", "services:webservice", "services:shared"
+//
 include 'asion-base'
+
+// asion-cloud
+include 'asion-cloud',
+        'asion-cloud:asion-cloud-registry-server'
 
 // sample
 include 'asion-sample',
@@ -15,3 +20,7 @@ include 'asion-search',
         "asion-search:asion-search-shared",
         "asion-search:asion-search-core",
         "asion-search:asion-search-server"
+
+// Exposes gradle buildSrc for IDE support
+include "buildSrc"
+rootProject.children.find{ it.name == "buildSrc" }.name = "asion-build-src"

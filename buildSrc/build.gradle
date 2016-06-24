@@ -1,7 +1,9 @@
-repositories {
-    jcenter()
-}
+
+
+description = "Exposes gradle buildSrc for IDE support"
+apply plugin: "groovy"
 
 dependencies {
-    testCompile 'junit:junit:4.12'
+    compile gradleApi()
+    compile localGroovy()
 }

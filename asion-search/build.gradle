@@ -1,18 +1,6 @@
 /**
- * asion-search's subprojects
+ * asion-search's sub projects
  */
-subprojects {
-    apply plugin: "io.spring.dependency-management"
-
-    dependencyManagement {
-        imports {
-            mavenBom "org.springframework:spring-framework-bom:${springVersion}"
-            mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
-            mavenBom "io.spring.platform:platform-bom:${platformBomVersion}"
-        }
-    }
-}
-
 project("asion-search-shared") {
     dependencies {
         compile("org.asion:asion-base:${version}")
@@ -20,8 +8,8 @@ project("asion-search-shared") {
         compile("org.springframework:spring-context-support")
         compile("org.springframework.boot:spring-boot-starter-jdbc")
         compile("org.springframework.boot:spring-boot-starter-data-elasticsearch")
-        compile("org.springframework.data:spring-data-elasticsearch:2.0.1.RELEASE")
-        compile("org.elasticsearch:elasticsearch:2.2.0")
+        compile("org.springframework.data:spring-data-elasticsearch")
+//        compile("org.elasticsearch:elasticsearch:${elasticsearchVersion}")
     }
 }
 
@@ -33,13 +21,19 @@ project("asion-search-core") {
         compile("org.springframework:spring-context-support")
         compile("org.springframework.boot:spring-boot-starter-jdbc")
         compile("org.springframework.data:spring-data-jpa")
-        compile("org.springframework.data:spring-data-elasticsearch:2.0.1.RELEASE")
-        compile("org.elasticsearch:elasticsearch:2.2.0")
+        compile("org.springframework.boot:spring-boot-starter-data-elasticsearch")
+        compile("org.springframework.data:spring-data-elasticsearch")
+//        compile("org.elasticsearch:elasticsearch:${elasticsearchVersion}")
+
+        compile("com.google.guava:guava:18.0")
+
+        compile("javax.persistence:persistence-api:1.0.2")
 
         compile("mysql:mysql-connector-java")
         compile('com.h2database:h2')
 
         testCompile("org.springframework.boot:spring-boot-starter-test")
+        testCompile("org.assertj:assertj-core:${assertjVersion}")
         testCompile("org.unitils:unitils-bom:${unitilsBom}")
     }
 }
@@ -63,7 +57,7 @@ project("asion-search-server") {
     }
 
     bootRepackage {
-        mainClass = 'org.asion.sample.AsionElasticsearchServerApplication'
+        mainClass = 'org.asion.search.AsionSearchServerApplication'
     }
 
     // noinspection GroovyAssignabilityCheck
