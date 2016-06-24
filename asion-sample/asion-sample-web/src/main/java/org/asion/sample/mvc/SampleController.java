@@ -50,7 +50,7 @@ public class SampleController {
         }
         sample = sampleManager.save(sample);
         redirect.addFlashAttribute("globalSample", "Successfully save a new sample");
-        return new ModelAndView("redirect:sample/{sample.id}", "sample.id", sample.getId());
+        return new ModelAndView("redirect:/sample/{sample.id}", "sample.id", sample.getId());
     }
 
     @RequestMapping("foo")
