@@ -2,11 +2,10 @@
 server:
   port: 10000
 
-# Allow Thymeleaf templates to be reloaded at dev time
+# spring cofig
 spring:
-  thymeleaf.cache: false
   application:
-    name: asion-search-server
+    name: asion-search-core
   datasource:
     url: jdbc:mysql://192.168.99.100:1006/asion_search_sample?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
     username: root
@@ -21,7 +20,12 @@ spring:
       time-between-eviction-runs-millis: 20000
       min-evictable-idle-time-millis: 28700
 
+  data:
+    elasticsearch:
+      cluster-nodes: http://192.168.99.100:9300
+      cluster-name: elasticsearch
+
 logging:
   level:
     root: info
-  file: asion-search-server.log
+  file: asion-search-core.log

@@ -1,11 +1,6 @@
 package org.asion.search;
 
-import org.elasticsearch.index.query.QueryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -39,16 +34,6 @@ public class SearchSampleRepositoryImpl implements SearchSampleRepository {
     }
 
     @Override
-    public Iterable<SearchSample> findAll(Iterable<Long> longs) {
-        return null;
-    }
-
-    @Override
-    public long count() {
-        return 0;
-    }
-
-    @Override
     public SearchSample save(SearchSample sample) {
         int rows;
         if (sample.getId() == null) {
@@ -71,18 +56,8 @@ public class SearchSampleRepositoryImpl implements SearchSampleRepository {
     }
 
     @Override
-    public <S extends SearchSample> Iterable<S> save(Iterable<S> entities) {
-        return null;
-    }
-
-    @Override
     public SearchSample findOne(Long id) {
         return jdbcTemplate.queryForObject("select * from asion_search_sample where id = ?", userMapper, id);
-    }
-
-    @Override
-    public boolean exists(Long aLong) {
-        return false;
     }
 
     @Override
@@ -91,58 +66,5 @@ public class SearchSampleRepositoryImpl implements SearchSampleRepository {
         assert rows == 1;
     }
 
-    @Override
-    public void delete(SearchSample entity) {
 
-    }
-
-    @Override
-    public void delete(Iterable<? extends SearchSample> entities) {
-
-    }
-
-    @Override
-    public void deleteAll() {
-
-    }
-
-    @Override
-    public <S extends SearchSample> S index(S entity) {
-        return null;
-    }
-
-    @Override
-    public Iterable<SearchSample> search(QueryBuilder query) {
-        return null;
-    }
-
-    @Override
-    public Page<SearchSample> search(QueryBuilder query, Pageable pageable) {
-        return null;
-    }
-
-    @Override
-    public Page<SearchSample> search(SearchQuery searchQuery) {
-        return null;
-    }
-
-    @Override
-    public Page<SearchSample> searchSimilar(SearchSample entity, String[] fields, Pageable pageable) {
-        return null;
-    }
-
-    @Override
-    public void refresh() {
-
-    }
-
-    @Override
-    public Iterable<SearchSample> findAll(Sort sort) {
-        return null;
-    }
-
-    @Override
-    public Page<SearchSample> findAll(Pageable pageable) {
-        return null;
-    }
 }

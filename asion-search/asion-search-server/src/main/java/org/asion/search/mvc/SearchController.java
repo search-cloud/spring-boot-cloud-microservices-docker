@@ -2,6 +2,7 @@ package org.asion.search.mvc;
 
 import org.asion.search.SearchSample;
 import org.asion.search.SearchSampleRepository;
+import org.asion.search.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -24,6 +25,18 @@ public class SearchController {
 
     @Autowired
     private SearchSampleRepository sampleRepository;
+
+    @Autowired
+    private SearchService searchService;
+
+    @RequestMapping("search/{value}/")
+    public ModelAndView search(@PathVariable("value") String value) {
+
+        searchService.search(value);
+
+        Iterable<SearchSample> samples = sampleRepository.findAll();
+        return new ModelAndView("samples/list", "samples", samples);
+    }
 
     @RequestMapping
     public ModelAndView list() {

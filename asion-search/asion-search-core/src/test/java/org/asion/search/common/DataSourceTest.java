@@ -1,11 +1,14 @@
 package org.asion.search.common;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.unitils.UnitilsJUnit4;
 import org.unitils.database.annotations.TestDataSource;
 
 import javax.sql.DataSource;
+
+import java.sql.SQLException;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Asion.
@@ -22,7 +25,12 @@ public class DataSourceTest extends UnitilsJUnit4 {
 
     @Test
     public void testCheckDefaultDataSource() {
-        Assert.assertNotNull(defaultDataSource);
-        System.out.println(defaultDataSource.getClass());
+        assertThat(defaultDataSource).isNotNull();
+        try {
+            assertThat(defaultDataSource.getConnection()).isNotNull();
+            System.out.println(defaultDataSource.getConnection());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
