@@ -1,0 +1,5 @@
+redis-dubbo:
+    image: redis:3.0.3
+    ports:
+      - "5050:6379"
+
