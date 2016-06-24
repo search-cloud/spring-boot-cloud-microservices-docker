@@ -1,0 +1,15 @@
+# registry server
+spring.application.name: asion-cloud-eureka-server
+server.port: 8761
+logging:
+  file: asion-cloud-eureka-server.log
+  level.root: info
+eureka:
+  instance:
+    hostname: eureka_1.asion.org
+    prefer-ip-address: true
+  server:
+    wait-time-in-ms-when-sync-empty: 0
+  client:
+    register-with-eureka: false
+    fetch-registry: false
