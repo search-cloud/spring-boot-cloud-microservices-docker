@@ -2,9 +2,13 @@
 server:
   port: 9980
 
+management:
+  port: 9981
+
 # Allow Thymeleaf templates to be reloaded at dev time
 spring:
   thymeleaf.cache: false
+#  mvc.favicon.enabled: false
   application:
     name: asion-sample-web
   dubbo:
