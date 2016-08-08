@@ -3,7 +3,7 @@
  */
 buildscript {
     ext {
-        springBootVersion = '1.4.0.BUILD-SNAPSHOT'
+        springBootVersion = '1.4.0.RELEASE'
     }
     repositories {
         mavenLocal()
@@ -12,7 +12,7 @@ buildscript {
         maven { url "https://repo.spring.io/milestone" }
     }
     dependencies {
-        classpath "io.spring.gradle:dependency-management-plugin:0.5.6.RELEASE"
+        classpath "io.spring.gradle:dependency-management-plugin:0.6.0.RELEASE"
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
 }
@@ -33,13 +33,13 @@ configure(allprojects) { project ->
     targetCompatibility = 1.8
 
     ext {
-        springBootVersion = '1.4.0.BUILD-SNAPSHOT'
-        springVersion = '4.3.1.BUILD-SNAPSHOT'
-        springCloudVersion = 'Brixton.SR1'
-        springBootAdminVersion = '1.3.3'
-        platformBomVersion = '2.1.0.BUILD-SNAPSHOT'
+        springBootVersion = '1.4.0.RELEASE'
+        springVersion = '4.3.2.RELEASE'
+        springCloudVersion = 'Brixton.SR2'
+        springBootAdminVersion = '1.3.5'
+        platformBomVersion = 'Athens-RC1'
         unitilsBom = '3.4.2'
-        elasticsearchVersion = '2.2.2'
+        elasticsearchVersion = '2.3.4'
 //        springDataElasticsearch = '2.0.1.RELEASE'
         assertjVersion = '3.4.1'
     }
@@ -50,6 +50,30 @@ configure(allprojects) { project ->
         jcenter()
         maven { url "https://repo.spring.io/snapshot" }
         maven { url "https://repo.spring.io/milestone" }
+    }
+
+    // noinspection GroovyAssignabilityCheck
+    jar {
+        manifest {
+            attributes 'Created-By': "${System.getProperty("java.version")} (${System.getProperty("java.specification.vendor")})",
+                    'Implementation-Title': project.name,
+                    'Implementation-Version': project.version
+        }
+        from("${rootProject.projectDir}/src/dist") {
+            include "license.txt"
+            include "notice.txt"
+            into "META-INF"
+            expand(copyright: new Date().format("yyyy"), version: project.version)
+        }
+    }
+
+    idea {
+        module {
+            //if you hate browsing Javadoc
+            downloadJavadoc = false
+            //and love reading sources :)
+            downloadSources = true
+        }
     }
 }
 
@@ -93,7 +117,7 @@ configure(rootProject) {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.13'
+    gradleVersion = '2.14'
 }
 
 /*
