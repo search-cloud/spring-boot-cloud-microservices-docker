@@ -15,18 +15,20 @@ project("asion-cloud-registry-server") {
         mainClass = 'org.asion.cloud.server.AsionCloudRegistryServerApplication'
     }
 
-    // noinspection GroovyAssignabilityCheck
-    jar {
-        manifest {
-            attributes 'Created-By': "${System.getProperty("java.version")} (${System.getProperty("java.specification.vendor")})",
-                    'Implementation-Title': project.name,
-                    'Implementation-Version': project.version
-        }
-        from("${rootProject.projectDir}/src/dist") {
-            include "license.txt"
-            include "notice.txt"
-            into "META-INF"
-            expand(copyright: new Date().format("yyyy"), version: project.version)
-        }
+}
+
+project("asion-spring-boot-admin") {
+    apply plugin: "spring-boot"
+
+    dependencies {
+        compile("de.codecentric:spring-boot-admin-server:${springBootAdminVersion}")
+        compile("de.codecentric:spring-boot-admin-server-ui:${springBootAdminVersion}")
+        compile('org.springframework.cloud:spring-cloud-starter-eureka')
+        testCompile('org.springframework.boot:spring-boot-starter-test')
     }
+
+    bootRepackage {
+        mainClass = 'org.asion.cloud.server.AsionSpringBootAdminApplication'
+    }
+
 }

@@ -3,16 +3,18 @@
  */
 project("asion-sample-shared") {
     dependencies {
-        compile("org.asion:asion-base:${version}")
+        //compile("org.asion:asion-base:${version}")
+        compile project(":asion-base")
     }
 }
 
 /**
- * spring boot starter asion sample
+ * asion sample spring boot starter
  */
-project("spring-boot-starter-asion-sample") {
+project("asion-sample-spring-boot-starter") {
     dependencies {
-        compile("org.asion:asion-sample-shared:${version}")
+        //compile("org.asion:asion-sample-shared:${version}")
+        compile project(":asion-sample:asion-sample-shared")
 
         compile("org.mvnsearch.spring.boot:spring-boot-starter-dubbo:1.0.0-SNAPSHOT")
         compile("org.springframework.boot:spring-boot-starter-actuator")
@@ -22,13 +24,15 @@ project("spring-boot-starter-asion-sample") {
 
 project("asion-sample-core") {
     dependencies {
-        compile("org.asion:asion-sample-shared:${version}")
+        //compile("org.asion:asion-sample-shared:${version}")
+        compile project(":asion-sample:asion-sample-shared")
 
         compile("org.springframework:spring-context-support")
         compile("org.springframework.boot:spring-boot-starter-jdbc")
         compile("mysql:mysql-connector-java")
         compile('com.h2database:h2')
 
+        compile('org.projectlombok:lombok:1.16.8')
         testCompile("org.springframework.boot:spring-boot-starter-test")
         testCompile("org.unitils:unitils-bom:${unitilsBom}")
     }
@@ -38,9 +42,13 @@ project("asion-sample-server") {
     apply plugin: "spring-boot"
 
     dependencies {
-        compile("org.asion:asion-sample-core:${version}")
+        //compile("asion-sample:asion-sample-core")
+        compile project(":asion-sample:asion-sample-core")
         compile("org.mvnsearch.spring.boot:spring-boot-starter-dubbo:1.0.0-SNAPSHOT")
         compile("org.springframework.cloud:spring-cloud-starter-eureka")
+        compile("de.codecentric:spring-boot-admin-starter-client:${springBootAdminVersion}")
+        compile("org.jolokia:jolokia-core")
+
         compile("org.springframework.boot:spring-boot-starter-actuator")
         compile("org.springframework.boot:spring-boot-starter-jdbc")
         compile("mysql:mysql-connector-java")
@@ -59,20 +67,6 @@ project("asion-sample-server") {
         mainClass = 'org.asion.sample.AsionSampleServerApplication'
     }
 
-    // noinspection GroovyAssignabilityCheck
-    jar {
-        manifest {
-            attributes 'Created-By': "${System.getProperty("java.version")} (${System.getProperty("java.specification.vendor")})",
-                    'Implementation-Title': project.name,
-                    'Implementation-Version': project.version
-        }
-        from("${rootProject.projectDir}/src/dist") {
-            include "license.txt"
-            include "notice.txt"
-            into "META-INF"
-            expand(copyright: new Date().format("yyyy"), version: project.version)
-        }
-    }
 }
 
 project("asion-sample-web") {
@@ -80,34 +74,25 @@ project("asion-sample-web") {
 
     dependencies {
         //
-        compile("org.asion:spring-boot-starter-asion-sample:${version}")
+        //compile("org.asion:asion-sample-spring-boot-starter:${version}")
+        compile project(":asion-sample:asion-sample-spring-boot-starter")
+
+        compile("org.springframework.boot:spring-boot-starter-actuator")
+        compile("de.codecentric:spring-boot-admin-starter-client:${springBootAdminVersion}")
+        compile("org.jolokia:jolokia-core")
 
         compile('redis.clients:jedis')
-        compile("org.springframework.boot:spring-boot-starter-actuator")
         compile("org.springframework.boot:spring-boot-starter-web")
         compile("org.springframework.boot:spring-boot-starter-thymeleaf")
         compile("org.webjars:bootstrap:3.3.6")
         compile("org.webjars:jquery:2.2.3")
         compile('org.webjars:jquery-validation:1.15.0')
         compile("org.sitemesh:sitemesh:3.0.1")
+
+        testCompile("org.springframework.boot:spring-boot-starter-test")
     }
 
     bootRepackage {
         mainClass = 'org.asion.sample.AsionSampleWebApplication'
-    }
-
-    // noinspection GroovyAssignabilityCheck
-    jar {
-        manifest {
-            attributes 'Created-By': "${System.getProperty("java.version")} (${System.getProperty("java.specification.vendor")})",
-                    'Implementation-Title': project.name,
-                    'Implementation-Version': project.version
-        }
-        from("${rootProject.projectDir}/src/dist") {
-            include "license.txt"
-            include "notice.txt"
-            into "META-INF"
-            expand(copyright: new Date().format("yyyy"), version: project.version)
-        }
     }
 }

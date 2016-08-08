@@ -1,0 +1,19 @@
+# asion spring boot admin server
+spring.application.name: asion-spring-boot-admin
+server.port: 10090
+logging:
+  file: asion-spring-boot-admin.log
+  level.root: info
+
+info:
+  app:
+    name: asion-spring-boot-admin
+    version: 1.0.0-BUILD-SNAPSHOT
+    description: ytx spring boot admin
+    group: cloud
+    groupId: 90
+    tags: cloud, admin
+  owner:
+    developer: Asion
+    tester: Asion
+  scm.url: http://github.org/luxuexian99/asion-projects/asion-cloud/asion-spring-boot-admin

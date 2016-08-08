@@ -1,62 +1,96 @@
 package org.asion.search;
 
+import org.asion.search.common.ElasticsearchConfiguration;
+import org.junit.Before;
 import org.junit.Test;
-import org.unitils.UnitilsJUnit4;
-import org.unitils.dbunit.annotation.DataSet;
-import org.unitils.spring.annotation.SpringApplicationContext;
-import org.unitils.spring.annotation.SpringBeanByType;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static org.junit.Assert.*;
+import java.util.List;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 /**
  * @author Asion.
  * @since 16/5/1.
  */
-@SpringApplicationContext("/appContext-unit.xml")
-@DataSet({
-        "/database/dataset/asion_search_sample.xml"
-})
-public class SearchSampleRepositoryTest extends UnitilsJUnit4 {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = ElasticsearchConfiguration.class)
+public class SearchSampleRepositoryTest {
 
-    @SpringBeanByType
-    private SearchSampleRepository sampleRepository;
+    @Autowired
+    private SearchSampleRepository searchSampleRepository;
 
-    @Test
-    public void findAll() {
-        Iterable<SearchSample> resultList = sampleRepository.findAll();
-        assertNotNull(resultList);
-        assertTrue(resultList.iterator().hasNext());
+    @Before
+    public void emptyData(){
+        searchSampleRepository.deleteAll();
     }
 
     @Test
-    public void  save() {
-        // create
-        SearchSample sample = new SearchSample();
-        sample.setText("Test Text!");
-        sample.setSummary("Test Summary!");
-        SearchSample created = sampleRepository.save(sample);
-        assertNotNull(created);
-        assertEquals(sample.getSummary(), created.getSummary());
+    public void shouldReturnListOfProductsByName() {
+        //given
+        SearchSample searchSample = new SearchSample();
+        searchSample.setId(1L);
+        searchSample.setSummary("test product 1");
+        searchSample.setText("How great would it be if we could search for this product.");
+        searchSampleRepository.index(searchSample);
 
-        // update
-        created.setText("Test Update Text!");
-        created.setSummary("Test Update Summary!");
-        SearchSample updated = sampleRepository.save(created);
-        assertNotNull(created);
-        assertEquals(created.getSummary(), updated.getSummary());
+        searchSample = new SearchSample();
+        searchSample.setId(2L);
+        searchSample.setSummary("test Product 2");
+        searchSample.setText("How great would it be if we could search for this other product.");
+        searchSampleRepository
+                .index(searchSample);
+        //when
+        List<SearchSample> products = searchSampleRepository.findByName("product");
+        //then
+        assertThat(products.size(), is(2));
     }
 
     @Test
-    public void  findOne() {
-        Long id = 1L;
-        SearchSample sample = sampleRepository.findOne(id);
-        assertNotNull(sample);
-        assertEquals("This is the test text1!", sample.getText());
+    public void shouldReturnListOfBookByNameWithPageable(){
+        //given
+        SearchSample searchSample = new SearchSample();
+        searchSample.setId(1L);
+        searchSample.setSummary("test product 1");
+        searchSample.setText("How great would it be if we could search for this product.");
+        searchSampleRepository.index(searchSample);
+
+        searchSample = new SearchSample();
+        searchSample.setId(2L);
+        searchSample.setSummary("test Product 2");
+        searchSample.setText("How great would it be if we could search for this other product.");
+        searchSampleRepository
+                .index(searchSample);
+        //when
+        List<SearchSample> products = searchSampleRepository.findByName("product", new PageRequest(0,1));
+        //then
+        assertThat(products.size(), is(1));
     }
 
     @Test
-    public void  delete() {
-        Long id = 1L;
-        sampleRepository.delete(id);
+    public void shouldReturnListOfProductsForGivenNameAndId(){
+        //given
+        SearchSample searchSample = new SearchSample();
+        searchSample.setId(1L);
+        searchSample.setSummary("test product 1");
+        searchSample.setText("How great would it be if we could search for this product.");
+        searchSampleRepository.save(searchSample);
+
+        searchSample = new SearchSample();
+        searchSample.setId(2L);
+        searchSample.setSummary("test Product 2");
+        searchSample.setText("How great would it be if we could search for this other product.");
+        searchSampleRepository
+                .save(searchSample);
+
+        List<SearchSample> products = searchSampleRepository.findByNameAndId("product", 1L);
+
+        //then
+        assertThat(products.size(),is(1));
     }
 }

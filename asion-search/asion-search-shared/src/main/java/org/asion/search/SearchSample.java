@@ -2,7 +2,6 @@ package org.asion.search;
 
 import org.asion.base.ddd.domain.BaseDomainModel;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
@@ -23,7 +22,7 @@ public class SearchSample implements BaseDomainModel<Long> {
     private String text;
 
     @Field(type = FieldType.String)
-    @Transient
+//    @Transient
     private String summary;
 
     @Field
@@ -31,6 +30,14 @@ public class SearchSample implements BaseDomainModel<Long> {
 
     @Field
     private Calendar updatedAt = Calendar.getInstance();
+
+    public SearchSample() {}
+
+    public SearchSample(Long id, String text, String summary) {
+        this.id = id;
+        this.text = text;
+        this.summary = summary;
+    }
 
     @Override
     public Long getId() {

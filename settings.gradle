@@ -5,7 +5,8 @@ include 'asion-base'
 
 // asion-cloud
 include 'asion-cloud',
-        'asion-cloud:asion-cloud-registry-server'
+        'asion-cloud:asion-cloud-registry-server',
+        'asion-cloud:asion-spring-boot-admin'
 
 // sample
 include 'asion-sample',
@@ -13,7 +14,7 @@ include 'asion-sample',
         "asion-sample:asion-sample-core",
         "asion-sample:asion-sample-server",
         "asion-sample:asion-sample-web",
-        "asion-sample:spring-boot-starter-asion-sample"
+        "asion-sample:asion-sample-spring-boot-starter"
 
 // search
 include 'asion-search',

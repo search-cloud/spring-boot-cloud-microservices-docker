@@ -16,6 +16,10 @@ spring:
     registry: redis://dubbo.asion.org:5050
     protocol: dubbo
 
+  boot:
+      admin:
+        url: http://boot.admin.asion.org:10090
+
 logging:
   level:
     root: info

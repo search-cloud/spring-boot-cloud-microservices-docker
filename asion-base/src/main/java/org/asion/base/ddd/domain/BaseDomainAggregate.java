@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * 基础的领域聚合根
- * @param <K>
+ * @param <K> key
  */
 public abstract class BaseDomainAggregate<K extends Serializable> implements BaseModel {
     /**
