@@ -9,7 +9,7 @@ info:
   app:
     name: asion-spring-boot-admin
     version: 1.0.0-BUILD-SNAPSHOT
-    description: ytx spring boot admin
+    description: asion spring boot admin
     group: cloud
     groupId: 90
     tags: cloud, admin

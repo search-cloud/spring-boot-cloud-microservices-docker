@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: asion-sample-server
+  cloud:
+    config:
+      uri: ${CONFIG_SERVER_URL:http://config.asion.org:9090}
+      fail-fast: true

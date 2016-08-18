@@ -1,0 +1,20 @@
+# config server
+spring.application.name: asion-cloud-config-server
+server.port: 9090
+spring.cloud.config.server.git.uri: git@bitbucket.org:Asion_Lu/asion-config.git
+spring.cloud.config.server.health.enabled: false
+spring.boot.admin.url: http://boot.admin.asion.net:10090
+
+logging:
+  file: asion-cloud-config-server.log
+  level.root: info
+
+eureka:
+  instance:
+    hostname: config.asion.org
+    prefer-ip-address: true
+  server:
+    wait-time-in-ms-when-sync-empty: 0
+  client:
+    register-with-eureka: false
+    fetch-registry: false
