@@ -1,9 +1,9 @@
-spring:
-  application:
-    name: asion-cloud-config-server
-#  cloud:
-#    config:
-#      uri: ${CONFIG_SERVER_URL:http://localhost:8888}
-
-encrypt:
-  key: asion777
+#spring:
+#  application:
+#    name: asion-cloud-config-server
+##  cloud:
+##    config:
+##      uri: ${CONFIG_SERVER_URL:http://localhost:8888}
+#
+#encrypt:
+#  key: asion777

@@ -46,6 +46,7 @@ project("asion-sample-server") {
         compile project(":asion-sample:asion-sample-core")
         compile("org.mvnsearch.spring.boot:spring-boot-starter-dubbo:1.0.0-SNAPSHOT")
         compile("org.springframework.cloud:spring-cloud-starter-eureka")
+        compile("org.springframework.cloud:spring-cloud-starter-config")
         compile("de.codecentric:spring-boot-admin-starter-client:${springBootAdminVersion}")
         compile("org.jolokia:jolokia-core")
 
@@ -57,8 +58,6 @@ project("asion-sample-server") {
 
         compile("org.springframework.boot:spring-boot-starter-web")
         compile("org.springframework.boot:spring-boot-starter-thymeleaf")
-//        compile("org.webjars:bootstrap:3.3.6")
-//        compile("org.webjars:jquery:2.2.3")
 
 //        testCompile("org.springframework.boot:spring-boot-starter-test")
     }

@@ -27,7 +27,7 @@ public class AsionSampleServerApplication {
     }
 
     @Value("${spring.datasource.url}")
-    private String url = "jdbc:mysql://192.168.99.100:2006/asion_sample?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull";
+    private String url = "jdbc:mysql://db.asion.org:2006/asion_sample?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull";
     @Value("${spring.datasource.username}")
     String user = "root";
     @Value("${spring.datasource.password}")
