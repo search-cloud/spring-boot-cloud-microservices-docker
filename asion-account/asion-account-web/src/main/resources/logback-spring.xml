@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+    <logger name="org.asion.account" level="DEBUG" />
+    <springProfile name="staging">
+        <logger name="org.asion.account" level="DEBUG" />
+    </springProfile>
+
+    <springProperty scope="context" name="logging.file" source="logging.file"/>
+    <springProperty scope="context" name="logging.path" source="logging.path"/>
+    <springProperty scope="context" name="spring.application.name" source="spring.application.name"/>
+    <property name="LOG_FILE" value="${logging.path:-.}/${logging.file:-${spring.application.name:-spring}.log}"/>
+
+    <jmxConfigurator/>
+
+    <!-- logger name="org.springframework" level="DEBUG"/-->
+
+    <!--<root level="INFO">-->
+        <!--<appender-ref ref="CONSOLE"/>-->
+        <!--<appender-ref ref="FILE"/>-->
+    <!--</root>-->
+
+</configuration>
