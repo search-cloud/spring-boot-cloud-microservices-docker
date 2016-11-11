@@ -23,7 +23,7 @@ public class AccountRepositoryTest extends UnitilsJUnit4 {
 
     @Test
     public void findAll() {
-        Iterable<User> resultList = accountRepository.findAll();
+        Iterable<Account> resultList = accountRepository.findAll();
         assertNotNull(resultList);
         assertTrue(resultList.iterator().hasNext());
     }
@@ -31,17 +31,17 @@ public class AccountRepositoryTest extends UnitilsJUnit4 {
     @Test
     public void  save() {
         // create
-        user user = new user();
-        user.setText("Test Text!");
-        user.setSummary("Test Summary!");
-        user created = accountRepository.save(user);
+        Account account = new Account();
+        account.setText("Test Text!");
+        account.setSummary("Test Summary!");
+        Account created = accountRepository.save(account);
         assertNotNull(created);
-        assertEquals(user.getSummary(), created.getSummary());
+        assertEquals(account.getSummary(), created.getSummary());
 
         // update
         created.setText("Test Update Text!");
         created.setSummary("Test Update Summary!");
-        user updated = accountRepository.save(created);
+        Account updated = accountRepository.save(created);
         assertNotNull(created);
         assertEquals(created.getSummary(), updated.getSummary());
     }
@@ -49,9 +49,9 @@ public class AccountRepositoryTest extends UnitilsJUnit4 {
     @Test
     public void  findOne() {
         Long id = 1L;
-        user user = accountRepository.findOne(id);
-        assertNotNull(user);
-        assertEquals("This is the test text1!", user.getText());
+        Account account = accountRepository.findOne(id);
+        assertNotNull(account);
+        assertEquals("This is the test text1!", account.getText());
     }
 
     @Test
