@@ -3,7 +3,7 @@
  */
 buildscript {
     ext {
-        springBootVersion = '1.4.0.RELEASE'
+        springBootVersion = '1.4.2.RELEASE'
     }
     repositories {
         mavenLocal()
@@ -33,11 +33,11 @@ configure(allprojects) { project ->
     targetCompatibility = 1.8
 
     ext {
-        springBootVersion = '1.4.0.RELEASE'
-        springVersion = '4.3.2.RELEASE'
-        springCloudVersion = 'Brixton.SR4'
-        springBootAdminVersion = '1.4.1'
-        platformBomVersion = 'Athens-RC1'
+        springBootVersion = '1.4.2.RELEASE'
+        springVersion = '4.3.4.RELEASE'
+        springCloudVersion = 'Camden.SR2'
+        springBootAdminVersion = '1.4.4'
+        platformBomVersion = 'Athens-SR1'
         unitilsBom = '3.4.2'
         elasticsearchVersion = '2.3.4'
 //        springDataElasticsearch = '2.0.1.RELEASE'
