@@ -21,7 +21,7 @@ spring:
       time-between-eviction-runs-millis: 20000
       min-evictable-idle-time-millis: 28700
   dubbo:
-    app: dubbo-account-provider
+    app: dubbo-sample-provider
     registry: redis://dubbo.asion.org:5050
     protocol: dubbo
     port: 9908
