@@ -1,0 +1,33 @@
+# server config
+server:
+  port: 9980
+
+management:
+  port: 9981
+
+# Allow Thymeleaf templates to be reloaded at dev time
+spring:
+  thymeleaf.cache: false
+#  mvc.favicon.enabled: false
+  application:
+    name: asion-account-web
+  dubbo:
+    app: asion-account-web
+    registry: redis://dubbo.asion.org:5050
+    protocol: dubbo
+  boot:
+      admin:
+        url: http://boot.admin.asion.org:10090
+  http:
+    multipart:
+      max-file-size: 2M
+      max-request-size: 10M
+logging:
+  level:
+    root: info
+  file: asion-account-web.log
+
+# spring security
+security:
+  user:
+    role: USER, OPERATOR

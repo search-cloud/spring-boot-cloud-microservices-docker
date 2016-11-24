@@ -1,4 +1,4 @@
-package org.asion.sample.assertj.demo;
+package org.asion.sample.common;
 
 import java.util.Date;
 
@@ -6,6 +6,7 @@ import java.util.Date;
  * @author Asion.
  * @since 16/7/2.
  */
+//@Data
 public class Demo {
     private Long id;
     private String code;
@@ -14,18 +15,6 @@ public class Demo {
     private Double money;
     private int status;
     private Date createdAt;
-
-    public Demo() {}
-
-    public Demo(Long id, String code, String name, int age, Double money, int status, Date createdAt) {
-        this.id = id;
-        this.code = code;
-        this.name = name;
-        this.age = age;
-        this.money = money;
-        this.status = status;
-        this.createdAt = createdAt;
-    }
 
     public Long getId() {
         return id;
@@ -80,6 +69,16 @@ public class Demo {
     }
 
     public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Demo(Long id, String code, String name, int age, Double money, int status, Date createdAt) {
+        this.id = id;
+        this.code = code;
+        this.name = name;
+        this.age = age;
+        this.money = money;
+        this.status = status;
         this.createdAt = createdAt;
     }
 }

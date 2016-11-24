@@ -1,4 +1,4 @@
-package org.asion.sample.assertj.demo;
+package org.asion.sample.common;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
