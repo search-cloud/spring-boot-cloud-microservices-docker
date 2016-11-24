@@ -19,6 +19,10 @@ spring:
   boot:
       admin:
         url: http://boot.admin.asion.org:10090
+  http:
+    multipart:
+      max-file-size: 2Mb
+      max-request-size: 10Mb
 
 logging:
   level:
