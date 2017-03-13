@@ -56,7 +56,7 @@ project("asion-account-core") {
 }
 
 project("asion-account-server") {
-    apply plugin: "spring-boot"
+    apply plugin: "org.springframework.boot"
 
     dependencies {
         //compile("asion-account:asion-account-core")
@@ -86,7 +86,7 @@ project("asion-account-server") {
 }
 
 project("asion-account-web") {
-    apply plugin: "spring-boot"
+    apply plugin: "org.springframework.boot"
 
     dependencies {
         //

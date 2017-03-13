@@ -41,7 +41,7 @@ project("asion-search-core") {
 }
 
 project("asion-search-server") {
-    apply plugin: "spring-boot"
+    apply plugin: "org.springframework.boot"
 
     dependencies {
         //compile("org.asion:asion-search-core:${version}")
