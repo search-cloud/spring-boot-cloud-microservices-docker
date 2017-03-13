@@ -3,7 +3,7 @@
  */
 buildscript {
     ext {
-        springBootVersion = '1.4.2.RELEASE'
+        springBootVersion = '1.5.2.RELEASE'
     }
     repositories {
         mavenLocal()
@@ -33,21 +33,22 @@ configure(allprojects) { project ->
     targetCompatibility = 1.8
 
     ext {
-        springBootVersion = '1.4.2.RELEASE'
-        springVersion = '4.3.4.RELEASE'
-        springCloudVersion = 'Camden.SR2'
-        springBootAdminVersion = '1.4.4'
-        platformBomVersion = 'Athens-SR1'
+        springBootVersion = '1.5.2.RELEASE'
+        springVersion = '4.3.7.RELEASE'
+        springCloudVersion = 'Camden.SR5'
+        springBootAdminVersion = '1.4.5'
+        platformBomVersion = 'Brussels-SR1'
         unitilsBom = '3.4.2'
-        elasticsearchVersion = '2.3.4'
+        elasticsearchVersion = '2.4.4'
 //        springDataElasticsearch = '2.0.1.RELEASE'
-        assertjVersion = '3.5.2'
+        assertjVersion = '3.6.2'
     }
 
     repositories {
         maven { url "/Users/Asion/.m2/repository" }
         mavenLocal()
         jcenter()
+        maven { url "https://repo.spring.io/release" }
         maven { url "https://repo.spring.io/snapshot" }
         maven { url "https://repo.spring.io/milestone" }
     }
