@@ -8,7 +8,7 @@ spring:
   application:
     name: asion-sample-server
   datasource:
-    url: jdbc:mysql://192.168.99.100:2006/asion_sample?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+    url: jdbc:mysql://db.asion.org:2006/asion_sample?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
     username: root
     password: asion
     driverClassName: com.mysql.jdbc.Driver
