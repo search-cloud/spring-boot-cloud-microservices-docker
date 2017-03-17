@@ -9,4 +9,6 @@ public interface AccountManager {
     Account findOne(Long id);
     void delete(Long id);
     Iterable<Account> findAll();
+
+    Account login(Account account);
 }

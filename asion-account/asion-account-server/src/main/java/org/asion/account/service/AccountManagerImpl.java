@@ -37,4 +37,9 @@ public class AccountManagerImpl implements AccountManager {
     public Iterable<Account> findAll() {
         return accountRepository.findAll();
     }
+
+    @Override
+    public Account login(Account account) {
+        return null;
+    }
 }

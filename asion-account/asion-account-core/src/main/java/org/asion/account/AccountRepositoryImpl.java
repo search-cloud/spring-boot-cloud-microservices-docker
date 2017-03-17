@@ -22,13 +22,16 @@ public class AccountRepositoryImpl implements AccountRepository {
     private static final RowMapper<Account> accountMapper = (resultSet, i) -> {
         Account account = new Account();
         account.setId(resultSet.getLong("id"));
-        account.setText(resultSet.getString("text"));
-        account.setSummary(resultSet.getString("summary"));
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.setTime(resultSet.getDate("created_at"));
-//        user.setCreatedAt(calendar);
-//        calendar.setTime(resultSet.getDate("updated_at"));
-//        user.setUpdatedAt(calendar);
+        account.setCode(resultSet.getString("code"));
+        account.setName(resultSet.getString("name"));
+        account.setPassword(resultSet.getString("password"));
+        account.setNickName(resultSet.getString("nick_name"));
+        account.setEmail(resultSet.getString("email"));
+        account.setMobile(resultSet.getString("mobile"));
+        account.setEnabled(resultSet.getBoolean("enabled"));
+        account.setCreatedAt(resultSet.getDate("created_at"));
+        account.setUpdatedAt(resultSet.getDate("updated_at"));
+
         return account;
     };
 
@@ -41,21 +44,28 @@ public class AccountRepositoryImpl implements AccountRepository {
     public Account save(Account account) {
         int rows;
         if (account.getId() == null) {
-            String insertSql = "insert into asion_account(text, summary, created_at, updated_at) values(?,?, now(), now())";
+            String insertSql = "insert into asion_account(code, name, password, nick_name, email, mobile, enabled, created_at, updated_at) values(?,?,?,?,?,?,?, now(), now())";
             KeyHolder keyHolder = new GeneratedKeyHolder();
             rows = jdbcTemplate.update(con -> {
                 PreparedStatement ps = con.prepareStatement(insertSql, PreparedStatement.RETURN_GENERATED_KEYS);
-                ps.setString(1, account.getText());
-                ps.setString(2, account.getSummary());
+                ps.setString(1, account.getCode());
+                ps.setString(2, account.getName());
+                ps.setString(3, account.getPassword());
+                ps.setString(4, account.getNickName());
+                ps.setString(5, account.getEmail());
+                ps.setString(6, account.getMobile());
+                ps.setBoolean(7, account.isEnabled());
                 return ps;
             }, keyHolder);
-
             account.setId(keyHolder.getKey().longValue());
-//            rows = jdbcTemplate.update(insertSql, user.getText(), user.getSummary());
         } else {
-            rows = jdbcTemplate.update("update asion_account set text=?, summary=?, updated_at=now() where id=?", account.getText(), account.getSummary(), account.getId());
+            rows = jdbcTemplate.update(
+                    "update asion_account set code=?, name=?, password=?, nick_name=?, email=?, mobile=?, enabled=?, updated_at=now() where id=?",
+                    account.getCode(), account.getName(), account.getPassword(), account.getNickName(), account.getEmail(), account.getMobile(), account.isEnabled(), account.getId());
         }
-        assert rows == 1;
+        if (rows != 1) {
+            throw new RuntimeException("data save fail!");
+        }
         return account;
     }
 
@@ -67,7 +77,9 @@ public class AccountRepositoryImpl implements AccountRepository {
     @Override
     public void delete(Long id) {
         int rows = jdbcTemplate.update("delete from asion_account where id = ?", id);
-        assert rows == 1;
+        if (rows != 1) {
+            throw new RuntimeException("data delete fail!");
+        }
     }
 
 }

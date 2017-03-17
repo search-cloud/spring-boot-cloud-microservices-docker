@@ -1,0 +1,54 @@
+@startuml
+
+title 权限系统设计
+'什么人？ 对什么资源？ 进行了什么操作？
+
+interface IUser<用户>
+interface IGroup<组织：同一类用户>
+interface ISection<区域>
+interface IDepartment<部门>
+
+interface IRole<角色>
+interface IPermission<权限>
+
+interface IResource<资源>
+
+interface IAppResource<应用资源>
+interface IFunctionalResource<功能资源>
+
+interface IDataResource<数据资源>
+
+IUser o-right-> IRole
+IRole o-right-> IResource
+IRole o-up-> IPermission
+
+IResource <|-right- IAppResource
+IAppResource <|-- IFunctionalResource
+IResource <|--- IDataResource
+
+IGroup <|-- ISection
+ISection <|-- IDepartment
+IDepartment <|-- IDepartment
+
+class Account<登录账号>
+class Employee<员工>
+
+IUser <|... Account
+IUser <|... Employee
+Account <-right-o Employee
+
+class Account<<Entity>> {
+    - Long id
+    - String code
+    - String name
+    - String nickName
+    - String password
+    - boolean enabled
+}
+
+class Employee<<Entity>> {
+
+}
+
+
+@enduml

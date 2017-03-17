@@ -1,7 +1,7 @@
 /**
  * asion-sample's sub projects configuration
  */
-project("asion-sample-shared") {
+project("asion-sample-common") {
     dependencies {
         //compile("org.asion:asion-base:${version}")
         compile project(":asion-base")
@@ -13,8 +13,8 @@ project("asion-sample-shared") {
  */
 project("asion-sample-spring-boot-starter") {
     dependencies {
-        //compile("org.asion:asion-sample-shared:${version}")
-        compile project(":asion-sample:asion-sample-shared")
+        //compile("org.asion:asion-sample-common:${version}")
+        compile project(":asion-sample:asion-sample-common")
 
         compile("org.mvnsearch.spring.boot:spring-boot-starter-dubbo:1.0.0-SNAPSHOT")
         compile("org.springframework.boot:spring-boot-starter-actuator")
@@ -24,15 +24,15 @@ project("asion-sample-spring-boot-starter") {
 
 project("asion-sample-core") {
     dependencies {
-        //compile("org.asion:asion-sample-shared:${version}")
-        compile project(":asion-sample:asion-sample-shared")
+        //compile("org.asion:asion-sample-common:${version}")
+        compile project(":asion-sample:asion-sample-common")
 
         compile("org.springframework:spring-context-support")
         compile("org.springframework.boot:spring-boot-starter-jdbc")
         compile("mysql:mysql-connector-java")
         compile('com.h2database:h2')
 
-        compile('org.projectlombok:lombok:1.16.8')
+        compile('org.projectlombok:lombok')
         testCompile("org.springframework.boot:spring-boot-starter-test")
         testCompile("org.unitils:unitils-bom:${unitilsBom}")
     }

@@ -11,7 +11,7 @@ include 'asion-cloud',
 
 // account
 include 'asion-account',
-        "asion-account:asion-account-shared",
+        "asion-account:asion-account-common",
         "asion-account:asion-account-core",
         "asion-account:asion-account-server",
         "asion-account:asion-account-web",
@@ -20,7 +20,7 @@ include 'asion-account',
 
 // sample
 include 'asion-sample',
-        "asion-sample:asion-sample-shared",
+        "asion-sample:asion-sample-common",
         "asion-sample:asion-sample-core",
         "asion-sample:asion-sample-server",
         "asion-sample:asion-sample-web",
@@ -28,7 +28,7 @@ include 'asion-sample',
 
 // search
 include 'asion-search',
-        "asion-search:asion-search-shared",
+        "asion-search:asion-search-common",
         "asion-search:asion-search-core",
         "asion-search:asion-search-server"
 

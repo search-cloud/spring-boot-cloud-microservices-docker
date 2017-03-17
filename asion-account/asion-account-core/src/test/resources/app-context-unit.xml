@@ -8,6 +8,6 @@
        ">
 
     <context:annotation-config/>
-    <bean name="sampleTestApplication" class="org.asion.account.common.SampleTestApplication"/>
+    <bean name="accountTestApplication" class="org.asion.account.common.AccountTestApplication"/>
 
 </beans>

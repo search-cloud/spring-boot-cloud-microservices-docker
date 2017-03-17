@@ -1,10 +1,11 @@
 /**
  * asion-account's sub projects configuration
  */
-project("asion-account-shared") {
+project("asion-account-common") {
     dependencies {
         //compile("org.asion:asion-base:${version}")
         compile project(":asion-base")
+        compile('org.projectlombok:lombok')
     }
 }
 
@@ -13,8 +14,8 @@ project("asion-account-shared") {
  */
 project("asion-account-spring-boot-starter") {
     dependencies {
-        //compile("org.asion:asion-account-shared:${version}")
-        compile project(":asion-account:asion-account-shared")
+        //compile("org.asion:asion-account-common:${version}")
+        compile project(":asion-account:asion-account-common")
 
         compile("org.springframework.boot:spring-boot-starter-actuator")
         compile("org.springframework.boot:spring-boot-configuration-processor")
@@ -26,8 +27,8 @@ project("asion-account-spring-boot-starter") {
  */
 project("asion-account-security-spring-boot-starter") {
     dependencies {
-        //compile("org.asion:asion-account-shared:${version}")
-        compile project(":asion-account:asion-account-shared")
+        //compile("org.asion:asion-account-common:${version}")
+        compile project(":asion-account:asion-account-common")
         compile project(":asion-account:asion-account-spring-boot-starter")
 
         compile("org.springframework.boot:spring-boot-starter-web")
@@ -40,8 +41,8 @@ project("asion-account-security-spring-boot-starter") {
 
 project("asion-account-core") {
     dependencies {
-        //compile("org.asion:asion-account-shared:${version}")
-        compile project(":asion-account:asion-account-shared")
+        //compile("org.asion:asion-account-common:${version}")
+        compile project(":asion-account:asion-account-common")
 
         compile("org.springframework:spring-context-support")
         compile("org.springframework.boot:spring-boot-starter-security")
@@ -49,7 +50,7 @@ project("asion-account-core") {
         compile("mysql:mysql-connector-java")
         compile('com.h2database:h2')
 
-        compile('org.projectlombok:lombok:1.16.8')
+        compile('org.projectlombok:lombok')
         testCompile("org.springframework.boot:spring-boot-starter-test")
         testCompile("org.unitils:unitils-bom:${unitilsBom}")
     }

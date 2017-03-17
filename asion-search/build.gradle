@@ -1,7 +1,7 @@
 /**
  * asion-search's sub projects
  */
-project("asion-search-shared") {
+project("asion-search-common") {
     dependencies {
         //compile("org.asion:asion-base:${version}")
         compile project(":asion-base")
@@ -17,8 +17,8 @@ project("asion-search-shared") {
 project("asion-search-core") {
 
     dependencies {
-        //compile("org.asion:asion-search-shared:${version}")
-        compile project(":asion-search:asion-search-shared")
+        //compile("org.asion:asion-search-common:${version}")
+        compile project(":asion-search:asion-search-common")
 
         compile("org.springframework:spring-context-support")
         compile("org.springframework.boot:spring-boot-starter-jdbc")
