@@ -1,5 +1,7 @@
-package org.asion.account;
+package org.asion.account.domain.infrastructure.model;
 
+import org.asion.account.Account;
+import org.asion.account.domain.model.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -16,8 +18,7 @@ import java.sql.PreparedStatement;
 @Repository("accountRepository")
 public class AccountRepositoryImpl implements AccountRepository {
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     private static final RowMapper<Account> accountMapper = (resultSet, i) -> {
         Account account = new Account();
@@ -35,6 +36,11 @@ public class AccountRepositoryImpl implements AccountRepository {
         return account;
     };
 
+    @Autowired
+    public AccountRepositoryImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
     @Override
     public Iterable<Account> findAll() {
         return jdbcTemplate.query("select * from asion_account", accountMapper);
@@ -42,29 +48,44 @@ public class AccountRepositoryImpl implements AccountRepository {
 
     @Override
     public Account save(Account account) {
-        int rows;
         if (account.getId() == null) {
-            String insertSql = "insert into asion_account(code, name, password, nick_name, email, mobile, enabled, created_at, updated_at) values(?,?,?,?,?,?,?, now(), now())";
-            KeyHolder keyHolder = new GeneratedKeyHolder();
-            rows = jdbcTemplate.update(con -> {
-                PreparedStatement ps = con.prepareStatement(insertSql, PreparedStatement.RETURN_GENERATED_KEYS);
-                ps.setString(1, account.getCode());
-                ps.setString(2, account.getName());
-                ps.setString(3, account.getPassword());
-                ps.setString(4, account.getNickName());
-                ps.setString(5, account.getEmail());
-                ps.setString(6, account.getMobile());
-                ps.setBoolean(7, account.isEnabled());
-                return ps;
-            }, keyHolder);
-            account.setId(keyHolder.getKey().longValue());
+            return create(account);
         } else {
-            rows = jdbcTemplate.update(
-                    "update asion_account set code=?, name=?, password=?, nick_name=?, email=?, mobile=?, enabled=?, updated_at=now() where id=?",
-                    account.getCode(), account.getName(), account.getPassword(), account.getNickName(), account.getEmail(), account.getMobile(), account.isEnabled(), account.getId());
+            return update(account);
         }
+    }
+
+    @Override
+    public Account create(Account account) {
+
+        String insertSql = "insert into asion_account(code, name, password, nick_name, email, mobile, enabled, created_at, updated_at) values(?,?,?,?,?,?,?, now(), now())";
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        int rows = jdbcTemplate.update(con -> {
+            PreparedStatement ps = con.prepareStatement(insertSql, PreparedStatement.RETURN_GENERATED_KEYS);
+            ps.setString(1, account.getCode());
+            ps.setString(2, account.getName());
+            ps.setString(3, account.getPassword());
+            ps.setString(4, account.getNickName());
+            ps.setString(5, account.getEmail());
+            ps.setString(6, account.getMobile());
+            ps.setBoolean(7, account.isEnabled());
+            return ps;
+        }, keyHolder);
+        account.setId(keyHolder.getKey().longValue());
+
         if (rows != 1) {
-            throw new RuntimeException("data save fail!");
+            throw new RuntimeException("data create fail!");
+        }
+        return account;
+    }
+
+    @Override
+    public Account update(Account account) {
+        int rows = jdbcTemplate.update(
+                "update asion_account set code=?, name=?, password=?, nick_name=?, email=?, mobile=?, enabled=?, updated_at=now() where id=?",
+                account.getCode(), account.getName(), account.getPassword(), account.getNickName(), account.getEmail(), account.getMobile(), account.isEnabled(), account.getId());
+        if (rows != 1) {
+            throw new RuntimeException("data update fail!");
         }
         return account;
     }

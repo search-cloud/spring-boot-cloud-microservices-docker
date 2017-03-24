@@ -1,7 +1,8 @@
 package org.asion.account;
 
 import lombok.Data;
-import org.asion.base.ddd.domain.BaseDomainModel;
+import org.asion.base.ddd.domain.BaseDomainEntity;
+import org.asion.base.ddd.domain.annotations.DomainEntity;
 
 import java.security.Principal;
 import java.util.Date;
@@ -13,7 +14,8 @@ import java.util.Date;
  * @since 16/4/29.
  */
 @Data
-public class Account implements BaseDomainModel<Long>, Principal {
+@DomainEntity
+public class Account implements BaseDomainEntity<Long>, Principal {
 
     private Long id;
 

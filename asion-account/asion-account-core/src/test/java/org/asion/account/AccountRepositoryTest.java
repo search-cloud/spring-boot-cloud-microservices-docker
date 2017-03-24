@@ -1,5 +1,6 @@
 package org.asion.account;
 
+import org.asion.account.domain.model.AccountRepository;
 import org.junit.Test;
 import org.unitils.UnitilsJUnit4;
 import org.unitils.dbunit.annotation.DataSet;
