@@ -1,6 +1,6 @@
 package org.asion.sample;
 
-import org.asion.base.ddd.domain.BaseDomainModel;
+import org.asion.base.ddd.domain.BaseDomainEntity;
 
 import java.util.Calendar;
 
@@ -8,7 +8,7 @@ import java.util.Calendar;
  * @author Asion.
  * @since 16/4/29.
  */
-public class Sample implements BaseDomainModel<Long> {
+public class Sample implements BaseDomainEntity<Long> {
 
     private Long id;
 

@@ -1,6 +1,6 @@
 package org.asion.search;
 
-import org.asion.base.ddd.domain.BaseDomainModel;
+import org.asion.base.ddd.domain.BaseDomainEntity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
@@ -13,7 +13,7 @@ import java.util.Calendar;
  * @since 16/4/29.
  */
 @Document(indexName = "search_sample", type = "search_sample", shards = 1, replicas = 0, refreshInterval = "-1")
-public class SearchSample implements BaseDomainModel<Long> {
+public class SearchSample implements BaseDomainEntity<Long> {
 
     @Id
     private Long id;
