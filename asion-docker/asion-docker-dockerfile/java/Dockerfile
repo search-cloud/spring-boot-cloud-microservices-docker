@@ -3,7 +3,7 @@ FROM alpine:3.5
 
 MAINTAINER Asion <luxuexian99@gmial.com>
 
-# Java Version and other ENV
+# Java Version and other ENV time zone
 ENV JAVA_VERSION_MAJOR=8 \
     JAVA_VERSION_MINOR=131 \
     JAVA_VERSION_BUILD=11 \
@@ -12,51 +12,41 @@ ENV JAVA_VERSION_MAJOR=8 \
     JAVA_HOME=/opt/jdk \
     PATH=${PATH}:/opt/jdk/bin \
     GLIBC_VERSION=2.25-r0 \
-    LANG=C.UTF-8
+    LANG=C.UTF-8 \
+    TZ=Asia/Shanghai
 
-#apk upgrade --update
-#apk add --update libstdc++ curl ca-certificates bash
-# time zone
-ENV TZ Asia/Shanghai
+# all in one step
+# 1) install glibc
+# 2) install jdk
+# 3) instsll jce
+# 4) clean package
 RUN set -ex && \
     apk upgrade --update && \
     apk add --update libstdc++ curl ca-certificates bash tzdata && \
     ls /usr/share/zoneinfo && \
-    cp /usr/share/zoneinfo/$TZ /etc/localtime && date
+    cp /usr/share/zoneinfo/$TZ /etc/localtime && date && \
 
-# add glibc
-#COPY *.apk /tmp/
-# install glibc
-RUN for pkg in glibc-${GLIBC_VERSION} glibc-bin-${GLIBC_VERSION} glibc-i18n-${GLIBC_VERSION}; do curl -sSL https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/${pkg}.apk -o /tmp/${pkg}.apk; done && \
+    for pkg in glibc-${GLIBC_VERSION} glibc-bin-${GLIBC_VERSION} glibc-i18n-${GLIBC_VERSION}; do curl -sSL https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/${pkg}.apk -o /tmp/${pkg}.apk; done && \
     apk add --allow-untrusted /tmp/*.apk && \
     rm -v /tmp/*.apk && \
     ( /usr/glibc-compat/bin/localedef --force --inputfile POSIX --charmap UTF-8 C.UTF-8 || true ) && \
     echo "export LANG=C.UTF-8" > /etc/profile.d/locale.sh && \
-    /usr/glibc-compat/sbin/ldconfig /lib /usr/glibc-compat/lib
+    /usr/glibc-compat/sbin/ldconfig /lib /usr/glibc-compat/lib && \
 
-# add jdk
-#COPY jdk-8u131-linux-x64.tar.gz /tmp/java.tar.gz
-#COPY jce_policy-8.zip /tmp/jce_policy-8.zip
-
-# install jdk
-RUN curl -jksSLH "Cookie: oraclelicense=accept-securebackup-cookie" -o /tmp/java.tar.gz \
+    curl -jksSLH "Cookie: oraclelicense=accept-securebackup-cookie" -o /tmp/java.tar.gz \
       http://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION_MAJOR}u${JAVA_VERSION_MINOR}-b${JAVA_VERSION_BUILD}/d54c1d3a095b4ff2b6607d096fa80163/${JAVA_PACKAGE}-${JAVA_VERSION_MAJOR}u${JAVA_VERSION_MINOR}-linux-x64.tar.gz && \
     mkdir /opt && \
     gunzip /tmp/java.tar.gz && \
     tar -C /opt -xf /tmp/java.tar && \
-    ln -s /opt/jdk1.${JAVA_VERSION_MAJOR}.0_${JAVA_VERSION_MINOR} /opt/jdk
+    ln -s /opt/jdk1.${JAVA_VERSION_MAJOR}.0_${JAVA_VERSION_MINOR} /opt/jdk && \
 
-# instsll jce
-RUN set -ex && \
     if [ "${JAVA_JCE}" == "unlimited" ]; then echo "Installing Unlimited JCE policy" >&2 && \
       curl -jksSLH "Cookie: oraclelicense=accept-securebackup-cookie" -o /tmp/jce_policy-${JAVA_VERSION_MAJOR}.zip \
             http://download.oracle.com/otn-pub/java/jce/${JAVA_VERSION_MAJOR}/jce_policy-${JAVA_VERSION_MAJOR}.zip && \
       cd /tmp && unzip /tmp/jce_policy-${JAVA_VERSION_MAJOR}.zip && cp -v /tmp/UnlimitedJCEPolicyJDK8/*.jar /opt/jdk/jre/lib/security; \
     fi && \
-    sed -i s/#networkaddress.cache.ttl=-1/networkaddress.cache.ttl=10/ $JAVA_HOME/jre/lib/security/java.security
+    sed -i s/#networkaddress.cache.ttl=-1/networkaddress.cache.ttl=10/ $JAVA_HOME/jre/lib/security/java.security && \
 
-# clean package
-RUN set -ex && \
     apk del glibc-i18n curl ca-certificates tzdata && \
     rm -rf /opt/jdk/*src.zip \
            /opt/jdk/lib/missioncontrol \
