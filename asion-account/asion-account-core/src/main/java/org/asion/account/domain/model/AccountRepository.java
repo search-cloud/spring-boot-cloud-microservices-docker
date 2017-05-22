@@ -1,6 +1,5 @@
 package org.asion.account.domain.model;
 
-import org.asion.account.Account;
 import org.asion.base.ddd.domain.BaseRepository;
 import org.asion.base.ddd.domain.annotations.DomainRepository;
 

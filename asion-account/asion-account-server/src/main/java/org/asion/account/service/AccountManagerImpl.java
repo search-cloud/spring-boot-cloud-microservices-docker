@@ -1,8 +1,8 @@
 package org.asion.account.service;
 
 import com.alibaba.dubbo.config.annotation.DubboService;
-import org.asion.account.Account;
-import org.asion.account.AccountManager;
+import org.asion.account.domain.model.Account;
+import org.asion.account.domain.application.AccountManager;
 import org.asion.account.domain.model.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

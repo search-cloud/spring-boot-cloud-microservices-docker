@@ -1,0 +1,24 @@
+/**
+ * asion-user's sub projects configuration
+ */
+project("asion-user-common") {
+    dependencies {
+        //compile("org.asion:asion-base:${version}")
+        compile project(":asion-base")
+        compile('org.projectlombok:lombok')
+    }
+}
+
+/**
+ * asion user spring boot starter
+ */
+project("asion-user-spring-boot-starter") {
+    dependencies {
+        //compile("org.asion:asion-user-common:${version}")
+        compile project(":asion-user:asion-user-common")
+
+        compile("org.springframework.boot:spring-boot-starter-actuator")
+        compile("org.springframework.boot:spring-boot-configuration-processor")
+        compile("org.mvnsearch.spring.boot:spring-boot-starter-dubbo:1.0.0-SNAPSHOT")
+    }
+}

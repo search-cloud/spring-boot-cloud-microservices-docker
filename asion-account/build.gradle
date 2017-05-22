@@ -5,6 +5,7 @@ project("asion-account-common") {
     dependencies {
         //compile("org.asion:asion-base:${version}")
         compile project(":asion-base")
+        compile project(":asion-user:asion-user-common")
         compile('org.projectlombok:lombok')
     }
 }
@@ -18,22 +19,6 @@ project("asion-account-spring-boot-starter") {
         compile project(":asion-account:asion-account-common")
 
         compile("org.springframework.boot:spring-boot-starter-actuator")
-        compile("org.springframework.boot:spring-boot-configuration-processor")
-        compile("org.mvnsearch.spring.boot:spring-boot-starter-dubbo:1.0.0-SNAPSHOT")
-    }
-}
-/**
- * asion account spring boot starter
- */
-project("asion-account-security-spring-boot-starter") {
-    dependencies {
-        //compile("org.asion:asion-account-common:${version}")
-        compile project(":asion-account:asion-account-common")
-        compile project(":asion-account:asion-account-spring-boot-starter")
-
-        compile("org.springframework.boot:spring-boot-starter-web")
-        compile("org.springframework.boot:spring-boot-starter-actuator")
-        compile("org.springframework.boot:spring-boot-starter-security")
         compile("org.springframework.boot:spring-boot-configuration-processor")
         compile("org.mvnsearch.spring.boot:spring-boot-starter-dubbo:1.0.0-SNAPSHOT")
     }
@@ -93,7 +78,7 @@ project("asion-account-web") {
         //
         //compile("org.asion:asion-account-spring-boot-starter:${version}")
         compile project(":asion-account:asion-account-spring-boot-starter")
-        compile project(":asion-account:asion-account-security-spring-boot-starter")
+//        compile project(":asion-account:asion-account-security-spring-boot-starter")
 
         compile("org.springframework.boot:spring-boot-starter-actuator")
         compile("org.springframework.boot:spring-boot-starter-security")

@@ -4,6 +4,7 @@ title 权限系统设计
 '什么人？ 对什么资源？ 进行了什么操作？
 
 interface IUser<用户>
+interface IAccount<账户>
 interface IGroup<组织：同一类用户>
 interface ISection<区域>
 interface IDepartment<部门>
@@ -20,7 +21,8 @@ interface IDataResource<数据资源>
 
 IUser o-right-> IRole
 IRole o-right-> IResource
-IRole o-up-> IPermission
+IRole o.up.> IPermission
+IResource o-up-> IPermission
 
 IResource <|-right- IAppResource
 IAppResource <|-- IFunctionalResource
@@ -33,15 +35,17 @@ IDepartment <|-- IDepartment
 class Account<登录账号>
 class Employee<员工>
 
-IUser <|... Account
+'IUser <|... IAccount
+IAccount <|... Account
 IUser <|... Employee
-Account <-right-o Employee
+Account <-left-o Employee
+IUser <-right-o IAccount
 
 class Account<<Entity>> {
     - Long id
     - String code
     - String name
-    - String nickName
+    - String alias
     - String password
     - boolean enabled
 }

@@ -1,6 +1,6 @@
 package org.asion.account.domain.infrastructure.model;
 
-import org.asion.account.Account;
+import org.asion.account.domain.model.Account;
 import org.asion.account.domain.model.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
