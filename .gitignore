@@ -130,5 +130,5 @@ log/
 *.log
 
 ### Elasticsearch
-data/
-index/
+/data/
+/index/
