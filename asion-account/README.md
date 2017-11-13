@@ -6,7 +6,6 @@
 
 ### Account system
 #### Login
-#### Authorization
-#### Register 
+#### Register
 #### Allocate employee accounts
 #### Manage accounts
