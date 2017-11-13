@@ -1,0 +1,63 @@
+@startuml
+
+
+node "Domain Module" {
+   package "model package" {
+       [Model] <<Domain>>
+       [Repository] <<Domain>>
+       [Factory] <<Domain>>
+    }
+   [Service] <<Domain>>
+   [Event] <<Domain>>
+   [Policy] <<Domain>>
+   [Shared]
+   note right of Shared : XxxSupport\nWrapper\nSpring Integration
+
+   package "application package" {
+        [Application]
+        note left of Application : utils,spring
+   }
+   package "infrastructure package" {
+        [Infrastructure] #Aqua
+        [DomainImpl] <<Domain>>
+        [DomainImpl] -> [Infrastructure]
+   }
+}
+
+cloud "App Modules" {
+    [WebApp] <<App>>
+    [MobileBackend] <<App>>
+    [Interface] <<App>>
+    [MobileApp] <<App>>
+}
+
+[Shared] <-- [DomainImpl]
+[Application] <--- [DomainImpl]
+[Repository] ---> [Shared]
+[Repository] --> [Model]
+[Service] -[#0000FF]> [Repository]
+[Service] -[#0000FF]> [Factory]
+[Service] -[#0000FF]> [Policy]
+[Service] <-[#0000FF]> [Event]
+[Policy] -[#0000FF]> [Repository]
+[Factory] --> [Model]
+[Factory] ---> [Shared]
+[Event] -[#0000FF]> [Repository]
+[Event] -[#0000FF]> [Factory]
+[Application] -[#0000FF]> [Service]
+[Application] -[#0000FF]> [Event]
+[Application] -[#0000FF]> [Policy]
+
+[WebApp] ...> [Application]
+[Interface] --> [WebApp]
+[MobileBackend] ...> [Application]
+[MobileApp] --> [MobileBackend]
+
+skinparam component {
+  FontSize 13
+  BackgroundColor<<Domain>> gold
+  BackgroundColor<<App>> DarkKhaki
+  FontName Courier
+}
+
+@enduml

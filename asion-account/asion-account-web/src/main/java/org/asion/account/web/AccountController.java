@@ -1,7 +1,7 @@
 package org.asion.account.web;
 
-import org.asion.account.Account;
-import org.asion.account.AccountManager;
+import org.asion.account.domain.model.Account;
+import org.asion.account.domain.application.AccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;

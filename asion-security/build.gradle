@@ -1,0 +1,104 @@
+/**
+ * asion-account's sub projects configuration
+ */
+project("asion-security-common") {
+    dependencies {
+        //compile("org.asion:asion-base:${version}")
+        compile project(":asion-base")
+        compile('org.projectlombok:lombok')
+    }
+}
+
+/**
+ * asion security spring boot starter
+ */
+project("asion-security-spring-boot-starter") {
+    dependencies {
+        //compile("org.asion:asion-security-common:${version}")
+        compile project(":asion-security:asion-security-common")
+
+        compile("org.springframework.boot:spring-boot-starter-web")
+        compile("org.springframework.boot:spring-boot-starter-actuator")
+        compile("org.springframework.boot:spring-boot-starter-security")
+        compile("org.springframework.boot:spring-boot-configuration-processor")
+        compile("org.mvnsearch.spring.boot:spring-boot-starter-dubbo:1.0.0-SNAPSHOT")
+    }
+}
+
+project("asion-security-core") {
+    dependencies {
+        //compile("org.asion:asion-security-common:${version}")
+        compile project(":asion-security:asion-security-common")
+
+        compile("org.springframework:spring-context-support")
+        compile("org.springframework.boot:spring-boot-starter-security")
+        compile("org.springframework.boot:spring-boot-starter-jdbc")
+        compile("mysql:mysql-connector-java")
+        compile('com.h2database:h2')
+
+        compile('org.projectlombok:lombok')
+        testCompile("org.springframework.boot:spring-boot-starter-test")
+        testCompile("org.unitils:unitils-bom:${unitilsBom}")
+    }
+}
+
+project("asion-security-server") {
+    apply plugin: "org.springframework.boot"
+
+    dependencies {
+        //compile("asion-security:asion-security-core")
+        compile project(":asion-security:asion-security-core")
+        compile("org.mvnsearch.spring.boot:spring-boot-starter-dubbo:1.0.0-SNAPSHOT")
+        compile("org.springframework.cloud:spring-cloud-starter-eureka")
+//        compile("org.springframework.cloud:spring-cloud-starter-config")
+        compile("de.codecentric:spring-boot-admin-starter-client:${springBootAdminVersion}")
+        compile("org.jolokia:jolokia-core")
+
+        compile("org.springframework.boot:spring-boot-starter-actuator")
+        compile("org.springframework.boot:spring-boot-starter-jdbc")
+        compile("mysql:mysql-connector-java")
+        compile('com.h2database:h2')
+        compile('redis.clients:jedis')
+
+        compile("org.springframework.boot:spring-boot-starter-web")
+        compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+
+//        testCompile("org.springframework.boot:spring-boot-starter-test")
+    }
+
+//    bootRepackage {
+//        mainClass = 'org.asion.security.AsionUserServerApplication'
+//    }
+
+}
+
+project("asion-security-web") {
+    apply plugin: "org.springframework.boot"
+
+    dependencies {
+        //
+        //compile("org.asion:asion-security-spring-boot-starter:${version}")
+        compile project(":asion-security:asion-security-spring-boot-starter")
+
+        compile("org.springframework.boot:spring-boot-starter-actuator")
+        compile("org.springframework.boot:spring-boot-starter-security")
+        compile("org.springframework.security.oauth:spring-security-oauth2")
+
+        compile("de.codecentric:spring-boot-admin-starter-client:${springBootAdminVersion}")
+        compile("org.jolokia:jolokia-core")
+
+        compile('redis.clients:jedis')
+        compile("org.springframework.boot:spring-boot-starter-web")
+        compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+        compile("org.webjars:bootstrap:3.3.6")
+        compile("org.webjars:jquery:2.2.3")
+        compile('org.webjars:jquery-validation:1.15.0')
+        compile("org.sitemesh:sitemesh:3.0.1")
+
+        testCompile("org.springframework.boot:spring-boot-starter-test")
+    }
+
+//    bootRepackage {
+//        mainClass = 'org.asion.security.AsionUserWebApplication'
+//    }
+}

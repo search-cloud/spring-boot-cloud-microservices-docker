@@ -15,11 +15,11 @@ import java.util.stream.Collectors;
  */
 abstract class SimpleBaseTest {
 
-    protected Demo demo = null;
-    protected List<Demo> demoList = null;
-    protected List<Demo> demoSubList = null;
-    protected Map<Long, Demo> demoMap = null;
-    protected Date date = new Date();
+    Demo demo = null;
+    List<Demo> demoList = null;
+    List<Demo> demoSubList = null;
+    Map<Long, Demo> demoMap = null;
+    Date date = new Date();
 
     @Before
     public void before() {

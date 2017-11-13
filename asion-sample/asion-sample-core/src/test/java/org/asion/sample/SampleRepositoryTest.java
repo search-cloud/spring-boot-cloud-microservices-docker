@@ -1,6 +1,7 @@
 package org.asion.sample;
 
 import org.junit.Test;
+import org.springframework.test.context.ContextConfiguration;
 import org.unitils.UnitilsJUnit4;
 import org.unitils.dbunit.annotation.DataSet;
 import org.unitils.spring.annotation.SpringApplicationContext;
@@ -16,6 +17,7 @@ import static org.junit.Assert.*;
 @DataSet(
         "/database/dataset/asion_sample_sample.xml"
 )
+@ContextConfiguration(classes = org.asion.sample.common.SampleTestApplication.class)
 public class SampleRepositoryTest extends UnitilsJUnit4 {
 
     @SpringBeanByType

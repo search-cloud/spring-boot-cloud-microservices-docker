@@ -9,18 +9,29 @@ include 'asion-cloud',
         'asion-cloud:asion-cloud-config-server',
         'asion-cloud:asion-spring-boot-admin'
 
+include 'asion-user'
+include "asion-user:asion-user-common"
+include "asion-user:asion-user-spring-boot-starter"
+
 // account
 include 'asion-account',
-        "asion-account:asion-account-shared",
+        "asion-account:asion-account-common",
         "asion-account:asion-account-core",
         "asion-account:asion-account-server",
         "asion-account:asion-account-web",
-        "asion-account:asion-account-spring-boot-starter",
-        "asion-account:asion-account-security-spring-boot-starter"
+        "asion-account:asion-account-spring-boot-starter"
+
+// security
+include 'asion-security',
+        "asion-security:asion-security-common",
+        "asion-security:asion-security-core",
+        "asion-security:asion-security-server",
+        "asion-security:asion-security-web",
+        "asion-security:asion-security-spring-boot-starter"
 
 // sample
 include 'asion-sample',
-        "asion-sample:asion-sample-shared",
+        "asion-sample:asion-sample-common",
         "asion-sample:asion-sample-core",
         "asion-sample:asion-sample-server",
         "asion-sample:asion-sample-web",
@@ -28,10 +39,16 @@ include 'asion-sample',
 
 // search
 include 'asion-search',
-        "asion-search:asion-search-shared",
+        "asion-search:asion-search-common",
         "asion-search:asion-search-core",
         "asion-search:asion-search-server"
 
 // Exposes gradle buildSrc for IDE support
 include "buildSrc"
 rootProject.children.find{ it.name == "buildSrc" }.name = "asion-build-src"
+
+include 'asion-docker'
+include 'asion-docker:asion-docker-dockerfile'
+findProject(':asion-docker:asion-docker-dockerfile')?.name = 'asion-docker-dockerfile'
+include 'asion-docker:asion-docker-compose'
+findProject(':asion-docker:asion-docker-compose')?.name = 'asion-docker-compose'

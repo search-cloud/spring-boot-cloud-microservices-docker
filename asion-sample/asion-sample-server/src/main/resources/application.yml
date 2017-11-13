@@ -8,11 +8,11 @@ spring:
   application:
     name: asion-sample-server
   datasource:
-    url: jdbc:mysql://192.168.99.100:2006/asion_sample?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+    url: jdbc:mysql://db.asion.org:2006/asion_sample?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
     username: root
     password: asion
     driverClassName: com.mysql.jdbc.Driver
-    dbcp:
+    hikari:
       test-on-borrow: false
       test-on-return: false
       test-while-idle: true
@@ -21,7 +21,7 @@ spring:
       time-between-eviction-runs-millis: 20000
       min-evictable-idle-time-millis: 28700
   dubbo:
-    app: dubbo-account-provider
+    app: dubbo-sample-provider
     registry: redis://dubbo.asion.org:5050
     protocol: dubbo
     port: 9908

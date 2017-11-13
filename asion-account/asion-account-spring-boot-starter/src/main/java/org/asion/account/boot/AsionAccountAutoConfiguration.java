@@ -1,7 +1,7 @@
 package org.asion.account.boot;
 
 import com.alibaba.dubbo.config.spring.ReferenceBean;
-import org.asion.account.AccountManager;
+import org.asion.account.domain.application.AccountManager;
 import org.mvnsearch.spring.boot.dubbo.DubboAutoConfiguration;
 import org.mvnsearch.spring.boot.dubbo.DubboBasedAutoConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +15,11 @@ import org.springframework.context.annotation.Configuration;
  * @author Asion.
  * @since 16/8/24.
  */
-@SuppressWarnings("SpringJavaAutowiringInspection")
 @Configuration
 @EnableConfigurationProperties(AsionAccountProperties.class)
 @AutoConfigureAfter(DubboAutoConfiguration.class)
 public class AsionAccountAutoConfiguration extends DubboBasedAutoConfiguration {
 
-    @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
     private AsionAccountProperties properties;
 

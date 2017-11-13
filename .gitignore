@@ -128,3 +128,7 @@ gradle-app.setting
 
 log/
 *.log
+
+### Elasticsearch
+/data/
+/index/

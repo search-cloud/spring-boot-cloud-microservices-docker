@@ -1,0 +1,63 @@
+@startuml
+
+package "openApi1" {
+   package idl1 {
+
+   }
+}
+
+package "openApi2" {
+   package idl2 {
+
+   }
+}
+
+package "client" {
+
+}
+package "application" {
+   package "appServiceImpl" {
+   }
+}
+
+package "domain" {
+  package "model" {
+     package "account" {
+
+     }
+  }
+  package "factory" {
+  }
+
+  package "event" {
+
+  }
+
+  package "shared" {
+  }
+
+  package "service" {
+  }
+
+  package "policy" {
+  }
+
+}
+
+package "infrastructure" {
+   package "cache"
+   package "db"
+   package "email"
+   package "rpc"
+   package "domainImpl"
+}
+
+infrastructure --up-> domain
+application --down-> domain
+application --up-> openApi1
+domain --> openApi1
+
+client ---> openApi1
+client ---> openApi2
+
+@enduml

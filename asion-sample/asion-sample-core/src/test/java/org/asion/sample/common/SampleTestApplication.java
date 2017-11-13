@@ -18,7 +18,7 @@ public class SampleTestApplication {
 
     @Bean
     public DataSource dataSource() {
-        String url = "jdbc:mysql://192.168.99.100:2006/asion_sample?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull";
+        String url = "jdbc:mysql://localhost:2006/asion_sample?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull";
         String user = "root";
         String password = "asion";
         DriverManagerDataSource dataSource = new DriverManagerDataSource(url, user, password);

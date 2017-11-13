@@ -1,7 +1,7 @@
 package org.asion.account.test;
 
-import org.asion.account.user;
-import org.asion.account.web.userController;
+import org.asion.account.domain.model.Account;
+import org.asion.account.web.AccountController;
 import org.hamcrest.core.IsInstanceOf;
 import org.hamcrest.core.StringContains;
 import org.junit.Test;
@@ -24,8 +24,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @since 16/7/2.
  */
 @RunWith(SpringRunner.class)
-@WebMvcTest(userController.class)
-public class userControllerTest {
+@WebMvcTest(AccountController.class)
+public class SampleControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
@@ -65,9 +65,9 @@ public class userControllerTest {
 
     @Test
     public void testCreate() throws Exception {
-        user user = new user();
-        user.setSummary("Summary Test");
-        user.setText("This is test text!");
+        Account user = new Account();
+        user.setName("Summary Test");
+        user.setNickName("This is test text!");
         mockMvc.perform(post("/user/create", user)
                 .accept(MediaType.TEXT_PLAIN))
                 .andExpect(status().is3xxRedirection())

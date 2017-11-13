@@ -1,5 +1,7 @@
 package org.asion.account;
 
+import org.asion.account.domain.model.Account;
+import org.asion.account.domain.model.AccountRepository;
 import org.junit.Test;
 import org.unitils.UnitilsJUnit4;
 import org.unitils.dbunit.annotation.DataSet;
@@ -12,9 +14,9 @@ import static org.junit.Assert.*;
  * @author Asion.
  * @since 16/5/1.
  */
-@SpringApplicationContext("/appContext-unit.xml")
+@SpringApplicationContext("classpath:/app-context-unit.xml")
 @DataSet(
-        "/database/dataset/asion_user_user.xml"
+        "/database/dataset/asion_account.xml"
 )
 public class AccountRepositoryTest extends UnitilsJUnit4 {
 
@@ -32,18 +34,18 @@ public class AccountRepositoryTest extends UnitilsJUnit4 {
     public void  save() {
         // create
         Account account = new Account();
-        account.setText("Test Text!");
-        account.setSummary("Test Summary!");
+        account.setCode("Test Text!");
+        account.setName("Test Summary!");
         Account created = accountRepository.save(account);
         assertNotNull(created);
-        assertEquals(account.getSummary(), created.getSummary());
+        assertEquals(account.getCode(), created.getCode());
 
         // update
-        created.setText("Test Update Text!");
-        created.setSummary("Test Update Summary!");
+        created.setCode("Test Update Text!");
+        created.setName("Test Update Summary!");
         Account updated = accountRepository.save(created);
         assertNotNull(created);
-        assertEquals(created.getSummary(), updated.getSummary());
+        assertEquals(created.getCode(), updated.getCode());
     }
 
     @Test
@@ -51,7 +53,7 @@ public class AccountRepositoryTest extends UnitilsJUnit4 {
         Long id = 1L;
         Account account = accountRepository.findOne(id);
         assertNotNull(account);
-        assertEquals("This is the test text1!", account.getText());
+        assertEquals("This is the test text1!", account.getCode());
     }
 
     @Test

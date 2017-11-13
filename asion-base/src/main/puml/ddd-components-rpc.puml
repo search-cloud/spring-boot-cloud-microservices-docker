@@ -1,0 +1,78 @@
+@startuml
+
+node "domain module" {
+    package "domain package"  {
+        package "model" {
+           [Model] <<Domain>>
+           [Repository] <<Domain>>
+           [Factory] <<Domain>>
+        }
+       [Shared]
+        note right of Shared : XxxSupport, Wrapper
+       [Service] <<Domain>>
+       [Event] <<Domain>>
+       [Policy] <<Domain>>
+    }
+    package "application package" {
+      [Application]
+      note right of Application : published service implementation
+    }
+    package "infrastructure package" {
+      [Infrastructure] #Aqua
+      [DomainImpl] <<Domain>>
+      [DomainImpl] -> [Infrastructure]
+    }
+}
+package "Published Service Module" {
+   [PublishedService]
+   note right of PublishedService : models\npublished service api
+
+}
+package "Client Module" {
+   [XxxClient] #99FF99
+   note right of XxxClient : DSL\nSpring Support\nException Handler
+
+   [XxxClient] -> [PublishedService]
+}
+
+cloud "App Modules" {
+    [WebApp] <<App>>
+    [MobileBackend] <<App>>
+    [Interface] <<App>>
+    [MobileApp] <<App>>
+}
+
+[Shared] <-- [DomainImpl]
+[Application] <--- [DomainImpl]
+[Repository] ---> [Shared]
+[Repository] --> [Model]
+[Factory] ---> [Shared]
+[Service] -[#0000FF]> [Factory]
+[Service] -[#0000FF]> [Repository]
+[Service] -[#0000FF]> [Policy]
+[Policy] -[#0000FF]> [Repository]
+[Factory] --> [Model]
+[Event] -[#0000FF]> [Factory]
+[Event] <-[#0000FF]> [Service]
+[Event] -[#0000FF]> [Repository]
+
+[Application] -[#0000FF]-> [Service]
+[Application] -[#0000FF]-> [Event]
+[Application] -[#0000FF]-> [Policy]
+
+[PublishedService] ..> [Application]: RPC
+[PublishedService] <-- [Application]: Maven dependency
+
+[WebApp] ..> [XxxClient]
+[Interface] --> [WebApp]
+[MobileBackend] ..> [XxxClient]
+[MobileApp] --> [MobileBackend]
+
+skinparam component {
+  FontSize 13
+  BackgroundColor<<Domain>> gold
+  BackgroundColor<<App>> DarkKhaki
+  FontName Courier
+}
+
+@enduml

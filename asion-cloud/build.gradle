@@ -2,7 +2,7 @@
  * asion-cloud's sub projects configuration
  */
 project("asion-cloud-config-server") {
-    apply plugin: "spring-boot"
+    apply plugin: "org.springframework.boot"
 
     dependencies {
         compile('org.springframework.cloud:spring-cloud-config-server')
@@ -10,14 +10,14 @@ project("asion-cloud-config-server") {
         testCompile('org.springframework.boot:spring-boot-starter-test')
     }
 
-    bootRepackage {
-        mainClass = 'org.asion.cloud.server.AsionCloudConfigServerApplication'
-    }
+//    bootRepackage {
+//        mainClass = 'org.asion.cloud.server.AsionCloudConfigServerApplication'
+//    }
 
 }
 
 project("asion-cloud-registry-server") {
-    apply plugin: "spring-boot"
+    apply plugin: "org.springframework.boot"
 
     dependencies {
         compile('org.springframework.cloud:spring-cloud-starter-eureka')
@@ -25,14 +25,14 @@ project("asion-cloud-registry-server") {
         testCompile('org.springframework.boot:spring-boot-starter-test')
     }
 
-    bootRepackage {
-        mainClass = 'org.asion.cloud.server.AsionCloudRegistryServerApplication'
-    }
+//    bootRepackage {
+//        mainClass = 'org.asion.cloud.server.AsionCloudRegistryServerApplication'
+//    }
 
 }
 
 project("asion-spring-boot-admin") {
-    apply plugin: "spring-boot"
+    apply plugin: "org.springframework.boot"
 
     dependencies {
         compile("de.codecentric:spring-boot-admin-server:${springBootAdminVersion}")
@@ -41,8 +41,8 @@ project("asion-spring-boot-admin") {
         testCompile('org.springframework.boot:spring-boot-starter-test')
     }
 
-    bootRepackage {
-        mainClass = 'org.asion.cloud.server.AsionSpringBootAdminApplication'
-    }
+//    bootRepackage {
+//        mainClass = 'org.asion.cloud.server.AsionSpringBootAdminApplication'
+//    }
 
 }
