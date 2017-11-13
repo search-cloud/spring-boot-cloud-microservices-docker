@@ -32,9 +32,10 @@ configure(allprojects) { project ->
     apply plugin: 'java'
     apply plugin: 'maven'
     apply plugin: 'groovy'
+    apply plugin: 'kotlin'
 
-    sourceCompatibility = 1.9
-    targetCompatibility = 1.9
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
 
     ext {
         springBootVersion = '2.0.0.M6'
@@ -52,6 +53,10 @@ configure(allprojects) { project ->
         maven { url "https://repo.spring.io/release" }
         maven { url "https://repo.spring.io/snapshot" }
         maven { url "https://repo.spring.io/milestone" }
+    }
+
+    sourceSets {
+        main.kotlin.srcDirs += 'src/main/java'
     }
 
     // noinspection GroovyAssignabilityCheck
@@ -84,6 +89,7 @@ configure(allprojects) { project ->
  */
 subprojects {
     apply plugin: "io.spring.dependency-management"
+    apply plugin: 'kotlin'
 
     dependencyManagement {
         imports {
@@ -97,6 +103,7 @@ subprojects {
     dependencies {
         compile("org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}")
         compile("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
+        testCompile "org.jetbrains.kotlin:kotlin-test-junit"
     }
 
     task sourcesJar(type: Jar, dependsOn: classes) {

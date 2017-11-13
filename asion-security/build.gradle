@@ -66,9 +66,9 @@ project("asion-security-server") {
 //        testCompile("org.springframework.boot:spring-boot-starter-test")
     }
 
-//    bootRepackage {
-//        mainClass = 'org.asion.security.AsionUserServerApplication'
-//    }
+    bootJar {
+        mainClassName = 'org.asion.security.AsionUserServerApplication'
+    }
 
 }
 
@@ -98,7 +98,7 @@ project("asion-security-web") {
         testCompile("org.springframework.boot:spring-boot-starter-test")
     }
 
-//    bootRepackage {
-//        mainClass = 'org.asion.security.AsionUserWebApplication'
-//    }
+    bootJar {
+        mainClassName = 'org.asion.security.AsionUserWebApplication'
+    }
 }

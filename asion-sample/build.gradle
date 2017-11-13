@@ -62,9 +62,9 @@ project("asion-sample-server") {
 //        testCompile("org.springframework.boot:spring-boot-starter-test")
     }
 
-//    bootRepackage {
-//        mainClass = 'org.asion.sample.AsionSampleServerApplication'
-//    }
+    bootJar {
+        mainClassName = 'org.asion.sample.AsionSampleServerApplication'
+    }
 
 }
 
@@ -91,7 +91,7 @@ project("asion-sample-web") {
         testCompile("org.springframework.boot:spring-boot-starter-test")
     }
 
-//    bootRepackage {
-//        mainClass = 'org.asion.sample.AsionSampleWebApplication'
-//    }
+    bootJar {
+        mainClassName = 'org.asion.sample.AsionSampleWebApplication'
+    }
 }

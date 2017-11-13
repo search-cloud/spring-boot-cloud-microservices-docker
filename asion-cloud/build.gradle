@@ -10,9 +10,9 @@ project("asion-cloud-config-server") {
         testCompile('org.springframework.boot:spring-boot-starter-test')
     }
 
-//    bootRepackage {
-//        mainClass = 'org.asion.cloud.server.AsionCloudConfigServerApplication'
-//    }
+    bootJar {
+        mainClassName = 'org.asion.cloud.server.AsionCloudConfigServerApplication'
+    }
 
 }
 
@@ -25,9 +25,9 @@ project("asion-cloud-registry-server") {
         testCompile('org.springframework.boot:spring-boot-starter-test')
     }
 
-//    bootRepackage {
-//        mainClass = 'org.asion.cloud.server.AsionCloudRegistryServerApplication'
-//    }
+    bootJar {
+        mainClassName = 'org.asion.cloud.server.AsionCloudRegistryServerApplication'
+    }
 
 }
 
@@ -41,8 +41,8 @@ project("asion-spring-boot-admin") {
         testCompile('org.springframework.boot:spring-boot-starter-test')
     }
 
-//    bootRepackage {
-//        mainClass = 'org.asion.cloud.server.AsionSpringBootAdminApplication'
-//    }
+    bootJar {
+        mainClassName = 'org.asion.cloud.server.AsionSpringBootAdminApplication'
+    }
 
 }

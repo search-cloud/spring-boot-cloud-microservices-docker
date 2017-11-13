@@ -59,7 +59,7 @@ project("asion-search-server") {
 //        testCompile("org.springframework.boot:spring-boot-starter-test")
     }
 
-//    bootRepackage {
-//        mainClass = 'org.asion.search.AsionSearchServerApplication'
-//    }
+    bootJar {
+        mainClassName = 'org.asion.search.AsionSearchServerApplication'
+    }
 }
