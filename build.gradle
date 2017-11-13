@@ -3,17 +3,21 @@
  */
 buildscript {
     ext {
-        springBootVersion = '1.5.2.RELEASE'
+        kotlinVersion = '1.1.51'
+        springBootVersion = '2.0.0.M6'
     }
     repositories {
         mavenLocal()
         jcenter()
+        maven { url "https://repo.spring.io/release" }
         maven { url "https://repo.spring.io/snapshot" }
         maven { url "https://repo.spring.io/milestone" }
     }
     dependencies {
-        classpath "io.spring.gradle:dependency-management-plugin:0.6.0.RELEASE"
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.2.RELEASE"
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
+        classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
     }
 }
 
@@ -29,23 +33,20 @@ configure(allprojects) { project ->
     apply plugin: 'maven'
     apply plugin: 'groovy'
 
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
+    sourceCompatibility = 1.9
+    targetCompatibility = 1.9
 
     ext {
-        springBootVersion = '1.5.2.RELEASE'
-        springVersion = '4.3.7.RELEASE'
-        springCloudVersion = 'Camden.SR5'
-        springBootAdminVersion = '1.4.5'
-        platformBomVersion = 'Brussels-SR1'
+        springBootVersion = '2.0.0.M4'
+        springVersion = '5.0.0.RELEASE'
+        springCloudVersion = 'Dalston.SR4'
+        springBootAdminVersion = '1.5.4'
+        platformBomVersion = 'Brussels-SR5'
         unitilsBom = '3.4.2'
-        elasticsearchVersion = '2.4.4'
-//        springDataElasticsearch = '2.0.1.RELEASE'
         assertjVersion = '3.6.2'
     }
 
     repositories {
-        maven { url "/Users/Asion/.m2/repository" }
         mavenLocal()
         jcenter()
         maven { url "https://repo.spring.io/release" }
@@ -91,6 +92,11 @@ subprojects {
             mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
             mavenBom "io.spring.platform:platform-bom:${platformBomVersion}"
         }
+    }
+
+    dependencies {
+        compile("org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}")
+        compile("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
     }
 
     task sourcesJar(type: Jar, dependsOn: classes) {

@@ -6,7 +6,7 @@ project("asion-account-common") {
         //compile("org.asion:asion-base:${version}")
         compile project(":asion-base")
         compile project(":asion-user:asion-user-common")
-        compile('org.projectlombok:lombok')
+        compile('org.projectlombok:lombok:1.16.18')
     }
 }
 
@@ -42,7 +42,7 @@ project("asion-account-core") {
 }
 
 project("asion-account-server") {
-    apply plugin: "org.springframework.boot"
+    apply plugin: 'org.springframework.boot'
 
     dependencies {
         //compile("asion-account:asion-account-core")
@@ -65,9 +65,9 @@ project("asion-account-server") {
 //        testCompile("org.springframework.boot:spring-boot-starter-test")
     }
 
-    bootRepackage {
-        mainClass = 'org.asion.account.AsionUserServerApplication'
-    }
+//    bootRepackage {
+//        mainClass = 'org.asion.account.AsionUserServerApplication'
+//    }
 
 }
 
@@ -98,7 +98,7 @@ project("asion-account-web") {
         testCompile("org.springframework.boot:spring-boot-starter-test")
     }
 
-    bootRepackage {
-        mainClass = 'org.asion.account.AsionUserWebApplication'
-    }
+//    bootRepackage {
+//        mainClass = 'org.asion.account.AsionUserWebApplication'
+//    }
 }
