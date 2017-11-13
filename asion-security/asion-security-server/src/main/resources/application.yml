@@ -6,13 +6,13 @@ server:
 spring:
   thymeleaf.cache: false
   application:
-    name: asion-sample-server
+    name: asion-account-server
   datasource:
-    url: jdbc:mysql://db.asion.org:2006/asion_sample?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+    url: jdbc:mysql://db.asion.org:2006/asion_account?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
     username: root
     password: asion
     driverClassName: com.mysql.jdbc.Driver
-    hikari:
+    dbcp:
       test-on-borrow: false
       test-on-return: false
       test-while-idle: true
@@ -21,7 +21,7 @@ spring:
       time-between-eviction-runs-millis: 20000
       min-evictable-idle-time-millis: 28700
   dubbo:
-    app: dubbo-sample-provider
+    app: dubbo-account-provider
     registry: redis://dubbo.asion.org:5050
     protocol: dubbo
     port: 9908
@@ -33,7 +33,7 @@ spring:
 logging:
   level:
     root: info
-  file: asion-sample-server.log
+  file: asion-account-server.log
 
 # eureka
 eureka:

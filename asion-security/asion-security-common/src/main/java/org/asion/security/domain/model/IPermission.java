@@ -1,4 +1,4 @@
-package org.asion.user.domain.model;
+package org.asion.security.domain.model;
 
 /**
  * Resource Permission.
