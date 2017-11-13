@@ -37,7 +37,7 @@ configure(allprojects) { project ->
     targetCompatibility = 1.9
 
     ext {
-        springBootVersion = '2.0.0.M4'
+        springBootVersion = '2.0.0.M6'
         springVersion = '5.0.0.RELEASE'
         springCloudVersion = 'Dalston.SR4'
         springBootAdminVersion = '1.5.4'

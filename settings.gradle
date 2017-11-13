@@ -1,4 +1,4 @@
-rootProject.name = 'asion-projects'
+rootProject.name = 'spring-boot-cloud-microservices-docker'
 
 //
 include 'asion-base'
