@@ -1,12 +1,11 @@
 package org.asion.sample.assertj.demo;
 
+import org.asion.sample.common.DateUtil;
 import org.assertj.core.data.Offset;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Date;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,38 +13,16 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Asion.
  * @since 16/7/2.
  */
-public class AssertJTest {
-
-    private Demo demo = null;
-    private List<Demo> demoList = null;
-    private List<Demo> demoSubList = null;
-    private Map<Long, Demo> demoMap = null;
-    private Date date = new Date();
-
-    @Before
-    public void before() {
-        // init single
-        demo = new Demo(999L, "demo Code Test", "demoNameTest", 90, 200.001, 0, date);
-        // init list
-        demoList = new ArrayList<>(10);
-        demoSubList = new ArrayList<>(10);
-        for (int i = 0; i < 10; i++) {
-            Demo demo = new Demo((long) i, "demoCode"+i, "demoName"+i, (20 + i), (200.0 * i), i, date);
-            demoList.add(demo);
-            if (i%2 == 0) {
-                demoSubList.add(demo);
-            }
-        }
-        // init map
-        demoMap = demoList.stream().collect(Collectors.toMap(Demo::getId, demo1 -> demo1));
-    }
+public class AssertJSimpleTest extends SimpleBaseTest {
 
     @Test
     public void testObjectAssertions() {
         // 1 assert Object
         assertThat(demo).isNotNull()
-                .hasFieldOrProperty("code").hasFieldOrProperty("name")
-                .hasFieldOrPropertyWithValue("code", "demo Code Test").hasFieldOrPropertyWithValue("name", "demoNameTest");
+                .hasFieldOrProperty("code")
+                .hasFieldOrProperty("name")
+                .hasFieldOrPropertyWithValue("code", "demo Code Test")
+                .hasFieldOrPropertyWithValue("name", "demoNameTest");
 
     }
 
@@ -55,6 +32,7 @@ public class AssertJTest {
         assertThat(demo.getCode())
                 .isEqualTo("demo Code Test")
                 .isEqualToIgnoringCase("demo code test")
+                // 忽略字符串前后空格
                 .isEqualToIgnoringWhitespace("                demo Code Test ");
 
     }
@@ -93,8 +71,8 @@ public class AssertJTest {
     @Test
     public void testListAssertions() {
         // 6 assert List
-        assertThat(demoList).hasSize(10);
-        demoSubList.stream().forEach(demo1 -> assertThat(demoList).contains(demo1));
+        assertThat(demoList).isNotEmpty().hasSize(10);
+        demoSubList.forEach(demo1 -> assertThat(demoList).contains(demo1));
     }
 
     @Test

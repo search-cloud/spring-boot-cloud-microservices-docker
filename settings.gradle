@@ -9,6 +9,15 @@ include 'asion-cloud',
         'asion-cloud:asion-cloud-config-server',
         'asion-cloud:asion-spring-boot-admin'
 
+// account
+include 'asion-account',
+        "asion-account:asion-account-shared",
+        "asion-account:asion-account-core",
+        "asion-account:asion-account-server",
+        "asion-account:asion-account-web",
+        "asion-account:asion-account-spring-boot-starter",
+        "asion-account:asion-account-security-spring-boot-starter"
+
 // sample
 include 'asion-sample',
         "asion-sample:asion-sample-shared",
