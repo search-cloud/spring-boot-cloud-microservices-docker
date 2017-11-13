@@ -22,12 +22,12 @@ include 'asion-account',
         "asion-account:asion-account-spring-boot-starter"
 
 // security
-//include 'asion-security',
-//        "asion-security:asion-security-common",
-//        "asion-security:asion-security-core",
-//        "asion-security:asion-security-server",
-//        "asion-security:asion-security-web",
-//        "asion-security:asion-security-spring-boot-starter"
+include 'asion-security',
+        "asion-security:asion-security-common",
+        "asion-security:asion-security-core",
+        "asion-security:asion-security-server",
+        "asion-security:asion-security-web",
+        "asion-security:asion-security-spring-boot-starter"
 
 // sample
 include 'asion-sample',

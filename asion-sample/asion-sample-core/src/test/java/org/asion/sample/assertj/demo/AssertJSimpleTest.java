@@ -37,7 +37,7 @@ public class AssertJSimpleTest extends SimpleBaseTest {
     @Test
     public void testStringAssertions() {
         // 2 assert String
-        assertThat(demo.getCode())
+        assertThat("")
                 .isEqualTo("demo Code Test")
                 // 断言忽略大小写
                 .isEqualToIgnoringCase("demo code test")
@@ -92,7 +92,7 @@ public class AssertJSimpleTest extends SimpleBaseTest {
     @Test
     public void testListAssertions() {
         // 6 assert List
-        assertThat(demoList).isNotEmpty().hasSize(10);
+        assertThat(demoList).isNotNull().isNotEmpty().hasSize(10);
         demoSubList.forEach(demo1 -> assertThat(demoList).contains(demo1));
     }
 
@@ -110,5 +110,35 @@ public class AssertJSimpleTest extends SimpleBaseTest {
     @Test
     public void testDigits() {
         assertThat("10").containsOnlyDigits();
+    }
+
+    /**
+     * The following example shows an incorrect AssertJ API usage:
+     */
+    @Test
+    public void testErrorUsage() {
+        // The following example shows an incorrect AssertJ API usage:
+
+        String a1 = "";
+        String a2 = "";
+        String a3 = "";
+        String b1 = "";
+        String b2 = "";
+        String b3 = "";
+
+        // BAD USAGE : DON'T DO THIS ! It does not assert anything
+        assertThat(a1.equals(b1));
+        assertThat(a2.equals(b2));
+        assertThat(a3.equals(b3));
+
+        // DO THIS :
+        assertThat(a1).isEqualTo(b1);
+        assertThat(a2).isEqualTo(b2);
+        assertThat(a3).isEqualTo(b3);
+
+        // OR THIS (less classy but ok):
+        assertThat(a1.equals(b1)).isTrue();
+        assertThat(a2.equals(b2)).isTrue();
+        assertThat(a3.equals(b3)).isTrue();
     }
 }

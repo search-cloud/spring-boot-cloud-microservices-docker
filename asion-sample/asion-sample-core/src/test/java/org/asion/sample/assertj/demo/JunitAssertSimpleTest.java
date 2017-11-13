@@ -110,6 +110,7 @@ public class JunitAssertSimpleTest extends SimpleBaseTest {
     public void testListAssertions() {
         // 6 assert List
         assertNotNull(demoList);
+        assertEquals(10, demoList.size());
         assertThat(demoList.size(), new Equals(10));
 
         for (Demo demo1 : demoList) {

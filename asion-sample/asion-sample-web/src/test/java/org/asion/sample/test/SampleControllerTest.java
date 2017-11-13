@@ -20,7 +20,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.ThrowableAssert.catchThrowable;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -99,7 +102,12 @@ public class SampleControllerTest {
         sample1.setText("This is test text!");
         sample1.setId(1L);
 
+        // 模拟
         when(sampleManager.save(sample)).thenReturn(sample1);
+
+        when(sampleManager.save(new Sample())).thenReturn(null);
+
+        given(sampleManager.save(sample)).willReturn(null);
 
         mockMvc.perform(post("/sample/create", sample)
                 .accept(MediaType.APPLICATION_FORM_URLENCODED))
@@ -141,10 +149,20 @@ public class SampleControllerTest {
     @Test
     public void testFoo() {
         //Expected exception in controller
-        try {
-            mockMvc.perform(get("/sample/foo"));
-        } catch (Exception e) {
-            assertEquals("Request processing failed; nested exception is java.lang.RuntimeException: Expected exception in controller", e.getMessage());
-        }
+//        try {
+//            mockMvc.perform(get("/sample/foo"));
+//        } catch (Exception e) {
+//            assertEquals("Request processing failed; nested exception is java.lang.RuntimeException: Expected exception in controller", e.getMessage());
+//        }
+        // ava 8 exception assertion, standard style ...
+        assertThatThrownBy(() -> mockMvc.perform(get("/sample/foo")))
+                .hasCauseInstanceOf(RuntimeException.class)
+                .hasMessage("Request processing failed; nested exception is java.lang.RuntimeException: Expected exception in controller");
+
+        // ... or BDD style
+        Throwable thrown = catchThrowable(() -> mockMvc.perform(get("/sample/foo")));
+        assertThat(thrown).hasMessageContaining("Expected exception in controller");
+
+        assertThat(33).as("check %s's age", "name").isEqualTo(33);
     }
 }
