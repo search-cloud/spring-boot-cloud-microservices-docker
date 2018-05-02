@@ -133,7 +133,7 @@ configure(rootProject) {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.14'
+    gradleVersion = '4.2'
 }
 
 /*
