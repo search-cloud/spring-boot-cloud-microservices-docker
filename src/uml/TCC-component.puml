@@ -1,0 +1,24 @@
+@startuml
+
+package "Some Group" {
+request - [App Service]
+[App Service] -down- [TCC Manager]: commit job
+[TCC Manager] -down- [Log Service]
+}
+
+package "Other Groups1" {
+[App Service] -right- [Try Service]
+[App Service] -right- [Confirm Service]
+}
+
+package "Other Groups1" {
+[TCC Manager] -up- [Try Service]
+[TCC Manager] -up- [Confirm Service]
+[TCC Manager] -up- [Cancel Service]
+}
+
+[Try Service] -- [Other Service]
+[Confirm Service] -- [Other Service]
+[Cancel Service]-- [Other Service]
+
+@enduml
