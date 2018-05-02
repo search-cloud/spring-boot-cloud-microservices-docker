@@ -48,7 +48,7 @@ project("asion-account-server") {
         //compile("asion-account:asion-account-core")
         compile project(":asion-account:asion-account-core")
         compile("org.mvnsearch.spring.boot:spring-boot-starter-dubbo:1.0.0-SNAPSHOT")
-        compile("org.springframework.cloud:spring-cloud-starter-eureka")
+        compile("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
 //        compile("org.springframework.cloud:spring-cloud-starter-config")
         compile("de.codecentric:spring-boot-admin-starter-client:${springBootAdminVersion}")
         compile("org.jolokia:jolokia-core")
