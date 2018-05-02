@@ -3,21 +3,23 @@
  */
 buildscript {
     ext {
-        kotlinVersion = '1.1.51'
-        springBootVersion = '2.0.0.M6'
+        kotlinVersion = '1.2.31'
+        springBootVersion = '2.0.1.RELEASE'
     }
+
     repositories {
         mavenLocal()
         jcenter()
         maven { url "https://repo.spring.io/release" }
+        maven { url "https://repo.spring.io/libs-milestone" }
         maven { url "https://repo.spring.io/snapshot" }
-        maven { url "https://repo.spring.io/milestone" }
     }
+
     dependencies {
-        classpath "io.spring.gradle:dependency-management-plugin:1.0.2.RELEASE"
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
-        classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.3.RELEASE"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
+        classpath "org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}"
     }
 }
 
@@ -30,7 +32,7 @@ configure(allprojects) { project ->
 
     apply plugin: 'idea'
     apply plugin: 'java'
-    apply plugin: 'maven'
+//    apply plugin: 'maven'
     apply plugin: 'groovy'
     apply plugin: 'kotlin'
 
@@ -38,11 +40,11 @@ configure(allprojects) { project ->
     targetCompatibility = 1.8
 
     ext {
-        springBootVersion = '2.0.0.M6'
-        springVersion = '5.0.0.RELEASE'
-        springCloudVersion = 'Dalston.SR4'
-        springBootAdminVersion = '1.5.4'
-        platformBomVersion = 'Brussels-SR5'
+        springBootVersion = '2.0.1.RELEASE'
+        springVersion = '5.0.5.RELEASE'
+        springCloudVersion = 'Finchley.RC1'//'Edgware.SR3'
+        springBootAdminVersion = '1.5.7'
+        platformBomVersion = 'Cairo-RELEASE'
         unitilsBom = '3.4.2'
         assertjVersion = '3.6.2'
     }
@@ -51,8 +53,8 @@ configure(allprojects) { project ->
         mavenLocal()
         jcenter()
         maven { url "https://repo.spring.io/release" }
+        maven { url "https://repo.spring.io/libs-milestone" }
         maven { url "https://repo.spring.io/snapshot" }
-        maven { url "https://repo.spring.io/milestone" }
     }
 
     sourceSets {
@@ -103,7 +105,7 @@ subprojects {
     dependencies {
         compile("org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}")
         compile("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
-        testCompile "org.jetbrains.kotlin:kotlin-test-junit"
+        testCompile "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}"
     }
 
     task sourcesJar(type: Jar, dependsOn: classes) {
