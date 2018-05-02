@@ -2,7 +2,7 @@ FROM asion/base
 
 MAINTAINER Asion
 
-ENV ZOOKEEPER_VERSION 3.4.9
+ENV ZOOKEEPER_VERSION 3.4.11
 
 
 # all in one step
@@ -16,14 +16,12 @@ RUN wget -q http://mirror.vorboss.net/apache/zookeeper/zookeeper-${ZOOKEEPER_VER
     wget -q https://www.apache.org/dist/zookeeper/KEYS && \
     wget -q https://www.apache.org/dist/zookeeper/zookeeper-${ZOOKEEPER_VERSION}/zookeeper-${ZOOKEEPER_VERSION}.tar.gz.asc && \
     wget -q https://www.apache.org/dist/zookeeper/zookeeper-${ZOOKEEPER_VERSION}/zookeeper-${ZOOKEEPER_VERSION}.tar.gz.md5 && \
-
     md5sum -c zookeeper-${ZOOKEEPER_VERSION}.tar.gz.md5 && \
     gpg --import KEYS && \
     gpg --verify zookeeper-${ZOOKEEPER_VERSION}.tar.gz.asc && \
-
     tar -xzf zookeeper-${ZOOKEEPER_VERSION}.tar.gz -C /opt && \
     mv /opt/zookeeper-${ZOOKEEPER_VERSION}/conf/zoo_sample.cfg /opt/zookeeper-${ZOOKEEPER_VERSION}/conf/zoo.cfg && \
-    rm -rf zookeeper-${ZOOKEEPER_VERSION}.tar.gz \
+    rm -rf zookeeper-${ZOOKEEPER_VERSION}.tar.gz
 
 ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
 ENV ZK_HOME /opt/zookeeper-${ZOOKEEPER_VERSION}
