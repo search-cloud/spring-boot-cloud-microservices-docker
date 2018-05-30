@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+        xmlns:sitemesh="http://www.opensymphony.com/sitemesh">
+<head>
+    <title><sitemesh:write property='title'/></title>
+    <sitemesh:write property='head'/>
+</head>
+<body>
+<div class="navbar">
+    <div class="navbar-inner">
+        <a class="brand" href="https://github.com/ultraq/thymeleaf-layout-dialect">
+            Thymeleaf - Layout
+        </a>
+        <ul class="nav">
+            <li><a th:href="@{/sample/list}" href="list.html"> Samples </a></li>
+        </ul>
+    </div>
+</div>
+    <p>This has been decorated!!!</p>
+    <sitemesh:write property='body'/>
+</body>
+</html>

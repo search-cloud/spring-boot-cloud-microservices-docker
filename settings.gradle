@@ -16,32 +16,42 @@ include "asion-user:asion-user-spring-boot-starter"
 // account
 include 'asion-account',
         "asion-account:asion-account-common",
+        "asion-account:asion-account-spring-boot-starter",
         "asion-account:asion-account-core",
         "asion-account:asion-account-server",
-        "asion-account:asion-account-web",
-        "asion-account:asion-account-spring-boot-starter"
+        "asion-account:asion-account-web"
 
 // security
 include 'asion-security',
         "asion-security:asion-security-common",
+        "asion-security:asion-security-spring-boot-starter",
         "asion-security:asion-security-core",
         "asion-security:asion-security-server",
-        "asion-security:asion-security-web",
-        "asion-security:asion-security-spring-boot-starter"
+        "asion-security:asion-security-web"
 
 // sample
 include 'asion-sample',
         "asion-sample:asion-sample-common",
+        "asion-sample:asion-sample-spring-boot-starter",
         "asion-sample:asion-sample-core",
         "asion-sample:asion-sample-server",
-        "asion-sample:asion-sample-web",
-        "asion-sample:asion-sample-spring-boot-starter"
+        "asion-sample:asion-sample-web"
 
 // search
 include 'asion-search',
         "asion-search:asion-search-common",
+        "asion-search:asion-search-spring-boot-starter",
         "asion-search:asion-search-core",
-        "asion-search:asion-search-server"
+        "asion-search:asion-search-server",
+        "asion-search:asion-search-web"
+
+// robot
+include 'asion-bot',
+        "asion-bot:asion-bot-common",
+        "asion-bot:asion-bot-spring-boot-starter",
+        "asion-bot:asion-bot-core",
+        "asion-bot:asion-bot-server",
+        "asion-bot:asion-bot-web"
 
 // Exposes gradle buildSrc for IDE support
 include "buildSrc"
