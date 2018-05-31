@@ -16,8 +16,9 @@ project("asion-sample-spring-boot-starter") {
         //compile("org.asion:asion-sample-common:${version}")
         compile project(":asion-sample:asion-sample-common")
 
-        compile("org.mvnsearch.spring.boot:spring-boot-starter-dubbo:1.0.0-SNAPSHOT")
+        compile("org.mvnsearch.spring.boot:spring-boot-starter-dubbo:2.0.0-SNAPSHOT")
         compile("org.springframework.boot:spring-boot-starter-actuator")
+        compile("org.springframework.boot:spring-boot-actuator-autoconfigure")
         compile("org.springframework.boot:spring-boot-configuration-processor")
     }
 }
@@ -34,6 +35,7 @@ project("asion-sample-core") {
 
         compile('org.projectlombok:lombok')
         testCompile("org.springframework.boot:spring-boot-starter-test")
+        testCompile("org.assertj:assertj-core:${assertjVersion}")
         testCompile("org.unitils:unitils-bom:${unitilsBom}")
     }
 }
@@ -44,7 +46,7 @@ project("asion-sample-server") {
     dependencies {
         //compile("asion-sample:asion-sample-core")
         compile project(":asion-sample:asion-sample-core")
-        compile("org.mvnsearch.spring.boot:spring-boot-starter-dubbo:1.0.0-SNAPSHOT")
+        compile("org.mvnsearch.spring.boot:spring-boot-starter-dubbo:2.0.0-SNAPSHOT")
         compile("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
 //        compile("org.springframework.cloud:spring-cloud-starter-config")
         compile("de.codecentric:spring-boot-admin-starter-client:${springBootAdminVersion}")

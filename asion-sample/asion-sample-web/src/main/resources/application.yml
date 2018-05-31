@@ -3,7 +3,8 @@ server:
   port: 9980
 
 management:
-  port: 9981
+  server:
+    port: 9981
 
 # Allow Thymeleaf templates to be reloaded at dev time
 spring:
@@ -19,7 +20,7 @@ spring:
   boot:
       admin:
         url: http://boot.admin.asion.org:10090
-  http:
+  servlet:
     multipart:
       max-file-size: 2Mb
       max-request-size: 10Mb
