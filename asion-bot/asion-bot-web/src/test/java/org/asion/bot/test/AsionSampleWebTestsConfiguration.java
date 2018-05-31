@@ -1,6 +1,6 @@
-package org.asion.sample.test;
+package org.asion.bot.test;
 
-import org.asion.search.boot.AsionSampleAutoConfiguration;
+import org.asion.bot.boot.AsionBotAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,10 +11,10 @@ import static org.springframework.context.annotation.FilterType.ASSIGNABLE_TYPE;
  * @since 16/12/12.
  */
 @Configuration
-@ComponentScan(value = "org.asion.sample.mvc",
+@ComponentScan(value = "org.asion.bot",
         excludeFilters = @ComponentScan.Filter(
                 type = ASSIGNABLE_TYPE,
-                classes = AsionSampleAutoConfiguration.class)
+                classes = AsionBotAutoConfiguration.class)
         )
 public class AsionSampleWebTestsConfiguration {
 
