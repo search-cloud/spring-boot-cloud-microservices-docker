@@ -11,5 +11,5 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient
 open class AsionCloudConfigServerApplication
 
 fun main(args: Array<String>) {
-    run(AsionCloudConfigServerApplication::class, *args)
+    run(AsionCloudConfigServerApplication::class.java, *args)
 }

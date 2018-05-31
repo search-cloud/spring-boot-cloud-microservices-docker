@@ -38,6 +38,7 @@ project("asion-spring-boot-admin") {
         compile("de.codecentric:spring-boot-admin-server:${springBootAdminVersion}")
         compile("de.codecentric:spring-boot-admin-server-ui:${springBootAdminVersion}")
         compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
+        compile('org.springframework.cloud:spring-cloud-starter-netflix-zuul')
         testCompile('org.springframework.boot:spring-boot-starter-test')
     }
 

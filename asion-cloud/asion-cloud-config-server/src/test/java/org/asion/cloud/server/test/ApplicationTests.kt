@@ -4,18 +4,20 @@ import org.asion.cloud.server.AsionCloudConfigServerApplication
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.springframework.boot.context.embedded.LocalServerPort
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT
 import org.springframework.boot.test.web.client.TestRestTemplate
+import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.http.HttpStatus
 import org.springframework.test.context.junit4.SpringRunner
 
+
+
 @RunWith(SpringRunner::class)
 @SpringBootTest(
-        value = *arrayOf("server.port=0"),
+        value = ["server.port=0"],
         webEnvironment = RANDOM_PORT,
-        classes = arrayOf(AsionCloudConfigServerApplication::class)
+        classes = [(AsionCloudConfigServerApplication::class)]
 )
 class ApplicationTests {
 
@@ -25,19 +27,21 @@ class ApplicationTests {
     @Test
     fun catalogLoads() {
         val entity = TestRestTemplate().getForEntity(
-                "http://127.0.0.1:$port/eureka/apps",
+                "http://127.0.0.1:$port/actuator",
                 Map::class.java
         )
         assertEquals(HttpStatus.OK, entity.statusCode)
+        println(entity.body)
     }
 
     @Test
     fun adminLoads() {
         val entity = TestRestTemplate().getForEntity(
-                "http://127.0.0.1:$port/env",
+                "http://127.0.0.1:$port/actuator/info",
                 Map::class.java
         )
         assertEquals(HttpStatus.OK, entity.statusCode)
+        println(entity.body)
     }
 
 }
