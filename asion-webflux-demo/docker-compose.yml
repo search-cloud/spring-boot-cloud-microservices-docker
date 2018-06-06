@@ -1,0 +1,12 @@
+mysql:
+    image: mysql:5.6.23
+    ports:
+      - "2006:3306"
+    environment:
+       MYSQL_ROOT_PASSWORD: asion
+       MYSQL_DATABASE: asion_sample
+
+
+
+# docker run --name ewolf-mysql --env MYSQL_ROOT_PASSWORD=123456 -p 127.0.0.1:3306:3306 -it mysql:5.6.23 /bin/bash
+

@@ -1,0 +1,51 @@
+# server config
+server:
+  port: 9909
+
+
+# Allow Thymeleaf templates to be reloaded at dev time
+spring:
+  thymeleaf.cache: false
+  application:
+    name: asion-webflux-server
+  datasource:
+    url: jdbc:mysql://db.asion.org:2006/asion_sample?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+    username: root
+    password: asion
+    driverClassName: com.mysql.jdbc.Driver
+    hikari:
+      connection-test-query: SELECT 1
+      idle-timeout: 28700
+  dubbo:
+    app: dubbo-webflux-provider
+    registry: redis://dubbo.asion.org:5050
+    protocol: dubbo
+    port: 9908
+    transporter: netty4
+  boot:
+    admin:
+      client:
+        instance:
+          management-url: http://boot.admin.asion.org:10090
+  data:
+    mongodb:
+      port: 32768
+      host: db.asion.org
+
+# logger
+logging:
+  level:
+    root: info
+  file: asion-webflux-server.log
+
+# eureka
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    metadataMap:
+      instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://eureka.asion.org:8761/eureka/

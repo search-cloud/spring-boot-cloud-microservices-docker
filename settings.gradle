@@ -53,6 +53,14 @@ include 'asion-bot',
         "asion-bot:asion-bot-server",
         "asion-bot:asion-bot-web"
 
+// webflux
+include 'asion-webflux-demo',
+        "asion-webflux-demo:asion-webflux-demo-common",
+        "asion-webflux-demo:asion-webflux-demo-spring-boot-starter",
+        "asion-webflux-demo:asion-webflux-demo-core",
+        "asion-webflux-demo:asion-webflux-demo-server",
+        "asion-webflux-demo:asion-webflux-demo-web"
+
 // Exposes gradle buildSrc for IDE support
 include "buildSrc"
 rootProject.children.find{ it.name == "buildSrc" }.name = "asion-build-src"

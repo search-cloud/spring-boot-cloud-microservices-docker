@@ -1,0 +1,10 @@
+
+CONFIG_SERVER_URL: http://config.asion.org
+spring:
+  application:
+    name: asion-webflux-server
+
+  cloud:
+    config:
+      uri: ${CONFIG_SERVER_URL}:9090
+      failFast: true

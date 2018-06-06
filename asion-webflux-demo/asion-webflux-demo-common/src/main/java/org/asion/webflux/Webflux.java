@@ -1,10 +1,6 @@
-package org.asion.search;
+package org.asion.webflux;
 
 import org.asion.base.ddd.domain.BaseDomainEntity;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.util.Calendar;
 
@@ -12,32 +8,17 @@ import java.util.Calendar;
  * @author Asion.
  * @since 16/4/29.
  */
-@Document(indexName = "search_sample", type = "search_sample", shards = 1, replicas = 0, refreshInterval = "-1")
-public class SearchSample implements BaseDomainEntity<Long> {
+public class Webflux implements BaseDomainEntity<Long> {
 
-    @Id
     private Long id;
 
-    @Field(type = FieldType.String)
     private String text;
 
-    @Field(type = FieldType.String)
-//    @Transient
     private String summary;
 
-    @Field
     private Calendar createdAt = Calendar.getInstance();
 
-    @Field
     private Calendar updatedAt = Calendar.getInstance();
-
-    public SearchSample() {}
-
-    public SearchSample(Long id, String text, String summary) {
-        this.id = id;
-        this.text = text;
-        this.summary = summary;
-    }
 
     @Override
     public Long getId() {
