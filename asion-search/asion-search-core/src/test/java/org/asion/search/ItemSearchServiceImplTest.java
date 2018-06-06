@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 16/5/18.
  */
 @SpringApplicationContext("/appContext-unit.xml")
-public class SearchServiceImplTest extends UnitilsJUnit4 {
+public class ItemSearchServiceImplTest extends UnitilsJUnit4 {
 
     @SpringBeanByType
     private ElasticsearchTemplate elasticsearchTemplate;

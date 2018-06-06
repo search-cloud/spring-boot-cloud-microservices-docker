@@ -1,0 +1,41 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<!--xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="layout"-->
+<head th:lang="zh-CN">
+    <title>Demos : View</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"/>
+</head>
+<body>
+<!--<h1 layout:fragment="header">Demos : Create</h1>-->
+<!--<div layout:fragment="content" class="container">-->
+<div class="header" th:include="ytx-webjars-seekerData/seekerData :: head"></div>
+<h1>Demos : Create</h1>
+<div class="container">
+    <!--/*@thymesVar id="globalDemo" type="com.ytx.seekerData.domain.model.Demo"*/-->
+    <!--/*@thymesVar id="seekerData" type="com.ytx.seekerData.domain.model.Demo"*/-->
+    <div class="alert alert-success" th:if="${globalDemo}"
+         th:text="${globalDemo}">Some Success Demo
+    </div>
+    <div class="pull-right">
+        <a th:href="@{/demos/list}" href="list.html"> Demos </a>
+    </div>
+    <dl>
+        <dt>ID</dt>
+        <dd id="id" th:text="${seekerData.id}">123</dd>
+        <dt>Date</dt>
+        <dd id="created" th:if="seekerData.createdAt ne null" th:text="${#calendars.format(seekerData.createdAt)}">July 11, 2012 2:17:16 PM CDT</dd>
+        <dt>Code</dt>
+        <dd id="code" th:text="${seekerData.code}">A short code...</dd>
+        <dt>Name</dt>
+        <dd id="name" th:text="${seekerData.name}">A detailed seekerData that is longer than the summary.</dd>
+        <dt>Age</dt>
+        <dd id="age" th:text="${seekerData.age}"></dd>
+        <dt>Money</dt>
+        <dd id="money" th:text="${seekerData.money}"></dd>
+    </dl>
+    <div class="pull-left">
+        <a href="view.html" th:href="@{'/demos/' + ${seekerData.id} + '/delete'}">delete </a> |
+        <a href="form.html" th:href="@{'/demos/' + ${seekerData.id} + '/modify'}"> modify </a>
+    </div>
+</div>
+</body>
+</html>

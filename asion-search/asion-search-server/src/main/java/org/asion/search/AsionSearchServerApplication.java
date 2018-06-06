@@ -1,16 +1,15 @@
 package org.asion.search;
 
+import org.mvnsearch.spring.boot.dubbo.EnableDubboConfiguration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.sql.DataSource;
 
@@ -19,17 +18,18 @@ import javax.sql.DataSource;
  * @since 16/4/29.
  */
 @SpringBootApplication
-@EnableAutoConfiguration()
-@EnableWebMvc
+@EnableDubboConfiguration("org.asion.search.server")
 @ComponentScan("org.asion.search")
-public class AsionSearchServerApplication extends WebMvcConfigurerAdapter {
+@EnableJpaRepositories
+@EnableElasticsearchRepositories()
+public class AsionSearchServerApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(AsionSearchServerApplication.class,args);
     }
 
     @Value("${spring.datasource.url}")
-    private String url;// = "jdbc:mysql://192.168.99.100:2006/asion_search?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull";
+    private String url;// = "jdbc:mysql://192.168.99.100:9006/asion_search?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull";
     @Value("${spring.datasource.username}")
     String user = "root";
     @Value("${spring.datasource.password}")
@@ -59,13 +59,14 @@ public class AsionSearchServerApplication extends WebMvcConfigurerAdapter {
         return new JdbcTemplate(dataSource());
     }
 
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        if (!registry.hasMappingForPattern("/static/**")) {
-            registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
-        }
-        if (!registry.hasMappingForPattern("/webjars/**")) {
-            registry.addResourceHandler("/webjars/**").addResourceLocations(
-                    "classpath:/META-INF/resources/webjars/");
-        }
-    }
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        if (!registry.hasMappingForPattern("/static/**")) {
+//            registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+//        }
+//        if (!registry.hasMappingForPattern("/webjars/**")) {
+//            registry.addResourceHandler("/webjars/**").addResourceLocations(
+//                    "classpath:/META-INF/resources/webjars/");
+//        }
+//    }
 }
+

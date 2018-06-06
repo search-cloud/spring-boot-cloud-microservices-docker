@@ -1,6 +1,5 @@
 package org.asion.search.common;
 
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -15,7 +14,6 @@ import javax.sql.DataSource;
  */
 @SpringBootApplication
 @ComponentScan(value = "org.asion.search")
-@EnableAutoConfiguration(exclude = ElasticsearchConfiguration.class)
 public class SearchTestApplication {
 
     @Bean

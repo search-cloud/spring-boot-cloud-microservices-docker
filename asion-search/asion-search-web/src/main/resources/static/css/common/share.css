@@ -1,0 +1,70 @@
+@charset "utf-8";
+
+#weixin {
+	display: none;
+	position: absolute;
+}
+#weixinCnt {
+	width: 240px;
+	height: 250px;
+	border: solid 1px #c1c1c1;
+	z-index: 1000000;
+	top: 0;
+	left: 0;
+	background: white;
+	display: block;
+}
+
+#weixinCnt .bd_weixin_popup_head {
+	font-size: 14px;
+	font-weight: normal;
+	text-align: center;
+	line-height: 36px;
+	height: 36px;
+	position: relative;
+	color: #333;
+	background: #f2f2f2;
+	width: 100%;
+	margin: 0 auto;
+}
+
+#weixinCnt .bd_weixin_popup_head .bd_weixin_popup_close {
+	width: 16px;
+	height: 16px;
+	position: absolute;
+	right: 16px;
+	top: 0;
+	color: #999;
+	text-decoration: none;
+	font-size: 20px;
+}
+
+#weixinCnt .erweima {
+	width: 63%;
+	height: auto;
+	margin: 10px auto 5px auto;
+}
+
+#weixinCnt .erweima .erweimas {
+	width: 100%;
+	display: block;
+}
+
+#weixinCnt .msgs {
+	width: 89%;
+	margin: 0 auto;
+	font-size: 12px;
+	text-align: center;
+	line-height: 19px;
+	color: #999;
+}
+#weixin .up-arrow {
+	display: block;
+	background: url("/static/images/up_arrow.png") no-repeat;
+	position: relative;
+	top: 1px;
+	margin-left: -8px;
+	left: 50%;
+	width: 15px;
+	height: 10px;
+}

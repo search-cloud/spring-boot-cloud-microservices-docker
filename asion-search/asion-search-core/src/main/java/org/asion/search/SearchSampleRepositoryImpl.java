@@ -14,14 +14,14 @@
 // * @since 16/4/30.
 // */
 //@Repository("searchSampleRepository")
-//public class SearchSampleRepositoryImpl implements SearchSampleRepository {
+//public class SearchSampleRepositoryImpl implements ItemSearchRepository {
 //
 //    @Autowired
 //    private JdbcTemplate jdbcTemplate;
 //
 //
-//    private static final RowMapper<SearchSample> userMapper = (resultSet, i) -> {
-//        SearchSample sample = new SearchSample();
+//    private static final RowMapper<Item> userMapper = (resultSet, i) -> {
+//        Item sample = new Item();
 //        sample.setId(resultSet.getLong("id"));
 //        sample.setText(resultSet.getString("text"));
 //        sample.setSummary(resultSet.getString("summary"));
@@ -29,12 +29,12 @@
 //    };
 //
 //    @Override
-//    public Iterable<SearchSample> findAll() {
+//    public Iterable<Item> findAll() {
 //        return jdbcTemplate.query("select * from asion_search_sample", userMapper);
 //    }
 //
 //    @Override
-//    public SearchSample save(SearchSample sample) {
+//    public Item save(Item sample) {
 //        int rows;
 //        if (sample.getId() == null) {
 //            String insertSql = "insert into asion_search_sample(text, summary, created_at, updated_at) values(?,?, now(), now())";
@@ -56,7 +56,7 @@
 //    }
 //
 //    @Override
-//    public SearchSample findOne(Long id) {
+//    public Item findOne(Long id) {
 //        return jdbcTemplate.queryForObject("select * from asion_search_sample where id = ?", userMapper, id);
 //    }
 //

@@ -14,6 +14,21 @@ project("asion-search-common") {
     }
 }
 
+/**
+ * asion search spring boot starter
+ */
+project("asion-search-spring-boot-starter") {
+    dependencies {
+        //compile("org.asion:asion-sample-common:${version}")
+        compile project(":asion-search:asion-search-common")
+
+        compile("org.mvnsearch.spring.boot:spring-boot-starter-dubbo:1.0.0-SNAPSHOT")
+        compile("com.alibaba.boot:dubbo-spring-boot-starter:0.1.0")
+        compile("org.springframework.boot:spring-boot-starter-actuator")
+        compile("org.springframework.boot:spring-boot-configuration-processor")
+    }
+}
+
 project("asion-search-core") {
 
     dependencies {
@@ -34,6 +49,7 @@ project("asion-search-core") {
         compile("mysql:mysql-connector-java")
         compile('com.h2database:h2')
 
+        compile('org.projectlombok:lombok')
         testCompile("org.springframework.boot:spring-boot-starter-test")
         testCompile("org.assertj:assertj-core:${assertjVersion}")
         testCompile("org.unitils:unitils-bom:${unitilsBom}")
@@ -46,20 +62,54 @@ project("asion-search-server") {
     dependencies {
         //compile("org.asion:asion-search-core:${version}")
         compile project(":asion-search:asion-search-core")
+        compile("org.mvnsearch.spring.boot:spring-boot-starter-dubbo:1.0.0-SNAPSHOT")
         compile("org.springframework.boot:spring-boot-starter-actuator")
         compile("org.springframework.boot:spring-boot-starter-jdbc")
+        compile("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
         compile("mysql:mysql-connector-java")
         compile('com.h2database:h2')
+        compile('redis.clients:jedis')
 
-        compile("org.springframework.boot:spring-boot-starter-web")
-        compile("org.springframework.boot:spring-boot-starter-thymeleaf")
-        compile("org.webjars:bootstrap:3.3.6")
-        compile("org.webjars:jquery:2.2.3")
+//        compile("org.springframework.boot:spring-boot-starter-web")
+//        compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+//        compile("org.webjars:bootstrap:3.3.6")
+//        compile("org.webjars:jquery:2.2.3")
 
 //        testCompile("org.springframework.boot:spring-boot-starter-test")
     }
 
     bootJar {
         mainClassName = 'org.asion.search.AsionSearchServerApplication'
+    }
+}
+
+project("asion-search-web") {
+    apply plugin: "org.springframework.boot"
+
+    dependencies {
+        //
+        //compile("org.asion:asion-search-spring-boot-starter:${version}")
+        compile project(":asion-search:asion-search-spring-boot-starter")
+        compile("org.springframework.boot:spring-boot-starter-actuator")
+        compile("de.codecentric:spring-boot-admin-starter-client:${springBootAdminVersion}")
+        compile("org.jolokia:jolokia-core")
+
+        compile('redis.clients:jedis')
+        compile("org.springframework.boot:spring-boot-starter-web")
+        compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+        compile("org.webjars:bootstrap:3.3.6")
+        compile("org.webjars:jquery:2.2.3")
+        compile('org.webjars:jquery-validation:1.15.0')
+        compile("org.sitemesh:sitemesh:3.0.1")
+
+        compile("edu.uci.ics:crawler4j:4.4.0")
+        compile("org.jsoup:jsoup:1.9.2")
+        compile("net.sourceforge.javacsv:javacsv:2.0")
+
+        testCompile("org.springframework.boot:spring-boot-starter-test")
+    }
+
+    bootJar {
+        mainClassName = 'org.asion.search.AsionSearchWebApplication'
     }
 }

@@ -1,0 +1,68 @@
+<div th:fragment="head" xmlns:th="http://www.thymeleaf.org" xmlns:cms="http://www.w3.org/1999/xhtml">
+	<div class="topbar-box mw990">
+		<div class="topbar-wrap w990 clearfix">
+			<div class="topbar-user fl">
+				<a class="topbar-uname" th:if="${currentAccount ne null}" th:href="${buyerDomain}" target="_blank">Hi,<span th:text="${currentAccount.displayName}"></span></a>
+				<a class="topbar-uname" th:if="${currentAccount eq null}" th:href="${logUrl}">请登录</a>
+				<a class="topbar-uexit" th:if="${currentAccount ne null}" th:href="${logoutUrl}">退出</a>
+			</div>
+			<div class="topbar-center fr" th:if="${currentAccount ne null and #strings.contains(currentAccount.authorities, 'ROLE_BUYER')}">
+				<a class="topbar-cmy" th:href="${indexDomain}" target="_blank">迎天下首页</a>
+				<a class="topbar-cmy" th:href="${buyerDomain}" target="_blank">我的天下</a>
+				<a class="topbar-corder" th:href="${buyerDomain} + '/purchaseOrder/0/1'" target="_blank">我的订单</a>
+				<a class="topbar-ccart" th:href="${cartDomain}" target="_blank">购物车 <span class="fw" id="cartValue"></span> 件</a>
+				<a class="topbar-cstow" th:href="${buyerDomain} + '/favorite/special'" target="_blank">收藏夹</a>
+			</div>
+			<div class="topbar-center fr" th:if="${currentAccount ne null and #strings.contains(currentAccount.authorities, 'ROLE_SELLER')}">
+				<a class="topbar-cmy" id="seller" th:href="${sellerDomain}" href="" target="_blank"><span>我的店铺</span></a>
+			</div>
+			<div class="topbar-center fr" th:if="${currentAccount ne null and #strings.contains(currentAccount.authorities, 'ROLE_EMPLOYEE')}">
+				<a class="topbar-cmy" id="employee" th:href="${crmDomain}" href="/" target="_blank"><span>我的后台</span></a>
+			</div>
+		</div>
+	</div>
+	<!-- logo -->
+	<div class="index-logobar mw990">
+		<div class="index-logobar-wrap w990 clearfix">
+			<div class="index-logo fl">
+				<a href="#" class="logo"></a>
+			</div>
+			<p class="index-shopcart fr tar clearfix"><a href="#" th:href="${cartDomain}"><span class="icon-cart tac fl"><i id="cartVal"></i></span>购物车</a></p>
+			<p class="index-logo-type fr"></p>
+		</div>
+	</div>
+	<!-- 主菜单 -->
+	<div class="index-navbox1 mw990">
+		<div class="index-nav-wrap w990">
+			<div class="idmain-nav fl clearfix">
+				<a href="#" class="nav-name oncur" th:href="${indexDomain}">首页</a>
+				<a href="#" class="nav-name nav-hot" th:href="${shanDomain}">迎闪购<span class="icon-hot"></span></a>
+				<a href="#" class="nav-name" th:href="${pinDomain}">迎品汇</a>
+				<a href="#" class="nav-name" th:href="${fenDomain}">迎粉团</a>
+				<a href="#" class="nav-napp" id="J_app">手机客户端
+					<div class="app-code hidden">
+						<p class="ap-code-img"><img src="/static/images/img_code.jpg" width="161" height="161" /></p>
+						<p class="ap-code-text tac">下载APP 及时抢</p>
+					</div>
+				</a>
+			</div>
+			<div class="sale-cate fr" id="J_category"><a href="#" class="sale-cate-title">在售分类<i class="fa fa-angle-down"></i></a>
+				<div class="sale-cate-box hidden">
+					<div class="sc-left fl clearfix tac">
+						<a href="javascript:;" class="sc-l-cname oncur">女装</a>
+						<a href="javascript:;" class="sc-l-cname">男装</a>
+						<a href="javascript:;" class="sc-l-cname">潮童</a>
+						<a href="javascript:;" class="sc-l-cname">内衣</a>
+						<a href="javascript:;" class="sc-l-cname">女鞋</a>
+						<a href="javascript:;" class="sc-l-cname">男鞋</a>
+						<a href="javascript:;" class="sc-l-cname">运动户外</a>
+					</div>
+					<div cms:fragment="/index/category.html"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 分类 -->
+	<div cms:fragment="/index/category_nav.html"></div>
+</div>
+

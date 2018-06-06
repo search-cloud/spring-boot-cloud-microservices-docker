@@ -1,0 +1,223 @@
+/*总体布局*/
+html {
+    background-color: #efefef;
+}
+.head{
+    height:60px;
+    -webkit-box-shadow: 0 0 8px 2px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 0 8px 2px rgba(0,0,0,.2);
+    box-shadow: 0 0 8px 2px rgba(0,0,0,.2);
+}
+.headContent{
+    width:100%;
+    position:fixed;
+    top:0;
+    left:0;
+    height:60px;
+    z-index: 5555;
+    background: #d62b36;
+
+}
+.head-logo{
+    -webkit-box-shadow: 0 2px 8px 2px rgba(0,0,0,.05);
+    -moz-box-shadow: 0 2px 8px 2px rgba(0,0,0,.05);
+    box-shadow: 0 2px 8px 2px rgba(0,0,0,.05);
+}
+.accordion{
+    -webkit-box-shadow: 0 0 8px 2px rgba(0,0,0,.1);
+    -moz-box-shadow: 0 0 8px 2px rgba(0,0,0,.1);
+    box-shadow: 0 0 8px 2px rgba(0,0,0,.1);
+}
+.left-content{
+    background-color: #fff;
+    box-shadow: 0 2px 10px #999;
+    position:fixed;
+    left:0;
+    top:60px;
+    z-index:999;
+    width: 220px;
+    overflow:auto;
+}
+.manage .manage-menu {
+    position: absolute;
+    top: 60px;
+}
+.head-menu {
+    padding-left: 17px;
+    padding-right: 30px;
+    padding-top: 10px;
+}
+.head-menu .menu-itemBox {
+    width: 90px;
+    height: 40px;
+    position: relative;
+}
+
+.head-menu .menu-item {
+    position: absolute;
+    cursor: pointer;
+}
+
+.head-menu .menu-item dt{
+    width: 75px;
+    height: 35px;
+    line-height: 35px;
+    padding-left: 15px;
+    font-size: 12px;
+    color: #fff;
+}
+.head-menu .menu-item dd {
+    display: none;
+    width: 75px;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 15px;
+    font-size: 12px;
+    color: #666;
+}
+.head-menu .menu-item dd a{
+    color:inherit;
+    font-size: inherit;
+}
+.head-menu .menu-item:hover {
+    background: #fff;
+    padding-bottom: 10px;
+    border-bottom:1px solid #e0dfdf;
+}
+.head-menu .menu-item:hover dd{
+    display: block;
+    background: #fff;
+}
+.head-menu .menu-item:hover dt {
+    background: #fff;
+    color:#333
+}
+/*路径导航*/
+.breadcrumb {
+    margin-bottom: 10px;
+    list-style: none;
+    border-radius: 4px;
+}
+.breadcrumb > li {
+    display: inline-block;
+
+    color: #666;
+}
+.breadcrumb > li + li:before {
+    padding: 0 5px;
+    content: '\003E';
+    color: #666;
+}
+/*左侧列表*/
+.accordion {
+    width: 100%;
+    max-width: 360px;
+    background: #fff;
+}
+.accordion .link {
+    font-size: 0;
+    font-weight: 700;
+    cursor: pointer;
+    color: #464646;
+    line-height:36px;
+    padding-left:32px;
+}
+.accordion .link i, .accordion .link span{
+    display: inline-block;
+    vertical-align: middle;
+    font-size:12px;
+}
+.accordion .link .link-name{
+    width:130px;
+}
+.accordion .link span{
+    margin-left:3px;
+}
+.accordion .link.check {
+    background-color: #f7f7f7;
+}
+.accordion li i {
+    font-size: 12px;
+    color: #464646;
+}
+.submenu{
+    padding-top:2px;
+}
+.submenu a {
+    display: inline-block;
+    margin: 8px 10px 7px 50px;
+    -webkit-transition: all .25s ease;
+         -o-transition: all .25s ease;
+            transition: all .25s ease;
+    text-decoration: none;
+
+    color: #464646;
+}
+.submenu a.check {
+    color: #e62e3a;
+}
+.submenu a:hover {
+    color: #e62e3a;
+}
+.seller-container{
+    width:1280px;
+    margin: 0 auto;
+}
+.main-container{
+    position: absolute;
+    top: 60px;
+    left:250px;
+    bottom: 0;
+    right:0;
+    padding:30px 30px 30px 0;
+    overflow: auto;
+    min-width: 1000px;
+}
+.head-controller{
+    line-height:60px;
+    font-size:0;
+}
+.head-action{
+    display: inline-block;
+    padding:0 20px;
+    font-size:0;
+    line-height: 60px;
+}
+.head-action .fa,.head-action .head-action-name,.seller-avatar{
+    font-size:12px;
+    color:#fff;
+    display: inline-block;
+}
+.head-action-name{
+    margin-left:4px;
+}
+.accordion{
+    position: absolute;
+    left: 0;
+    top: 60px;
+    bottom:0;
+    width: 220px;
+    overflow: auto;
+}
+.check .fa-fw{
+    color: #e62e3a;
+}
+.category{
+    padding: 0 0 13px 0;
+}
+.mt25{
+    margin-top:25px;
+}
+
+.news {
+    position: relative;
+}
+
+.news b {
+    position: absolute;
+    top: -6px;
+    left: 0px;
+    width: 12px;
+    height: 12px;
+    background: url("/static/images/dalog.jpg") no-repeat;
+}

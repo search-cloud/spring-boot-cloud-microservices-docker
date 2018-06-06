@@ -8,18 +8,15 @@ spring:
   application:
     name: asion-search-server
   datasource:
-    url: jdbc:mysql://db.asion.org:1006/asion_search_sample?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+    url: jdbc:mysql://db.asion.org:9306/asion_search?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
     username: root
     password: asion
     driverClassName: com.mysql.jdbc.Driver
-    dbcp:
-      test-on-borrow: false
-      test-on-return: false
-      test-while-idle: true
-      max-wait: 30000
-      validation-query: SELECT 1
-      time-between-eviction-runs-millis: 20000
-      min-evictable-idle-time-millis: 28700
+  dubbo:
+    app: dubbo-search-provider
+    registry: redis://dubbo.asion.org:5050
+    protocol: dubbo
+    port: 9908
 
 logging:
   level:
