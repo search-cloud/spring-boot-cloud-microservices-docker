@@ -3,6 +3,7 @@ package org.asion.search.common;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
@@ -13,7 +14,8 @@ import javax.sql.DataSource;
  * @since 16/5/1.
  */
 @SpringBootApplication
-@ComponentScan(value = "org.asion.search")
+@ComponentScan("org.asion.search")
+@EnableElasticsearchRepositories("org.asion.search.repository")
 public class SearchTestApplication {
 
     @Bean

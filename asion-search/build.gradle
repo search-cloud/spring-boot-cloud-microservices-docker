@@ -9,8 +9,6 @@ project("asion-search-common") {
         compile("org.springframework:spring-context-support")
         compile("org.springframework.boot:spring-boot-starter-jdbc")
         compile("org.springframework.boot:spring-boot-starter-data-elasticsearch")
-        compile("org.springframework.data:spring-data-elasticsearch")
-//        compile("org.elasticsearch:elasticsearch:${elasticsearchVersion}")
     }
 }
 
@@ -22,7 +20,7 @@ project("asion-search-spring-boot-starter") {
         //compile("org.asion:asion-sample-common:${version}")
         compile project(":asion-search:asion-search-common")
 
-        compile("org.mvnsearch.spring.boot:spring-boot-starter-dubbo:1.0.0-SNAPSHOT")
+        compile("org.mvnsearch.spring.boot:spring-boot-starter-dubbo:2.0.0-SNAPSHOT")
         compile("com.alibaba.boot:dubbo-spring-boot-starter:0.1.0")
         compile("org.springframework.boot:spring-boot-starter-actuator")
         compile("org.springframework.boot:spring-boot-configuration-processor")
@@ -35,16 +33,14 @@ project("asion-search-core") {
         //compile("org.asion:asion-search-common:${version}")
         compile project(":asion-search:asion-search-common")
 
-        compile("org.springframework:spring-context-support")
+//        compile("org.springframework:spring-context-support")
         compile("org.springframework.boot:spring-boot-starter-jdbc")
-        compile("org.springframework.data:spring-data-jpa")
+//        compile("org.springframework.data:spring-data-jpa")
         compile("org.springframework.boot:spring-boot-starter-data-elasticsearch")
-        compile("org.springframework.data:spring-data-elasticsearch")
-//        compile("org.elasticsearch:elasticsearch:${elasticsearchVersion}")
 
-        compile("com.google.guava:guava:18.0")
+//        compile("com.google.guava:guava:18.0")
 
-        compile("javax.persistence:persistence-api:1.0.2")
+//        compile("javax.persistence:persistence-api:1.0.2")
 
         compile("mysql:mysql-connector-java")
         compile('com.h2database:h2')
@@ -62,9 +58,11 @@ project("asion-search-server") {
     dependencies {
         //compile("org.asion:asion-search-core:${version}")
         compile project(":asion-search:asion-search-core")
-        compile("org.mvnsearch.spring.boot:spring-boot-starter-dubbo:1.0.0-SNAPSHOT")
+        compile("org.mvnsearch.spring.boot:spring-boot-starter-dubbo:2.0.0-SNAPSHOT")
         compile("org.springframework.boot:spring-boot-starter-actuator")
         compile("org.springframework.boot:spring-boot-starter-jdbc")
+        compile("org.springframework.data:spring-data-jpa")
+        compile("org.springframework.boot:spring-boot-starter-data-elasticsearch")
         compile("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
         compile("mysql:mysql-connector-java")
         compile('com.h2database:h2')

@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
@@ -20,8 +19,8 @@ import javax.sql.DataSource;
 @SpringBootApplication
 @EnableDubboConfiguration("org.asion.search.server")
 @ComponentScan("org.asion.search")
-@EnableJpaRepositories
-@EnableElasticsearchRepositories()
+//@EnableJpaRepositories
+@EnableElasticsearchRepositories("org.asion.search.repository")
 public class AsionSearchServerApplication {
 
     public static void main(String[] args) {
@@ -59,14 +58,5 @@ public class AsionSearchServerApplication {
         return new JdbcTemplate(dataSource());
     }
 
-//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        if (!registry.hasMappingForPattern("/static/**")) {
-//            registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
-//        }
-//        if (!registry.hasMappingForPattern("/webjars/**")) {
-//            registry.addResourceHandler("/webjars/**").addResourceLocations(
-//                    "classpath:/META-INF/resources/webjars/");
-//        }
-//    }
 }
 
