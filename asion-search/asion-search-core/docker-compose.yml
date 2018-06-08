@@ -1,0 +1,35 @@
+
+# elasticsearch docker images
+# docker run -d -p 9200:9200 -p 9300:9300 --name asion-elasticsearch elasticsearch:2.2.0
+#elasticsearch-version: 5.6.9
+# node 0
+asion-es-clouster-node-000:
+  image: elasticsearch:5.6.9
+  environment:
+    - http.host=0.0.0.0
+    - transport.host=0.0.0.0
+    - xpack.security.enabled=false
+  ports:
+    - "0.0.0.0:9200:9200"
+    - "0.0.0.0:9300:9300"
+
+## node 1
+#asion-es-clouster-node-001:
+#  image: elasticsearch:${version}
+#  ports:
+#    - "31768:9200"
+#    - "31769:9300"
+#
+## node 2
+#asion-es-clouster-node-002:
+#  image: elasticsearch:${version}
+#  ports:
+#    - "32768:9200"
+#    - "32769:9300"
+#
+## node 3
+#asion-es-clouster-node-003:
+#  image: elasticsearch:${version}
+#  ports:
+#    - "33768:9200"
+#    - "33769:9300"
