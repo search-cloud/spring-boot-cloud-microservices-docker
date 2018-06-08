@@ -1,11 +1,11 @@
 package org.asion.bot.selenium.processor
 
-import com.ytx.seeker.selenium.proxy.ProxyBuilder
 import org.asion.bot.CaptureItem
 import org.asion.bot.helper.RedisClientLocal
 import org.asion.bot.parser.ItemListParser
 import org.asion.bot.parser.Parser
 import org.asion.bot.selenium.HostAndPort
+import org.asion.bot.selenium.proxy.ProxyBuilder
 import org.asion.bot.selenium.webdirver.PhantomJsExecutor
 import java.util.concurrent.Executors
 

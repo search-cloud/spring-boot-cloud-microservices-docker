@@ -1,8 +1,8 @@
-package com.ytx.seeker.selenium.proxy
+package org.asion.bot.selenium.proxy
 
 import com.alibaba.fastjson.JSON
-import com.ytx.seeker.helper.RedisClientLocal
-import com.ytx.seeker.selenium.HostAndPort
+import org.asion.bot.helper.RedisClientLocal
+import org.asion.bot.selenium.HostAndPort
 import kotlin.math.roundToInt
 
 /**

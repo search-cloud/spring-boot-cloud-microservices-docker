@@ -1,6 +1,6 @@
 package org.asion.bot.selenium.processor
 
-import com.ytx.seeker.selenium.proxy.ProxyBuilder
+import org.asion.bot.selenium.proxy.ProxyBuilder
 import org.asion.bot.CaptureItem
 import org.asion.bot.helper.RedisClientLocal
 import org.asion.bot.parser.WebDriverDetailParser

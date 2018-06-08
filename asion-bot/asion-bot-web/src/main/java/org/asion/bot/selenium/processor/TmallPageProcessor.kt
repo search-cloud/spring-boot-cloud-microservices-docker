@@ -1,10 +1,10 @@
 package org.asion.bot.selenium.processor
 
 import com.alibaba.fastjson.JSON
-import com.ytx.seeker.selenium.spec.TmallPageProcessSpecification.filterPageNo
-import com.ytx.seeker.selenium.spec.TmallPageProcessSpecification.getOriginId
-import com.ytx.seeker.selenium.spec.TmallPageProcessSpecification.isDetailPage
-import com.ytx.seeker.selenium.spec.TmallPageProcessSpecification.isListPage
+import org.asion.bot.selenium.spec.TmallPageProcessSpecification.filterPageNo
+import org.asion.bot.selenium.spec.TmallPageProcessSpecification.getOriginId
+import org.asion.bot.selenium.spec.TmallPageProcessSpecification.isDetailPage
+import org.asion.bot.selenium.spec.TmallPageProcessSpecification.isListPage
 import org.apache.commons.lang3.StringUtils
 import org.asion.bot.CaptureItem
 import org.asion.bot.CaptureItemManger

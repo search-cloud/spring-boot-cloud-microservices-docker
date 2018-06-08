@@ -1,6 +1,6 @@
 package org.asion.bot.test.spec;
 
-import com.ytx.seeker.selenium.spec.TmallPageProcessSpecification;
+import org.asion.bot.selenium.spec.TmallPageProcessSpecification;
 import org.apache.commons.io.IOUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;

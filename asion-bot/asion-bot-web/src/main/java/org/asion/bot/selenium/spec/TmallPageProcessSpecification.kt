@@ -1,4 +1,4 @@
-package com.ytx.seeker.selenium.spec
+package org.asion.bot.selenium.spec
 
 import org.apache.commons.lang3.StringUtils
 import us.codecraft.webmagic.Page
