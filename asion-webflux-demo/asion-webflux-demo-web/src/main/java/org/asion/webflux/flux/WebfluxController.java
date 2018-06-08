@@ -29,6 +29,6 @@ public class WebfluxController {
 
     @GetMapping("{id}/flux")
     public Mono<Webflux> flux(@PathVariable("id") Long id) {
-        return webfluxManager.findOne(id);
+        return Mono.empty();
     }
 }
