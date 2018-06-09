@@ -16,12 +16,26 @@ spring:
     app: dubbo-search-provider
     registry: redis://dubbo.asion.org:5050
     protocol: dubbo
-    port: 9908
+    port: 10008
   data.elasticsearch:
-        cluster-nodes: bigdata-node01.kfk.com:9300, bigdata-node03.kfk.com:9300, bigdata-node05.kfk.com:9300
+        cluster-nodes: bigdata-node01.kfk.com:9300 #, bigdata-node03.kfk.com:9300, bigdata-node05.kfk.com:9300
         cluster-name: asion-elasticsearch-cluster
 
+# logger
 logging:
   level:
     root: info
   file: asion-search-server.log
+
+
+# eureka
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    metadataMap:
+      instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://eureka.asion.org:8761/eureka/

@@ -47,8 +47,7 @@ public class ItemSearchRepositoryTest {
         item.setId(2L);
         item.setName("test Product 2");
         item.setBrief("How great would it be if we could search for this other product.");
-        itemSearchRepository
-                .index(item);
+        itemSearchRepository.index(item);
         //when
         List<Item> products = itemSearchRepository.findByName("product");
         //then
@@ -68,12 +67,11 @@ public class ItemSearchRepositoryTest {
         item.setId(2L);
         item.setName("test Product 2");
         item.setBrief("How great would it be if we could search for this other product.");
-        itemSearchRepository
-                .index(item);
+        itemSearchRepository.index(item);
         //when
         Page<Item> products = itemSearchRepository.findByName("product", PageRequest.of(0, 1));
         //then
-        assertThat(products.getTotalPages(), is(1));
+        assertThat(products.getContent().size(), is(1));
     }
 
     @Test
@@ -89,8 +87,7 @@ public class ItemSearchRepositoryTest {
         item.setId(2L);
         item.setName("test Product 2");
         item.setBrief("How great would it be if we could search for this other product.");
-        itemSearchRepository
-                .save(item);
+        itemSearchRepository.save(item);
 
         List<Item> products = itemSearchRepository.findByNameAndId("product", 1L);
 

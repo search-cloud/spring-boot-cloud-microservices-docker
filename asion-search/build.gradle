@@ -21,7 +21,7 @@ project("asion-search-spring-boot-starter") {
         compile project(":asion-search:asion-search-common")
 
         compile("org.mvnsearch.spring.boot:spring-boot-starter-dubbo:2.0.0-SNAPSHOT")
-        compile("com.alibaba.boot:dubbo-spring-boot-starter:0.1.0")
+//        compile("com.alibaba.boot:dubbo-spring-boot-starter:0.1.0")
         compile("org.springframework.boot:spring-boot-starter-actuator")
         compile("org.springframework.boot:spring-boot-configuration-processor")
     }
@@ -61,14 +61,16 @@ project("asion-search-server") {
         compile("org.mvnsearch.spring.boot:spring-boot-starter-dubbo:2.0.0-SNAPSHOT")
         compile("org.springframework.boot:spring-boot-starter-actuator")
         compile("org.springframework.boot:spring-boot-starter-jdbc")
-        compile("org.springframework.data:spring-data-jpa")
+//        compile("org.springframework.data:spring-data-jpa")
         compile("org.springframework.boot:spring-boot-starter-data-elasticsearch")
-        compile("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+//        compile("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
         compile("mysql:mysql-connector-java")
         compile('com.h2database:h2')
         compile('redis.clients:jedis')
 
-//        compile("org.springframework.boot:spring-boot-starter-web")
+        runtime("org.springframework.boot:spring-boot-properties-migrator")
+
+        compile("org.springframework.boot:spring-boot-starter-web")
 //        compile("org.springframework.boot:spring-boot-starter-thymeleaf")
 //        compile("org.webjars:bootstrap:3.3.6")
 //        compile("org.webjars:jquery:2.2.3")
@@ -88,6 +90,7 @@ project("asion-search-web") {
         //
         //compile("org.asion:asion-search-spring-boot-starter:${version}")
         compile project(":asion-search:asion-search-spring-boot-starter")
+        compile("org.mvnsearch.spring.boot:spring-boot-starter-dubbo:2.0.0-SNAPSHOT")
         compile("org.springframework.boot:spring-boot-starter-actuator")
         compile("de.codecentric:spring-boot-admin-starter-client:${springBootAdminVersion}")
         compile("org.jolokia:jolokia-core")
@@ -100,9 +103,7 @@ project("asion-search-web") {
         compile('org.webjars:jquery-validation:1.15.0')
         compile("org.sitemesh:sitemesh:3.0.1")
 
-        compile("edu.uci.ics:crawler4j:4.4.0")
-        compile("org.jsoup:jsoup:1.9.2")
-        compile("net.sourceforge.javacsv:javacsv:2.0")
+        runtime("org.springframework.boot:spring-boot-properties-migrator")
 
         testCompile("org.springframework.boot:spring-boot-starter-test")
     }

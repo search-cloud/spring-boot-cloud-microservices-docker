@@ -1,7 +1,7 @@
 package org.asion.search.boot;
 
 import com.alibaba.dubbo.config.spring.ReferenceBean;
-import org.asion.search.SeekManger;
+import org.asion.search.ItemSearchManager;
 import org.mvnsearch.spring.boot.dubbo.DubboAutoConfiguration;
 import org.mvnsearch.spring.boot.dubbo.DubboBasedAutoConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +26,8 @@ public class AsionSearchAutoConfiguration extends DubboBasedAutoConfiguration {
     public AsionSearchAutoConfiguration(AsionSearchProperties properties) {this.properties = properties;}
 
     @Bean
-    public ReferenceBean asionSearchManager() {
-        return getConsumerBean(SeekManger.class, properties.getVersion(), properties.getTimeout());
+    public ReferenceBean itemSearchManager() {
+        return getConsumerBean(ItemSearchManager.class, properties.getVersion(), properties.getTimeout());
     }
 
 }

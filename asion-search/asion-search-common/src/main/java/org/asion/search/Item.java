@@ -18,7 +18,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(indexName = "item", type = "item", shards = 2, replicas = 2, refreshInterval = "-1")
+@Document(indexName = "item", type = "item", shards = 2, replicas = 2)
 public class Item implements BaseDomainEntity<Long> {
 
     /**
@@ -30,31 +30,31 @@ public class Item implements BaseDomainEntity<Long> {
     /**
      * 商品名称
      */
-    @Field(type = FieldType.text)
+    @Field(type = FieldType.Text)
     private String name;
 
     /**
      * 商品简介
      */
-    @Field(type = FieldType.text)
+    @Field(type = FieldType.Text)
     private String brief;
 
     /**
      * 最终销售价
      */
-    @Field
+    @Field(type = FieldType.Float)
     private Double salePrice;
 
     /**
      * 销售价的最低价
      */
-    @Field
+    @Field(type = FieldType.Float)
     private Double saleLowPrice;
 
     /**
      * 销售价的最高价
      */
-    @Field
+    @Field(type = FieldType.Float)
     private Double saleHighPrice;
 
     @Field(type = FieldType.Date)

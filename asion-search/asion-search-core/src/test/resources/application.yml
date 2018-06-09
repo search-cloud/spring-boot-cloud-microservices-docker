@@ -16,8 +16,10 @@ spring:
 
   data:
     elasticsearch:
-      cluster-nodes: bigdata-node01.kfk.com:9300
-      cluster-name: asion-elasticsearch-cluster
+      cluster-nodes: localhost:9300
+      cluster-name: es-docker-cluster
+
+xpack.security.user: "elastic:changeme"
 
 logging:
   level:
