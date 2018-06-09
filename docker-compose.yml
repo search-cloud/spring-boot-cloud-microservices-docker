@@ -1,5 +1,41 @@
-redis-dubbo:
+version: "3"
+
+# all services
+services:
+# redis for dubbo
+  redis-dubbo:
     image: redis:3.0.3
+    container_name: redis-dubbo-master
     ports:
       - "5050:6379"
+# mysql for sample
+  mysql-sample:
+      image: mysql:5.6.23
+      container_name: mysql-sample-master
+      ports:
+        - "9306:3306"
+      environment:
+         MYSQL_ROOT_PASSWORD: asion
+         MYSQL_DATABASE: asion_search
+# elasticsearch
+  elasticsearch-cluster-a:
+    image: elasticsearch:5.6.9
+    container_name: elasticsearch-cluster-a-node-00
+    environment:
+#      - http.host=0.0.0.0
+#      - transport.host=0.0.0.0
+      - xpack.security.enabled=false
+      - cluster.name=es-cluster-a
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+      - "discovery.zen.ping.unicast.hosts=es.asion.io"
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - /usr/share/elasticsearch/data:/usr/share/elasticsearch/data
 
