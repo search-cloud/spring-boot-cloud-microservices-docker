@@ -1,16 +1,6 @@
-:buildSrc:assemble UP-TO-DATE
-:buildSrc:compileJava UP-TO-DATE
-:buildSrc:compileGroovy UP-TO-DATE
-:buildSrc:processResources UP-TO-DATE
-:buildSrc:classes UP-TO-DATE
-:buildSrc:compileTestJava UP-TO-DATE
-:buildSrc:compileTestGroovy UP-TO-DATE
-:buildSrc:processTestResources UP-TO-DATE
-:buildSrc:testClasses UP-TO-DATE
-:buildSrc:test UP-TO-DATE
-:buildSrc:check UP-TO-DATE
-:buildSrc:build UP-TO-DATE
-:tasks
+
+Tasks
+=====
 
 ------------------------------------------------------------
 All tasks runnable from root project - Asion System
