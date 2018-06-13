@@ -1,0 +1,50 @@
+version: '3'
+
+networks:
+  esnet:
+    driver: bridge
+
+services:
+  elasticsearch-central:
+    image: elasticsearch:5.6.9
+    container_name: es-node-1a
+    volumes:
+      # /* 修改挂载位置 */
+      - /Users/Asion/Workstation/Personal/java-workspace/spring-boot-cloud-microservices-docker/data1:/usr/share/elasticsearch/data
+      - /Users/Asion/Workstation/Personal/java-workspace/spring-boot-cloud-microservices-docker/asion-docker/asion-docker-compose/elasticsearch/config/es-config-1.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    environment:
+      - ES_CLUSTERNAME=elasticsearch_cluster
+    command: elasticsearch
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    networks:
+      - esnet
+  elasticsearch-data:
+    image: elasticsearch:5.6.9
+    container_name: es-node-2a
+    volumes:
+        # /* 修改挂载位置 */
+      - /Users/Asion/Workstation/Personal/java-workspace/spring-boot-cloud-microservices-docker/data2:/usr/share/elasticsearch/data
+      - /Users/Asion/Workstation/Personal/java-workspace/spring-boot-cloud-microservices-docker/asion-docker/asion-docker-compose/elasticsearch/config/es-config-2.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    environment:
+      - ES_CLUSTERNAME=elasticsearch_cluster
+    command: elasticsearch
+    ports:
+      - "9201:9200"
+      - "9301:9300"
+    networks:
+      - esnet
+    links:
+      - elasticsearch-central:elasticsearch_cluster
+#  elasticsearch-head:
+#    image: mobz/elasticsearch-head:5
+#    container_name: head
+#    volumes:
+#      # /* 修改挂载位置 */
+#      - /root/apollo/elasticsearch/head/Gruntfile.js:/usr/src/app/Gruntfile.js
+#      - /root/apollo/elasticsearch/head/app.js:/usr/src/app/_site/app.js
+#    ports:
+#      - "9100:9100"
+#    links:
+#      - elasticsearch-central:elasticsearch
