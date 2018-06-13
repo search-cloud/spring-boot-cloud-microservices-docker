@@ -1,10 +1,10 @@
 # server config
 server:
-  port: 9980
+  port: 10080
 
-management:
-  server:
-    port: 9981
+#management:
+#  server:
+#    port: 10081
 
 # Allow Thymeleaf templates to be reloaded at dev time
 spring:
@@ -16,6 +16,7 @@ spring:
     app: asion-search-web
     registry: redis://dubbo.asion.org:5050
     protocol: dubbo
+    transporter: netty4
 
   boot:
       admin:

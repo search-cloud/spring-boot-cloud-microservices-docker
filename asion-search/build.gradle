@@ -7,7 +7,6 @@ project("asion-search-common") {
         compile project(":asion-base")
 
         compile("org.springframework:spring-context-support")
-        compile("org.springframework.boot:spring-boot-starter-jdbc")
         compile("org.springframework.boot:spring-boot-starter-data-elasticsearch")
     }
 }
@@ -91,7 +90,7 @@ project("asion-search-web") {
         //compile("org.asion:asion-search-spring-boot-starter:${version}")
         compile project(":asion-search:asion-search-spring-boot-starter")
         compile("org.mvnsearch.spring.boot:spring-boot-starter-dubbo:2.0.0-SNAPSHOT")
-        compile("org.springframework.boot:spring-boot-starter-actuator")
+//        compile("org.springframework.boot:spring-boot-starter-actuator")
         compile("de.codecentric:spring-boot-admin-starter-client:${springBootAdminVersion}")
         compile("org.jolokia:jolokia-core")
 

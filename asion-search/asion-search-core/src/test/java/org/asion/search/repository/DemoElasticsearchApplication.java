@@ -79,7 +79,7 @@ public class DemoElasticsearchApplication implements CommandLineRunner {
     }
 
     private void fetchAllItems() {
-        System.out.println("Items found with findAll():");
+        System.out.println("Items found with findItems():");
         System.out.println("-------------------------------");
         for (Item item : this.repository.findAll()) {
             System.out.println(item);

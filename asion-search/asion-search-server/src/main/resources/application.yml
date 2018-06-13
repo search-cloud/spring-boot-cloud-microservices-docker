@@ -17,9 +17,13 @@ spring:
     registry: redis://dubbo.asion.org:5050
     protocol: dubbo
     port: 10008
-  data.elasticsearch:
-        cluster-nodes: bigdata-node01.kfk.com:9300 #, bigdata-node03.kfk.com:9300, bigdata-node05.kfk.com:9300
-        cluster-name: asion-elasticsearch-cluster
+    transporter: netty4
+  data:
+    elasticsearch:
+      cluster-nodes: bigdata-node01.kfk.com:9300 #, bigdata-node03.kfk.com:9300, bigdata-node05.kfk.com:9300
+      cluster-name: asion-elasticsearch-cluster
+#      cluster-nodes: localhost:9300
+#      cluster-name: es-docker-cluster
 
 # logger
 logging:

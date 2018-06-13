@@ -12,8 +12,8 @@ import org.springframework.data.elasticsearch.repository.config.EnableElasticsea
  */
 @SpringBootApplication
 //@EnableEurekaClient
-@EnableDubboConfiguration("org.asion.search.server")
 @ComponentScan("org.asion.search")
+@EnableDubboConfiguration("org.asion.search.server")
 @EnableElasticsearchRepositories("org.asion.search.repository")
 open class AsionSearchServerApplication {
 
