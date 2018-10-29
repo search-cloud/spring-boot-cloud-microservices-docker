@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.servlet.DispatcherType;
 import java.util.EnumSet;
@@ -23,7 +23,7 @@ import java.util.EnumSet;
 @EnableWebMvc
 @EnableAsync
 @ComponentScan("org.asion.account")
-public class AsionAccountWebApplication extends WebMvcConfigurerAdapter {
+public class AsionAccountWebApplication implements WebMvcConfigurer {
 
     public static void main(String[] args) {
         SpringApplication.run(AsionAccountWebApplication.class, args);
