@@ -1,0 +1,21 @@
+# server config
+server:
+  port: 9909
+
+# Allow Thymeleaf templates to be reloaded at dev time
+spring:
+  thymeleaf.cache: false
+  application:
+    name: asion-account-server
+  datasource:
+    url: jdbc:mysql://db.asion.org:2006/asion_account?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+    username: root
+    password: asion
+    driverClassName: com.mysql.jdbc.Driver
+
+# logger
+logging:
+  level:
+    root: info
+  file: asion-account-server.log
+

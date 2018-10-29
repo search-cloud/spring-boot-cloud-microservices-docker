@@ -3,21 +3,24 @@
  */
 buildscript {
     ext {
-        kotlinVersion = '1.1.51'
-        springBootVersion = '2.0.0.M6'
+        kotlinVersion = '1.2.41'
+        springBootVersion = '2.0.2.RELEASE'
     }
+
     repositories {
         mavenLocal()
         jcenter()
         maven { url "https://repo.spring.io/release" }
+        maven { url "https://repo.spring.io/libs-milestone" }
         maven { url "https://repo.spring.io/snapshot" }
-        maven { url "https://repo.spring.io/milestone" }
     }
+
     dependencies {
-        classpath "io.spring.gradle:dependency-management-plugin:1.0.2.RELEASE"
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
-        classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.5.RELEASE"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
+        classpath "org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}"
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6.2"
     }
 }
 
@@ -30,28 +33,37 @@ configure(allprojects) { project ->
 
     apply plugin: 'idea'
     apply plugin: 'java'
-    apply plugin: 'maven'
+//    apply plugin: 'maven'
     apply plugin: 'groovy'
+    apply plugin: 'kotlin'
+//    apply plugin: "org.sonarqube"
 
-    sourceCompatibility = 1.9
-    targetCompatibility = 1.9
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
 
     ext {
-        springBootVersion = '2.0.0.M6'
-        springVersion = '5.0.0.RELEASE'
-        springCloudVersion = 'Dalston.SR4'
-        springBootAdminVersion = '1.5.4'
-        platformBomVersion = 'Brussels-SR5'
+        springBootVersion = '2.0.2.RELEASE'
+        springVersion = '5.0.6.RELEASE'
+        springCloudVersion = 'Finchley.RC1'//'Edgware.SR3'
+        springBootAdminVersion = '2.0.0'
+        platformBomVersion = 'Cairo-SR1'
         unitilsBom = '3.4.2'
         assertjVersion = '3.6.2'
+        mybatisSpringBootVersion = '1.3.2'
+        lombokVersion = '1.18.0'
     }
 
     repositories {
         mavenLocal()
         jcenter()
         maven { url "https://repo.spring.io/release" }
+        maven { url "https://repo.spring.io/libs-milestone" }
         maven { url "https://repo.spring.io/snapshot" }
-        maven { url "https://repo.spring.io/milestone" }
+        maven { url "https://artifacts.elastic.co/maven" }
+    }
+
+    sourceSets {
+        main.kotlin.srcDirs += 'src/main/java'
     }
 
     // noinspection GroovyAssignabilityCheck
@@ -69,6 +81,10 @@ configure(allprojects) { project ->
         }
     }
 
+    javadoc {
+        options.encoding = 'UTF-8'
+    }
+
     idea {
         module {
             //if you hate browsing Javadoc
@@ -84,6 +100,7 @@ configure(allprojects) { project ->
  */
 subprojects {
     apply plugin: "io.spring.dependency-management"
+    apply plugin: 'kotlin'
 
     dependencyManagement {
         imports {
@@ -95,8 +112,12 @@ subprojects {
     }
 
     dependencies {
-        compile("org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}")
+        compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
         compile("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
+        testCompile "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}"
+        runtime("org.springframework.boot:spring-boot-properties-migrator")
+
+        compile "org.elasticsearch.client:x-pack-transport:5.6.9"
     }
 
     task sourcesJar(type: Jar, dependsOn: classes) {
@@ -124,7 +145,7 @@ configure(rootProject) {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.14'
+    gradleVersion = '4.2'
 }
 
 /*

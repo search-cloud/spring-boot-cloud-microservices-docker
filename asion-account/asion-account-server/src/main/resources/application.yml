@@ -12,14 +12,6 @@ spring:
     username: root
     password: asion
     driverClassName: com.mysql.jdbc.Driver
-    dbcp:
-      test-on-borrow: false
-      test-on-return: false
-      test-while-idle: true
-      max-wait: 30000
-      validation-query: SELECT 1
-      time-between-eviction-runs-millis: 20000
-      min-evictable-idle-time-millis: 28700
   dubbo:
     app: dubbo-account-provider
     registry: redis://dubbo.asion.org:5050
@@ -27,7 +19,9 @@ spring:
     port: 9908
   boot:
     admin:
-      url: http://boot.admin.asion.org:10090
+      client:
+        instance:
+          management-url: http://boot.admin.asion.org:10090
 
 # logger
 logging:

@@ -199,3 +199,37 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
+
+=======================================================================
+
+ASION SOURCE ${version} SUBCOMPONENTS:
+
+ASION SOURCE ${version} includes a number of subcomponents
+with separate copyright notices and license terms. The product that
+includes this file does not necessarily use all the open source
+subcomponents referred to below. Your use of the source
+code for these subcomponents is subject to the terms and
+conditions of the following licenses.
+
+=======================================================================
+
+To the extent any open source subcomponents are licensed under the EPL and/or
+other similar licenses that require the source code and/or modifications to
+source code to be made available (as would be noted above), you may obtain a
+copy of the source code corresponding to the binaries for such open source
+components and modifications thereto, if any, (the "Source Files"), by
+downloading the Source Files from http://www.asionproject.org/download, or by
+sending a request, with your name and address to:
+
+    Asion, Inc., 577 Xi Hu St,
+    Hang Zhou, Zhe Jiang 310000
+    China
+
+or email luxuexian99@gmail.com.  All such requests should clearly specify:
+
+    OPEN SOURCE FILES REQUEST
+    Attention General Counsel
+
+Asion shall mail a copy of the Source Files to you on a CD or equivalent
+physical medium. This offer to obtain a copy of the Source Files is valid for
+three years from the date you acquired this Software product.

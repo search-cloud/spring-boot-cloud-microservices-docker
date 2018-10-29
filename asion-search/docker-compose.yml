@@ -1,41 +1,41 @@
-#mysql:
-#    image: mysql:5.6.23
-#    ports:
-#      - "1006:3306"
-#    environment:
-#       MYSQL_ROOT_PASSWORD: asion
-#       MYSQL_DATABASE: asion_search
+mysql:
+    image: mysql:5.6.23
+    ports:
+      - "9306:3306"
+    environment:
+       MYSQL_ROOT_PASSWORD: asion
+       MYSQL_DATABASE: asion_search
 
 
 
 
-# elasticsearch docker images
-# docker run -d -p 9200:9200 -p 9300:9300 --name asion-elasticsearch elasticsearch:2.2.0
-version: 2.4.4
-# node 0
-asion-es-clouster-node-000:
-  image: elasticsearch:${version}
-  ports:
-    - "30768:9200"
-    - "30769:9300"
-
-# node 1
-asion-es-clouster-node-001:
-  image: elasticsearch:${version}
-  ports:
-    - "31768:9200"
-    - "31769:9300"
-
-# node 2
-asion-es-clouster-node-002:
-  image: elasticsearch:${version}
-  ports:
-    - "32768:9200"
-    - "32769:9300"
-
-# node 3
-asion-es-clouster-node-003:
-  image: elasticsearch:${version}
-  ports:
-    - "33768:9200"
-    - "33769:9300"
+## elasticsearch docker images
+## docker run -d -p 9200:9200 -p 9300:9300 --name asion-elasticsearch elasticsearch:2.2.0
+#version: 2.4.4
+## node 0
+#asion-es-clouster-node-000:
+#  image: elasticsearch:${version}
+#  ports:
+#    - "30768:9200"
+#    - "30769:9300"
+#
+## node 1
+#asion-es-clouster-node-001:
+#  image: elasticsearch:${version}
+#  ports:
+#    - "31768:9200"
+#    - "31769:9300"
+#
+## node 2
+#asion-es-clouster-node-002:
+#  image: elasticsearch:${version}
+#  ports:
+#    - "32768:9200"
+#    - "32769:9300"
+#
+## node 3
+#asion-es-clouster-node-003:
+#  image: elasticsearch:${version}
+#  ports:
+#    - "33768:9200"
+#    - "33769:9300"

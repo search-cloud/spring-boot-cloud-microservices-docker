@@ -1,0 +1,33 @@
+# server config
+server:
+  port: 10080
+
+#management:
+#  server:
+#    port: 10081
+
+# Allow Thymeleaf templates to be reloaded at dev time
+spring:
+  thymeleaf.cache: false
+#  mvc.favicon.enabled: false
+  application:
+    name: asion-search-web
+  dubbo:
+    app: asion-search-web
+    registry: redis://dubbo.asion.org:5050
+    protocol: dubbo
+    transporter: netty4
+
+  boot:
+      admin:
+        url: http://boot.admin.asion.org:10090
+  servlet:
+    multipart:
+      max-file-size: 2Mb
+      max-request-size: 10Mb
+
+logging:
+  level:
+    root: info
+  file: asion-search-web.log
+

@@ -1,0 +1,32 @@
+@startuml
+
+package "Email System" {
+    [Email Web App] --> [Email Service]
+
+}
+
+package "Account System" {
+    [Account Web App] --> [Account Service]
+}
+
+package "Ops System" {
+    [Config Service]
+    [Registry Service]
+    [Monitor Service]
+    [Config]
+}
+
+package "Data System" {
+    [Data Report] --> [Data Service]
+    [DataFlow Service]
+}
+
+
+
+package "Content System" {
+    [CMS Service]
+    [Click Web]
+    [assets]
+}
+
+@enduml

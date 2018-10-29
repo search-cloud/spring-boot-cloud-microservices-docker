@@ -1,0 +1,30 @@
+@startuml
+
+title: 促销活动平台模型抽象
+
+interface Platform<平台>
+interface Promotion<抽象的活动>
+interface PromotionPlatform<活动平台>
+interface PromotionSprint<活动专场>
+interface PromotionItem<活动项>
+
+Promotion .left. Platform
+Platform <|-- PromotionPlatform
+Promotion <|-right- PromotionSprint
+PromotionSprint "1"<|--"N" PromotionSprint
+
+Promotion .. PromotionItem
+PromotionSprint "1"*--"N" PromotionItem : contains \n一个活动项，同一时间，只能参加一个活动专场
+
+'表示可以在上面建立各种活动平台的大平台；
+interface Platform {
+    + getName(); // 平台名称
+    + setName();
+}
+
+interface Promotion {
+    + getName();
+    + setName();
+}
+
+@enduml

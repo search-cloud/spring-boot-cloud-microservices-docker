@@ -5,7 +5,9 @@
 .idea
 *.iml
 out
-gen### Eclipse template
+gen
+
+### Eclipse template
 *.pydevproject
 .metadata
 bin/
@@ -61,7 +63,7 @@ hs_err_pid*
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio
 
 ## Directory-based project format:
-# .idea/
+.idea/
 # if you remove the above rule, at least ignore the following:
 
 # User-specific stuff:
@@ -127,8 +129,9 @@ gradle-app.setting
 # Created by .ignore support plugin (hsz.mobi)
 
 log/
-*.log
+*.log*
 
 ### Elasticsearch
 /data/
 /index/
+.sts4-cache/

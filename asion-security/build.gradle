@@ -21,7 +21,7 @@ project("asion-security-spring-boot-starter") {
         compile("org.springframework.boot:spring-boot-starter-actuator")
         compile("org.springframework.boot:spring-boot-starter-security")
         compile("org.springframework.boot:spring-boot-configuration-processor")
-        compile("org.mvnsearch.spring.boot:spring-boot-starter-dubbo:1.0.0-SNAPSHOT")
+        compile("org.mvnsearch.spring.boot:spring-boot-starter-dubbo:2.0.0-SNAPSHOT")
     }
 }
 
@@ -48,8 +48,8 @@ project("asion-security-server") {
     dependencies {
         //compile("asion-security:asion-security-core")
         compile project(":asion-security:asion-security-core")
-        compile("org.mvnsearch.spring.boot:spring-boot-starter-dubbo:1.0.0-SNAPSHOT")
-        compile("org.springframework.cloud:spring-cloud-starter-eureka")
+        compile("org.mvnsearch.spring.boot:spring-boot-starter-dubbo:2.0.0-SNAPSHOT")
+        compile("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
 //        compile("org.springframework.cloud:spring-cloud-starter-config")
         compile("de.codecentric:spring-boot-admin-starter-client:${springBootAdminVersion}")
         compile("org.jolokia:jolokia-core")
@@ -66,9 +66,9 @@ project("asion-security-server") {
 //        testCompile("org.springframework.boot:spring-boot-starter-test")
     }
 
-//    bootRepackage {
-//        mainClass = 'org.asion.security.AsionUserServerApplication'
-//    }
+    bootJar {
+        mainClassName = 'org.asion.security.AsionUserServerApplication'
+    }
 
 }
 
@@ -98,7 +98,7 @@ project("asion-security-web") {
         testCompile("org.springframework.boot:spring-boot-starter-test")
     }
 
-//    bootRepackage {
-//        mainClass = 'org.asion.security.AsionUserWebApplication'
-//    }
+    bootJar {
+        mainClassName = 'org.asion.security.AsionUserWebApplication'
+    }
 }

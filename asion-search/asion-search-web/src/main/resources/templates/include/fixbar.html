@@ -1,0 +1,38 @@
+<div class="ytx-rightBar" id="fixBar" th:fragment="fixbar" xmlns:th="http://www.thymeleaf.org">
+    <div class="ytx-right-wrap">
+        <div class="ytx-rightBar-box">
+            <a th:href="${buyerDomain}" class="ytx-rightBar-myCenter J_hover">
+                <i class="rightBar-myCenterIcon"></i>
+                <div class="rightBar-myCenter-desc">个人中心<span class="rightBar-myCenter-descArrow">◆</span></div>
+            </a>
+            <a th:href="${cartDomain}" class="rightBar-myCart" id="J_myCart">
+                <i class="rightBar-myCart-icon"></i>
+                <div class="rightBar-myCart-text">购物车</div>
+                <div class="rightBar-myCart-num"><span class="rightBar-myCart-bg tac" id="fixCartValue"></span></div>
+                <div class="rightBar-mycart-border"></div>
+            </a>
+            <a th:href="${buyerDomain+'favorite/special'}" class="rightBar-myFavorite J_hover">
+                <i class="fa fa-heart-o"></i>
+                <div class="rightBar-myCenter-desc">我收藏的品牌<span class="rightBar-myCenter-descArrow">◆</span></div>
+            </a>
+            <a th:href="${buyerDomain+'favorite/item/paging/1'}" class="rightBar-myFavorite J_hover" id="J_favoriteItem">
+                <i class="fa fa-star-o"></i>
+                <div class="rightBar-myCenter-desc">我的收藏<span class="rightBar-myCenter-descArrow">◆</span></div>
+            </a>
+        </div>
+    </div>
+    <div class="rightBar-scrollTop" id="J_scrollTop">
+        <i class="rightBar-scrollTop-icon"></i>
+    </div>
+    <!--<div class="rightBar-code-content">
+        <i class="rightBar-code-icon"></i>
+        <div class="code-content">
+            <div class="code-main">
+                <img src="#" class="code-main-image"/>
+            </div>
+            <p class="code-text">到迎天下APP</p>
+            <p class="code-text themeColor">领百元新人礼包</p>
+        </div>
+    </div>-->
+
+</div>

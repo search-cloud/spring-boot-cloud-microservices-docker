@@ -1,0 +1,112 @@
+#
+# elasticsearch docker images
+# docker run -d -p 9200:9200 -p 9300:9300 --name asion-elasticsearch elasticsearch:2.2.0
+# elasticsearch-version: 5.6.9
+#
+
+version: '3'
+
+# node 0
+#asion-es-clouster-node-000:
+#  image: elasticsearch:5.6.9
+#  environment:
+#    - http.host=0.0.0.0
+#    - transport.host=0.0.0.0
+#    - xpack.security.enabled=false
+#  ports:
+#    - "0.0.0.0:9200:9200"
+#    - "0.0.0.0:9300:9300"
+
+#services:
+#  elasticsearch:
+#    image: docker.elastic.co/elasticsearch/elasticsearch:5.6.9
+#    environment:
+#      - http.host=0.0.0.0
+#      - transport.host=0.0.0.0
+#      - xpack.security.enabled=false
+#      - cluster.name=asion-elasticsearch-cluster
+#      - script.inline=true
+#      - thread_pool.index.queue_size=100000
+#      - thread_pool.search.queue_size=100000
+#      - thread_pool.bulk.queue_size=100000
+#    volumes:
+#      - /Users/Asion/Workstation/Personal/java-workspace/spring-boot-cloud-microservices-docker/data:/usr/share/elasticsearch/data
+#    ports:
+#      - "9200:9200"
+#      - "9300:9300"
+
+# elasticsearch
+
+#volumes:
+#  esdata1:
+#    driver: /Users/Asion/Workstation/Personal/java-workspace/spring-boot-cloud-microservices-docker/data1
+#  esdata2:
+#    driver: /Users/Asion/Workstation/Personal/java-workspace/spring-boot-cloud-microservices-docker/data2
+
+networks:
+  esnet:
+    driver: bridge
+
+services:
+  elasticsearch-cluster-1a:
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.6.9
+    container_name: elasticsearch-cluster-1a
+    environment:
+      - xpack.security.enabled=false
+      - xpack.monitoring.enabled=false
+      - xpack.ml.enabled=false
+      - xpack.graph.enabled=false
+      - xpack.watcher.enabled=false
+      - cluster.name=es-docker-cluster
+      - bootstrap.system_call_filter=false
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+#      mem_limit: 1g
+    cap_add:
+      - IPC_LOCK
+    volumes:
+      - /Users/Asion/Workstation/Personal/java-workspace/spring-boot-cloud-microservices-docker/data1:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      - esnet
+
+  elasticsearch-cluster-2a:
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.6.9
+    container_name: elasticsearch-cluster-2a
+    environment:
+      - xpack.security.enabled=false
+      - xpack.monitoring.enabled=false
+      - xpack.ml.enabled=false
+      - xpack.graph.enabled=false
+      - xpack.watcher.enabled=false
+      - cluster.name=es-docker-cluster
+      - bootstrap.system_call_filter=false
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "discovery.zen.ping.unicast.hosts=elasticsearch-cluster-1a"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+#      mem_limit: 1g
+    cap_add:
+      - IPC_LOCK
+    volumes:
+      - /Users/Asion/Workstation/Personal/java-workspace/spring-boot-cloud-microservices-docker/data2:/usr/share/elasticsearch/data
+    networks:
+      - esnet
+
+#volumes:
+#  - /Users/Asion/Workstation/Personal/java-workspace/spring-boot-cloud-microservices-docker/data:/usr/share/elasticsearch/data

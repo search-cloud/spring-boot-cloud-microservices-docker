@@ -1,36 +1,54 @@
 package org.asion.search.common;
 
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.common.settings.Settings;
+import org.elasticsearch.common.transport.InetSocketTransportAddress;
+import org.elasticsearch.xpack.client.PreBuiltXPackTransportClient;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.core.env.Environment;
+import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
-import javax.sql.DataSource;
+import java.net.InetAddress;
 
 /**
  * @author Asion.
  * @since 16/5/1.
  */
 @SpringBootApplication
-@ComponentScan(value = "org.asion.search")
-@EnableAutoConfiguration(exclude = ElasticsearchConfiguration.class)
-public class SearchTestApplication {
+@ComponentScan("org.asion.search")
+@EnableElasticsearchRepositories("org.asion.search.repository")
+public class SearchTestApplication implements EnvironmentAware {
 
+    private Environment environment;
+
+    /**
+     * docker es x-pack 默认是打开的，所以需要认证
+     *
+     * @return TransportClient
+     * @throws Exception 主要是地址异常
+     */
     @Bean
-    public DataSource dataSource() {
-        String url = "jdbc:mysql://192.168.99.100:1006/asion_search?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull";
-        String user = "root";
-        String password = "asion";
-        DriverManagerDataSource dataSource = new DriverManagerDataSource(url, user, password);
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        return dataSource;
+    public TransportClient elasticsearchClient() throws Exception {
+//        TransportClientFactoryBean factory = new TransportClientFactoryBean();
+//        factory.setClusterNodes(this.properties.getClusterNodes());
+//        factory.setProperties(createProperties());
+//        factory.afterPropertiesSet();
+//        return factory.getObject();
+        return new PreBuiltXPackTransportClient(
+                Settings.builder()
+                        .put("cluster.name", environment.getProperty("spring.data.elasticsearch.cluster-name"))
+                        .put("xpack.security.user", environment.getProperty("xpack.security.user"))
+                        .build())
+                .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("localhost"), 9300));
+        //.addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("localhost"), 9301));
     }
 
-    @Bean
-    public JdbcTemplate jdbcTemplate() {
-        return new JdbcTemplate(dataSource());
+    @Override
+    public void setEnvironment(@NotNull Environment environment) {
+        this.environment = environment;
     }
-
 }

@@ -1,0 +1,28 @@
+@startuml
+
+
+
+interface ItemService
+interface CategoryService
+class ItemController
+
+ItemService o-- ItemController
+CategoryService o-- ItemController
+
+
+interface ItemService {
+    save()
+}
+
+interface CategoryService {
+    findOne()
+}
+
+class ItemController {
+    - ItemService itemService
+    - CategoryService categoryService
+
+    uploadItem()
+}
+
+@enduml

@@ -6,13 +6,13 @@ project("asion-cloud-config-server") {
 
     dependencies {
         compile('org.springframework.cloud:spring-cloud-config-server')
-        compile('org.springframework.cloud:spring-cloud-starter-eureka')
+        compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
         testCompile('org.springframework.boot:spring-boot-starter-test')
     }
 
-//    bootRepackage {
-//        mainClass = 'org.asion.cloud.server.AsionCloudConfigServerApplication'
-//    }
+    bootJar {
+        mainClassName = 'org.asion.cloud.server.AsionCloudConfigServerApplication'
+    }
 
 }
 
@@ -20,14 +20,14 @@ project("asion-cloud-registry-server") {
     apply plugin: "org.springframework.boot"
 
     dependencies {
-        compile('org.springframework.cloud:spring-cloud-starter-eureka')
-        compile('org.springframework.cloud:spring-cloud-starter-eureka-server')
+        compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
+        compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-server')
         testCompile('org.springframework.boot:spring-boot-starter-test')
     }
 
-//    bootRepackage {
-//        mainClass = 'org.asion.cloud.server.AsionCloudRegistryServerApplication'
-//    }
+    bootJar {
+        mainClassName = 'org.asion.cloud.server.AsionCloudRegistryServerApplication'
+    }
 
 }
 
@@ -37,12 +37,13 @@ project("asion-spring-boot-admin") {
     dependencies {
         compile("de.codecentric:spring-boot-admin-server:${springBootAdminVersion}")
         compile("de.codecentric:spring-boot-admin-server-ui:${springBootAdminVersion}")
-        compile('org.springframework.cloud:spring-cloud-starter-eureka')
+        compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
+        compile('org.springframework.cloud:spring-cloud-starter-netflix-zuul')
         testCompile('org.springframework.boot:spring-boot-starter-test')
     }
 
-//    bootRepackage {
-//        mainClass = 'org.asion.cloud.server.AsionSpringBootAdminApplication'
-//    }
+    bootJar {
+        mainClassName = 'org.asion.cloud.server.AsionSpringBootAdminApplication'
+    }
 
 }

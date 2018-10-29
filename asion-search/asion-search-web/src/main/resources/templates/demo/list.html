@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="layout"-->
+<head>
+    <title>Demos : View all</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"/>
+</head>
+<body>
+<!--<h1 layout:fragment="header">Demos : View all</h1>-->
+<!--<div layout:fragment="content" class="container">-->
+<div class="header" th:include="ytx-webjars-seekerData/seekerData :: head"></div>
+<h1>Demos : View all</h1>
+<div class="container">
+    <div class="pull-right">
+        <a href="form.html" th:href="@{/demos(form)}">Create Demo</a>
+    </div>
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>Code</td>
+            <td>Name</td>
+            <td>Age</td>
+            <td>Money</td>
+            <td>CreatedAt</td>
+            <td>Operation</td>
+        </tr>
+        </thead>
+        <tbody>
+        <!--/*@thymesVar id="demos" type="java.util.List<com.ytx.seekerData.domain.model.Demo>"*/-->
+        <!--/*@thymesVar id="data" type="com.ytx.common.vo.YTXResult"*/-->
+        <tr th:if="${data.getData('demos').isEmpty()}">
+            <td colspan="3">No demos</td>
+        </tr>
+        <tr th:each="seekerData : ${data.getData('demos')}">
+            <td th:text="${seekerData.id}">1</td>
+            <td>
+                <a href="view.html" th:href="@{'/demos/' + ${seekerData.id}}" th:text="${seekerData.code}"> The summary </a>
+            </td>
+            <td>
+                <a href="view.html" th:href="@{'/demos/' + ${seekerData.id}}" th:text="${seekerData.name}"> The summary </a>
+            </td>
+            <td>
+                <a href="view.html" th:href="@{'/demos/' + ${seekerData.id}}" th:text="${seekerData.age}"> The summary </a>
+            </td>
+            <td>
+                <a href="view.html" th:href="@{'/demos/' + ${seekerData.id}}" th:text="${seekerData.money}"> The summary </a>
+            </td>
+            <td th:text="${#calendars.format(seekerData.createdAt)}">July 11,2017 2:17:16 PM CDT</td>
+            <td>
+                <a href="view.html" th:href="@{'/demos/' + ${seekerData.id} + '/delete'}">delete </a> |
+                <a href="form.html" th:href="@{'/demos/' + ${seekerData.id} + '/modify'}"> modify </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+@startuml
+
+package "Category and Attribute System" {
+    [Category Service]
+    [Attribute Service]
+
+    [Category Web App] --> [Category Service]
+    [Attribute Web App] --> [Attribute Service]
+
+}
+
+package "Brand System" {
+    [Brand Service]
+
+    [Brand Web App] --> [Brand Service]
+}
+
+package "Item System" {
+    [Item Web App] --> [Item Service]
+    [Item Web App] --> [Category Service]
+    [Item Web App] --> [Attribute Service]
+    [Item Web App] --> [Brand Service]
+}
+
+package "Buyer System" {
+    [Buyer Web App] --> [Buyer Service]
+    [Buyer Web App] --> [Category Service]
+    [Buyer Web App] --> [Attribute Service]
+    [Buyer Web App] --> [Brand Service]
+    [Buyer Web App] --> [Item Service]
+}
+
+package "Seller System" {
+    [Seller Web App] --> [Seller Service]
+    [Seller Web App] --> [Category Service]
+    [Seller Web App] --> [Attribute Service]
+    [Seller Web App] --> [Brand Service]
+    [Seller Web App] --> [Item Service]
+}
+
+package "Trade System" {
+    [Trade Web App] --> [Trade Service]
+    [Trade Web App] --> [Category Service]
+    [Trade Web App] --> [Attribute Service]
+    [Trade Web App] --> [Brand Service]
+    [Trade Web App] --> [Item Service]
+    [Trade Web App] --> [Seller Service]
+    [Trade Web App] --> [Buyer Service]
+    [Cashier Web App] --> [Trade Service]
+    [Cashier Web App] --> [Pay Service]
+}
+
+package "ShoppingCart System" {
+    [ShoppingCart Web App] --> [ShoppingCart Service]
+    [ShoppingCart Web App] --> [Category Service]
+    [ShoppingCart Web App] --> [Attribute Service]
+    [ShoppingCart Web App] --> [Brand Service]
+    [ShoppingCart Web App] --> [Item Service]
+    [ShoppingCart Web App] --> [Seller Service]
+    [ShoppingCart Web App] --> [Buyer Service]
+    [ShoppingCart Web App] --> [Trade Service]
+}
+
+package "Pay System" {
+    [Pay Web App] --> [Pay Service]
+    [Pay Web App] --> [Trade Service]
+    [Pay Web App] --> [ShoppingCart Service]
+    [Pay Web App] --> [Item Service]
+    [Pay Web App] --> [Seller Service]
+    [Pay Web App] --> [Buyer Service]
+}
+
+package "Coupon System" {
+
+}
+
+@enduml

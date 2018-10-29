@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      >
+<!--xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout"-->
+<head>
+    <title>Demos : Create</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"/>
+</head>
+<body>
+<!--<h1 layout:fragment="header">Demos : Create</h1>-->
+<div class="header" th:include="ytx-webjars-seekerData/seekerData :: head"></div>
+<h1 >Demos : Create</h1>
+<!--<div layout:fragment="content" class="container">-->
+<div class="container">
+    <!--/*@thymesVar id="seekerData" type="com.ytx.seekerData.domain.model.Demo"*/-->
+    <form id="demoForm" th:action="@{/demos/save}" th:object="${seekerData}" action="#" method="post">
+        <div th:if="${#fields.hasErrors('*')}" class="alert alert-error">
+            <p th:each="error : ${#fields.errors('*')}" th:text="${error}">
+                Validation error
+            </p>
+        </div>
+        <div class="pull-right">
+            <a th:href="@{/demos/list}" href="list.html"> Demos </a>
+        </div>
+        <input type="hidden" th:field="*{id}" th:class="${#fields.hasErrors('id')} ? 'field-error'"/>
+        <label for="code">Code</label>
+        <input type="text" th:field="*{code}" th:class="${#fields.hasErrors('code')} ? 'field-error'" title="code"/>
+        <label for="name">Name</label>
+        <input type="text" th:field="*{name}" th:class="${#fields.hasErrors('name')} ? 'field-error'" title="name"/>
+        <label for="age">age</label>
+        <input type="text" th:field="*{age}" th:class="${#fields.hasErrors('age')} ? 'field-error'" title="age"/>
+        <label for="money">money</label>
+        <input type="text" th:field="*{money}" th:class="${#fields.hasErrors('money')} ? 'field-error'" title="money"/>
+        <div class="form-actions">
+            <input type="submit" value="Save"/>
+        </div>
+    </form>
+</div>
+</body>
+</html>
