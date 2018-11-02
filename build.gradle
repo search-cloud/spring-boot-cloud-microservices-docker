@@ -3,7 +3,7 @@
  */
 buildscript {
     ext {
-        kotlinVersion = '1.2.41'
+        kotlinVersion = '1.2.71'
         springBootVersion = '2.0.2.RELEASE'
     }
 
@@ -45,7 +45,7 @@ configure(allprojects) { project ->
     ext {
         springBootVersion = '2.0.2.RELEASE'
         springVersion = '5.0.6.RELEASE'
-        springCloudVersion = 'Finchley.RC1'//'Edgware.SR3'
+        springCloudVersion = 'Finchley.SR2'//'Edgware.SR3'
         springBootAdminVersion = '2.0.0'
         platformBomVersion = 'Cairo-SR1'
         unitilsBom = '3.4.2'
@@ -115,6 +115,7 @@ subprojects {
     dependencies {
         compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
         compile("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
+        compile("org.projectlombok:lombok:${lombokVersion}")
         testCompile "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}"
         runtime("org.springframework.boot:spring-boot-properties-migrator")
 

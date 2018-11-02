@@ -1,0 +1,13 @@
+/**
+ * asion-common's sub projects configuration
+ */
+project("asion-common") {
+    dependencies {
+        //compile("org.asion:asion-base:${version}")
+        compile project(":asion-base")
+        testCompile("org.springframework.boot:spring-boot-starter-test")
+//        testCompile("org.assertj:assertj-core:${assertjVersion}")
+    }
+}
+
+

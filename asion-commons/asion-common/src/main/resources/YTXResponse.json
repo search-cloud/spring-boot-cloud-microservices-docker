@@ -1,0 +1,27 @@
+[
+{
+  "success": "TRUE", // TRUE | FALSE
+  "messages": [
+    {"code": "Y30-100404", "message": "商品不存在！"},
+    {"code": "Y30-100403", "message": "没有权限！"}
+  ],
+  "attributes": {
+    "item": {},
+    "skus": [
+      {"skuCode": "SKUCODE", "skuProperty": ""}
+    ],
+    "account": {}
+  }
+},
+{
+  "success": "TRUE", // TRUE | FALSE
+  "message": {"code": "Y30-100404", "message": "item not found"},
+  "data": {
+    "item": {},
+    "skus": [
+      {"skuCode": "SKUCODE", "skuProperty": ""}
+    ],
+    "account": {}
+  }
+}
+]
