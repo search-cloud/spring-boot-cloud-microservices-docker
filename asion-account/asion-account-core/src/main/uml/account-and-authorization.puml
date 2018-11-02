@@ -34,12 +34,18 @@ IDepartment <|-- IDepartment
 
 class Account<登录账号>
 class Employee<员工>
+class Buyer<买家>
+class Seller<卖家>
 
 'IUser <|... IAccount
 IAccount <|... Account
 IUser <|... Employee
-Account <-left-o Employee
 IUser <-right-o IAccount
+Account <-down-o Employee
+IUser <|... Buyer
+IUser <|... Seller
+Account <-right-o Buyer
+Account <-left-o Seller
 
 class Account<<Entity>> {
     - Long id
@@ -51,6 +57,14 @@ class Account<<Entity>> {
 }
 
 class Employee<<Entity>> {
+
+}
+
+class Buyer<<Entity>> {
+
+}
+
+class Seller<<Entity>> {
 
 }
 
