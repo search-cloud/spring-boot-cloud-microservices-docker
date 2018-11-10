@@ -22,13 +22,13 @@ public class MathUtilsTest {
 
     @Test
     public void testDivide() {
-        assertThat(divide(56, 65)).isEqualTo(0.86);
-        assertThat(divide(null, 65)).isEqualTo(0.0);
-        assertThat(divide(56, null)).isEqualTo(0.0);
-        assertThat(divide(null, null)).isEqualTo(0.0);
-        assertThat(catchThrowable(() -> divide(56, 0.0)))
+        assertThat(INSTANCE.divide(56, 65)).isEqualTo(0.86);
+        assertThat(INSTANCE.divide(null, 65)).isEqualTo(0.0);
+        assertThat(INSTANCE.divide(56, null)).isEqualTo(0.0);
+        assertThat(INSTANCE.divide(null, null)).isEqualTo(0.0);
+        assertThat(catchThrowable(() -> INSTANCE.divide(56, 0.0)))
                 .isExactlyInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("divisor is null or zero");
+                .hasMessageContaining("divisor matches null or zero");
 
         assertThat(INSTANCE.divide(56, 65, 5)).isEqualTo(0.86154);
     }
@@ -71,6 +71,14 @@ public class MathUtilsTest {
         assertThat(INSTANCE.abs(9.0)).isEqualTo(9.0);
         assertThat(INSTANCE.abs(-9.0)).isEqualTo(9.0);
         assertThat(INSTANCE.abs(null)).isEqualTo(0.0);
+    }
+
+    @Test
+    public void testMatches() {
+        assertThat(INSTANCE.matches("1629.0", INTEGER_REG)).isTrue();
+        assertThat(INSTANCE.matches("1629", INTEGER_REG)).isTrue();
+        assertThat(INSTANCE.matches("1629.12", INTEGER_REG)).isFalse();
+        assertThat(INSTANCE.matches(null, INTEGER_REG)).isFalse();
     }
 
     @Test

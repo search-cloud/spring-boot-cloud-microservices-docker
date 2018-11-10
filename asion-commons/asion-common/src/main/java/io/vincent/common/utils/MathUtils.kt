@@ -10,8 +10,8 @@ import java.util.regex.Pattern
  */
 object MathUtils {
 
-    private const val integerReg = "(^[0-9]+[.][0]+$)||(^[0-9]+$)"
-    private const val doubleReg = "(^[0-9]+[.][0-9]+$)||(^[0-9]+$)"
+    const val INTEGER_REG = "(^[0-9]+[.][0]+$)||(^[0-9]+$)"
+    const val DOUBLE_REG = "(^[0-9]+[.][0-9]+$)||(^[0-9]+$)"
 
     /**
      * 两数相乘
@@ -31,7 +31,7 @@ object MathUtils {
     }
 
     /**
-     * 两数相除, 四舍五入
+     * 两数相除, 四舍五入, 默认保留2位小数
      *
      * @param value   除数
      * @param divisor 被除数
@@ -48,7 +48,7 @@ object MathUtils {
         val val2 = BigDecimal(divisor.toString())
 
         if (val2.toDouble() == 0.0) {
-            throw IllegalArgumentException("divisor is null or zero")
+            throw IllegalArgumentException("divisor matches null or zero")
         }
 
         return val1.divide(val2, len, BigDecimal.ROUND_HALF_UP).toDouble()
@@ -63,15 +63,12 @@ object MathUtils {
      * @return 相加或者相减的结果
      */
     fun mix(first: Double?, second: Double?, factor: Int): Double {
-        var first = first
-        var second = second
         if (Math.abs(factor) != 1) {
             throw IllegalArgumentException("错误的因子！factor只能为1或-1")
         }
 
-        first = first ?: 0.0
-        second = second ?: 0.0
-        return add(first, second * factor)
+        val mix = second ?: 0.0 * factor
+        return add(first ?: 0.0, mix)
     }
 
     /**
@@ -100,15 +97,7 @@ object MathUtils {
      * @return 相减的结果
      */
     fun sub(first: Double?, second: Double?): Double {
-        var first = first
-        var second = second
-        if (first == null) {
-            first = 0.0
-        }
-        if (second == null) {
-            second = 0.0
-        }
-        return add(first, second * -1)
+        return add(first ?: 0.0, second ?: 0.0 * -1)
     }
 
     /**
@@ -142,7 +131,7 @@ object MathUtils {
      * @param reg 正则
      * @return 匹配返回true, 否则返回false
      */
-    fun `is`(str: String?, reg: String): Boolean {
+    fun matches(str: String?, reg: String): Boolean {
         if (null == str) return false
         val pattern = Pattern.compile(reg)
         return pattern.matcher(str).matches()
@@ -155,7 +144,7 @@ object MathUtils {
      * @return 是整数返回true,否则返回false 1或1.0的“整数”
      */
     fun isInteger(str: String?): Boolean {
-        return null != str && `is`(str, integerReg)
+        return null != str && matches(str, INTEGER_REG)
     }
 
     /**
@@ -165,14 +154,7 @@ object MathUtils {
      * @return 是double返回true,否则返回false 1.0或1.22的“double”
      */
     fun isDouble(str: String?): Boolean {
-        return null != str && `is`(str, doubleReg)
+        return null != str && matches(str, DOUBLE_REG)
     }
 
 }
-/**
- * 两数相除, 四舍五入, 默认保留2位小数
- *
- * @param value   除数
- * @param divisor 被除数
- * @return 相除的结果
- */
