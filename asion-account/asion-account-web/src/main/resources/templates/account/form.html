@@ -4,29 +4,29 @@
 <!--xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="layout"-->
 <head>
-    <title>Samples : Create</title>
+    <title>Accounts : Create</title>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"/>
 </head>
 <body>
-<!--<h1 layout:fragment="header">Samples : Create</h1>-->
-<h1 >Samples : Create</h1>
+<!--<h1 layout:fragment="header">Accounts : Create</h1>-->
+<h1 >Accounts : Create</h1>
 <!--<div layout:fragment="content" class="container">-->
 <div class="container">
-    <form id="sampleForm" th:action="@{/sample/create}" th:object="${sample}" action="#" method="post">
+    <form id="sccountForm" th:action="@{/account/create}" th:object="${account}" action="#" method="post">
         <div th:if="${#fields.hasErrors('*')}" class="alert alert-error">
             <p th:each="error : ${#fields.errors('*')}" th:text="${error}">
                 Validation error
             </p>
         </div>
         <div class="pull-right">
-            <a th:href="@{/sample/list}" href="list.html"> Samples </a>
+            <a th:href="@{/account/list}" href="list.html"> Accounts </a>
         </div>
         <input type="hidden" th:field="*{id}" th:class="${#fields.hasErrors('id')} ? 'field-error'"/>
-        <label for="summary">Summary</label>
-        <input type="text" th:field="*{summary}" th:class="${#fields.hasErrors('summary')} ? 'field-error'"/>
-        <label for="text">Text</label>
-        <textarea th:field="*{text}"
-                  th:class="${#fields.hasErrors('text')} ? 'field-error'">Write some text hear</textarea>
+        <label for="username">Username</label>
+        <input type="text" th:field="*{username}" th:class="${#fields.hasErrors('username')} ? 'field-error'"/>
+        <label for="nickName">NickName</label>
+        <textarea th:field="*{nickName}"
+                  th:class="${#fields.hasErrors('nickName')} ? 'field-error'">Write some text hear</textarea>
         <div class="form-actions">
             <input type="submit" value="Save"/>
         </div>

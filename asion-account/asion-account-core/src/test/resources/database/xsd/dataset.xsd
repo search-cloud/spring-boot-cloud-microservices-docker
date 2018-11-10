@@ -4,8 +4,8 @@
 	<xsd:element name="dataset">
 		<xsd:complexType>
 			<xsd:choice minOccurs="0" maxOccurs="unbounded">
-				<xsd:element name="asion_account" type="dflt:asion_account__type" />
 				<xsd:element name="dbmaintain_scripts" type="dflt:dbmaintain_scripts__type" />
+				<xsd:element name="account" type="dflt:account__type" />
 				<xsd:any namespace="asion_account" />
 			</xsd:choice>
 		</xsd:complexType>

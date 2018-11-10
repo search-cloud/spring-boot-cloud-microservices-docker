@@ -1,7 +1,7 @@
 package org.asion.account.test;
 
-import org.asion.account.domain.model.Account;
-import org.asion.account.web.AccountController;
+import io.vincent.account.domain.model.Account;
+import io.vincent.account.web.AccountController;
 import org.hamcrest.core.IsInstanceOf;
 import org.hamcrest.core.StringContains;
 import org.junit.Test;
@@ -67,7 +67,7 @@ public class SampleControllerTest {
     public void testCreate() throws Exception {
         Account user = new Account();
         user.setName("Summary Test");
-        user.setNickName("This is test text!");
+        user.setNickName("This matches test text!");
         mockMvc.perform(post("/user/create", user)
                 .accept(MediaType.TEXT_PLAIN))
                 .andExpect(status().is3xxRedirection())
@@ -105,7 +105,7 @@ public class SampleControllerTest {
         try {
             mockMvc.perform(get("/user/foo"));
         } catch (Exception e) {
-            assertEquals("Request processing failed; nested exception is java.lang.RuntimeException: Expected exception in controller", e.getMessage());
+            assertEquals("Request processing failed; nested exception matches java.lang.RuntimeException: Expected exception in controller", e.getMessage());
         }
     }
 }

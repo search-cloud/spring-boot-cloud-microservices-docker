@@ -12,16 +12,36 @@ spring:
     username: root
     password: asion
     driverClassName: com.mysql.jdbc.Driver
-  dubbo:
-    app: dubbo-account-provider
-    registry: redis://dubbo.asion.org:5050
-    protocol: dubbo
-    port: 9908
-  boot:
-    admin:
-      client:
-        instance:
-          management-url: http://boot.admin.asion.org:10090
+#  dubbo:
+#    app: dubbo-account-provider
+#    registry: redis://dubbo.asion.org:5050
+#    protocol: dubbo
+#    port: 9908
+#  boot:
+#    admin:
+#      client:
+#        instance:
+#          management-url: http://boot.admin.asion.org:10090
+#
+mybatis:
+  config-location: classpath:/mybatis/mybatis-config.xml
+
+# Base packages to scan Dubbo Components (e.g., @Service, @Reference)
+dubbo.scan.basePackages: io.vincent.account.domain.application
+
+# Dubbo Config properties
+## ApplicationConfig Bean
+dubbo.application.id: dubbo-provider-account
+dubbo.application.name: dubbo-provider-account
+
+## ProtocolConfig Bean
+dubbo.protocol.id: dubbo
+dubbo.protocol.name: dubbo
+dubbo.protocol.port: 2008
+
+## RegistryConfig Bean
+dubbo.registry.id: dubbo-account-provider
+dubbo.registry.address: redis://dubbo.asion.org:5050
 
 # logger
 logging:
@@ -30,13 +50,13 @@ logging:
   file: asion-account-server.log
 
 # eureka
-eureka:
-  instance:
-    leaseRenewalIntervalInSeconds: 10
-    metadataMap:
-      instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
-  client:
-    registerWithEureka: true
-    fetchRegistry: true
-    serviceUrl:
-      defaultZone: http://eureka.asion.org:8761/eureka/
+#eureka:
+#  instance:
+#    leaseRenewalIntervalInSeconds: 10
+#    metadataMap:
+#      instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
+#  client:
+#    registerWithEureka: true
+#    fetchRegistry: true
+#    serviceUrl:
+#      defaultZone: http://eureka.asion.org:8761/eureka/

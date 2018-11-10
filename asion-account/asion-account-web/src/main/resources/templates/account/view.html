@@ -1,33 +1,33 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <!--xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="layout"-->
 <head>
-    <title>Samples : View</title>
+    <title>Accounts : View</title>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"/>
 </head>
 <body>
-<!--<h1 layout:fragment="header">Samples : Create</h1>-->
+<!--<h1 layout:fragment="header">Accounts : Create</h1>-->
 <!--<div layout:fragment="content" class="container">-->
-<h1>Samples : Create</h1>
+<h1>Accounts : Create</h1>
 <div class="container">
-    <div class="alert alert-success" th:if="${globalSample}"
-         th:text="${globalSample}">Some Success Sample
+    <div class="alert alert-success" th:if="${globalAccount}"
+         th:text="${globalAccount}">Some Success Account
     </div>
     <div class="pull-right">
-        <a th:href="@{/sample/list}" href="list.html"> Samples </a>
+        <a th:href="@{/account/list}" href="list.html"> Accounts </a>
     </div>
     <dl>
         <dt>ID</dt>
-        <dd id="id" th:text="${sample.id}">123</dd>
+        <dd id="id" th:text="${account.id}">123</dd>
         <dt>Date</dt>
-        <dd id="created" th:text="${#calendars.format(sample.createdAt)}">July 11, 2012 2:17:16 PM CDT</dd>
-        <dt>Summary</dt>
-        <dd id="summary" th:text="${sample.summary}">A short summary...</dd>
+        <dd id="created" th:text="${#calendars.format(account.createdAt)}">July 11, 2012 2:17:16 PM CDT</dd>
+        <dt>Username</dt>
+        <dd id="username" th:text="${account.username}">A username...</dd>
         <dt>Text</dt>
-        <dd id="text" th:text="${sample.text}">A detailed sample thatis longer than the summary.</dd>
+        <dd id="nickName" th:text="${account.nickName}">A detailed account thatis longer than the summary.</dd>
     </dl>
     <div class="pull-left">
-        <a href="samples" th:href="@{'/sample/delete/' + ${sample.id}}">delete </a> |
-        <a href="form.html" th:href="@{'/sample/modify/' + ${sample.id}}"> modify </a>
+        <a href="accounts" th:href="@{'/account/delete/' + ${account.id}}">delete </a> |
+        <a href="form.html" th:href="@{'/account/modify/' + ${account.id}}"> modify </a>
     </div>
 </div>
 </body>

@@ -1,0 +1,13 @@
+version: "3"
+
+# account services
+services:
+  # mysql for account
+  mysql-for-account:
+      image: mysql:5.6.23
+      container_name: mysql-account-master
+      ports:
+        - "2006:3306"
+      environment:
+         MYSQL_ROOT_PASSWORD: asion
+         MYSQL_DATABASE: asion_account

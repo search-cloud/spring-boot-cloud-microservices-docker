@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.asion.account.boot.AsionAccountAutoConfiguration
+io.vincent.account.boot.AsionAccountAutoConfiguration

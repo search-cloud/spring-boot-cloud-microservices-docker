@@ -11,7 +11,7 @@ def appenderList = ["ROLLING"]
 def WEBAPP_DIR = "."
 def consoleAppender = true;
 
-// does hostname match pixie or orion?
+// does hostname matches pixie or orion?
 if (hostname =~ /pixie|orion/) {
     WEBAPP_DIR = "/opt/myapp"
     consoleAppender = false

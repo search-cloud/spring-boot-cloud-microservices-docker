@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      >
+<!--xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout"-->
+<head>
+    <title>Accounts : Create</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.css}"/>
+    <script th:href="@{webjars/jquery/2.2.3/jquery.min.js}"></script>
+    <script th:href="@{webjars/popper.js/1.14.4/popper.min.js}"></script>
+    <script th:href="@{webjars/bootstrap/3.3.6/js/bootstrap.min.js}"></script>
+    <script th:href="@{webjars/vue/2.5.16/vue.min.js}"></script>
+</head>
+<body>
+<!--<h1 layout:fragment="header">Accounts : Create</h1>-->
+<h1 >Accounts : Create</h1>
+<!--<div layout:fragment="content" class="container">-->
+<div class="container">
+    <form id="sccountForm" th:action="@{/account/create}" th:object="${account}" action="#" method="post">
+        <!--<div th:if="${#fields.hasErrors('*')}" class="alert alert-error">-->
+            <!--<p th:each="error : ${#fields.errors('*')}" th:text="${error}">-->
+                <!--Validation error-->
+            <!--</p>-->
+        <!--</div>-->
+        <div class="pull-right">
+            <a th:href="@{/account/list}" href="list.html"> Accounts </a>
+        </div>
+        <!--<input type="hidden" th:field="*{id}" th:class="${#fields.hasErrors('id')} ? 'field-error'"/>-->
+        <label for="username">Username</label>
+        <input type="text" />
+        <label for="nickName">NickName</label>
+        <textarea >Write some text hear</textarea>
+        <div class="form-actions">
+            <input type="submit" value="Save"/>
+        </div>
+    </form>
+</div>
+</body>
+</html>

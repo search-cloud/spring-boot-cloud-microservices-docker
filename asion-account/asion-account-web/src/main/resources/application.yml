@@ -3,7 +3,8 @@ server:
   port: 9980
 
 management:
-  port: 9981
+  server:
+    port: 9981
 
 # Allow Thymeleaf templates to be reloaded at dev time
 spring:
@@ -11,23 +12,40 @@ spring:
 #  mvc.favicon.enabled: false
   application:
     name: asion-account-web
-  dubbo:
-    app: asion-account-web
-    registry: redis://dubbo.asion.org:5050
-    protocol: dubbo
-  boot:
-      admin:
-        url: http://boot.admin.asion.org:10090
-  http:
+#  dubbo:
+#    app: asion-account-web
+#    registry: redis://dubbo.asion.org:5050
+#    protocol: dubbo
+#  boot:
+#      admin:
+#        url: http://boot.admin.asion.org:10090
+  servlet:
     multipart:
-      max-file-size: 2M
-      max-request-size: 10M
+      max-file-size: 2MB
+      max-request-size: 10MB
+  # spring security
+  security:
+    user:
+      roles: USER, OPERATOR
+
+# Base packages to scan Dubbo Components (e.g., @Service, @Reference)
+#dubbo.scan.basePackages: io.vincent.account
+
+# Dubbo Config properties
+## ApplicationConfig Bean
+dubbo.application.id: dubbo-consumer-account
+dubbo.application.name: dubbo-consumer-account
+
+## ProtocolConfig Bean
+dubbo.protocol.id: dubbo
+dubbo.protocol.name: dubbo
+dubbo.protocol.port: 2008
+
+## RegistryConfig Bean
+dubbo.registry.id: dubbo-account-provider
+dubbo.registry.address: redis://dubbo.asion.org:5050
+
 logging:
   level:
     root: info
   file: asion-account-web.log
-
-# spring security
-security:
-  user:
-    role: USER, OPERATOR
