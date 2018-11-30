@@ -67,7 +67,10 @@ object MathUtils {
             throw IllegalArgumentException("错误的因子！factor只能为1或-1")
         }
 
-        val mix = second ?: 0.0 * factor
+        var mix = second ?: 0.0
+        if (factor == -1) {
+            mix = -mix
+        }
         return add(first ?: 0.0, mix)
     }
 
@@ -97,7 +100,7 @@ object MathUtils {
      * @return 相减的结果
      */
     fun sub(first: Double?, second: Double?): Double {
-        return add(first ?: 0.0, second ?: 0.0 * -1)
+        return add(first ?: 0.0, -(second ?: 0.0))
     }
 
     /**

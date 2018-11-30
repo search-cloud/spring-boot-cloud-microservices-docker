@@ -101,7 +101,7 @@ public abstract class BizException extends CommonException {
 	/**
 	 * 获取全局的errorList。
 	 *
-	 * @return List<ClientMessage> 全局的errorList。
+	 * @return ClientMessageList 全局的errorList。
 	 */
 	public List<ClientMessage> getErrorList() {
 		return errorList;
