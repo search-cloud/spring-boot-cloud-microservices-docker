@@ -1,8 +1,47 @@
+
+// create
 POST http://{{host}}:{{port}}/accounts
 Authorization: Basic {{username}} {{password}}
 Content-Type: application/json
-Set-Cookie: JSESSIONID=F376FBF46D0BE27880E2E1142D53B4D3; Path=/; HttpOnly
 
-{{data}}
+{
+  "id": 1000,
+  "code": "testcode1",
+  "username": "test1",
+  "password": "test1"
+}
+
+### page list
+
+GET http://{{host}}:{{port}}/accounts?pageNum=1&pageSize=10
+Accept: application/json
+
+### get by id
+
+GET http://{{host}}:{{port}}/accounts/{{accountId}}
+Accept: application/json
+
+### update by id
+
+PUT http://{{host}}:{{port}}/accounts/{{accountId}}
+Content-Type: application/json
+
+{
+  "id": 1000,
+  "code": "testcode1",
+  "username": "test1",
+  "password": "password1",
+  "nickName": null,
+  "usedPassword": "test1",
+  "mobile": "15333992199",
+  "email": "vincent@seekheap.com",
+  "wechatId": "HsianLu",
+  "enabled": true
+}
+
+### disable by id
+
+DELETE http://{{host}}:{{port}}/accounts/{{accountId}}
+Accept: application/json
 
 ###

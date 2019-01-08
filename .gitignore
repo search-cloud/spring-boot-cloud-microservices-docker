@@ -133,3 +133,5 @@ log/
 /data/
 /index/
 .sts4-cache/
+
+httpRequests

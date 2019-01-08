@@ -27,7 +27,7 @@ class AccountRestfulController {
      * @param pageSize page size.
      * @return page of account list.
      */
-    @GetMapping("")
+    @GetMapping
     @ResponseBody
     fun list(@RequestParam pageNum: Int, @RequestParam pageSize: Int): Page<Account> {
         return accountManager!!.findPage(pageNum, pageSize)
@@ -39,7 +39,7 @@ class AccountRestfulController {
      * @param account account info.
      * @return created account.
      */
-    @PostMapping("")
+    @PostMapping
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
     fun create(@RequestBody account: Account): Account {
