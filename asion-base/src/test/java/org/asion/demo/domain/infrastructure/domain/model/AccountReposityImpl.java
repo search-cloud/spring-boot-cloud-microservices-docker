@@ -18,6 +18,7 @@ public class AccountReposityImpl implements AccountRepository {
         return null;
     }
 
+    @NotNull
     @Override
     public <S extends Account> S update(S entity) {
         return null;

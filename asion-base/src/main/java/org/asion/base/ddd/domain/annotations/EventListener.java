@@ -14,6 +14,8 @@ public @interface EventListener {
 
     /**
      * value.
+     *
+     * @return Class[]
      */
     Class<?>[] value() default {};
 

@@ -1,4 +1,4 @@
-package org.asion.account.common;
+package io.vincent.account.common;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;

@@ -2,9 +2,9 @@
 server:
   port: 9980
 
-management:
-  server:
-    port: 9981
+#management:
+#  server:
+#    port: 9981
 
 # Allow Thymeleaf templates to be reloaded at dev time
 spring:
@@ -24,9 +24,11 @@ spring:
       max-file-size: 2MB
       max-request-size: 10MB
   # spring security
-  security:
-    user:
-      roles: USER, OPERATOR
+#  security:
+#    user:
+#      roles: USER, OPERATOR
+#      name: user
+#      password: 123456
 
 # Base packages to scan Dubbo Components (e.g., @Service, @Reference)
 #dubbo.scan.basePackages: io.vincent.account
@@ -39,7 +41,7 @@ dubbo.application.name: dubbo-consumer-account
 ## ProtocolConfig Bean
 dubbo.protocol.id: dubbo
 dubbo.protocol.name: dubbo
-dubbo.protocol.port: 2008
+dubbo.protocol.port: 9907
 
 ## RegistryConfig Bean
 dubbo.registry.id: dubbo-account-provider

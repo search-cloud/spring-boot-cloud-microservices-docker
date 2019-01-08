@@ -12,7 +12,7 @@ DROP TABLE IF EXISTS account;
 CREATE TABLE account (
     id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT 'id',
     code VARCHAR(64) DEFAULT NULL COMMENT 'code',
-    username VARCHAR(64) DEFAULT NULL COMMENT '登陆账号名称',
+    username VARCHAR(64) DEFAULT NULL COMMENT '登陆账号名称，保证唯一，创建后不可修改',
     nick_name VARCHAR(64) DEFAULT NULL COMMENT '昵称',
     password VARCHAR(64) DEFAULT NULL COMMENT '密码',
     used_password VARCHAR(64) DEFAULT NULL COMMENT '曾用密码',

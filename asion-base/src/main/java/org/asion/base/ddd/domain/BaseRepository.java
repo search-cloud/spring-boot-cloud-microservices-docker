@@ -9,6 +9,9 @@ import java.util.Optional;
 /**
  * BaseRepository C R U D.
  *
+ * @param <T> the type of domain entity.
+ * @param <ID> the type of the domain entity's id.
+ *
  * @author Asion.
  * @since 2017/3/20.
  */
@@ -21,6 +24,7 @@ public interface BaseRepository<T extends BaseDomainEntity, ID extends Serializa
      * entity instance completely.
      *
      * @param entity must not be {@literal null}.
+     * @param <S> the type of entity
      * @return the saved entity will never be {@literal null}.
      */
     @NotNull
@@ -30,6 +34,7 @@ public interface BaseRepository<T extends BaseDomainEntity, ID extends Serializa
      * Update entity
      *
      * @param entity must not be {@literal null}.
+     * @param <S> the type of entity
      * @return the updated entity will never be {@literal null}.
      */
     @NotNull

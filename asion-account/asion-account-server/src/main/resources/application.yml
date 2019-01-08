@@ -8,9 +8,12 @@ spring:
   application:
     name: asion-account-server
   datasource:
-    url: jdbc:mysql://db.asion.org:2006/asion_account?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
-    username: root
-    password: asion
+#    url: jdbc:mysql://db.asion.org:2006/asion_account?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+#    username: root
+#    password: asion
+    url: jdbc:mysql://cdb-3tujpacp.gz.tencentcdb.com:10039/asion_account?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+    username: vincent
+    password: vincent@2019
     driverClassName: com.mysql.jdbc.Driver
 #  dubbo:
 #    app: dubbo-account-provider
@@ -37,7 +40,7 @@ dubbo.application.name: dubbo-provider-account
 ## ProtocolConfig Bean
 dubbo.protocol.id: dubbo
 dubbo.protocol.name: dubbo
-dubbo.protocol.port: 2008
+dubbo.protocol.port: 9907
 
 ## RegistryConfig Bean
 dubbo.registry.id: dubbo-account-provider

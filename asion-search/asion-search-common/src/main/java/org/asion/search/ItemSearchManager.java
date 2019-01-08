@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface ItemSearchManager {
     List<Item> findByName(String name);
-    List<Item> findByName(String name, int page, int pageSize);
+    Page<Item> findByName(String name, int page, int pageSize);
     List<Item> findByNameAndId(String name, Long id);
 
     Page<Item> search(String name);

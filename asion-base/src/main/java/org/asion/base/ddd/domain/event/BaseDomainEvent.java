@@ -1,6 +1,5 @@
 package org.asion.base.ddd.domain.event;
 
-import lombok.Data;
 import org.asion.base.ddd.domain.annotations.DomainEvent;
 
 import java.io.Serializable;
@@ -14,7 +13,6 @@ import java.util.UUID;
  * @author Asion.
  * @since 2017/3/20.
  */
-@Data
 @DomainEvent
 public class BaseDomainEvent<T> implements Serializable {
     /**
@@ -71,5 +69,49 @@ public class BaseDomainEvent<T> implements Serializable {
             context = new HashMap<>();
         }
         this.context.put(name, value);
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Map<String, Object> getContext() {
+        return context;
+    }
+
+    public void setContext(Map<String, Object> context) {
+        this.context = context;
+    }
+
+    public Object getSource() {
+        return source;
+    }
+
+    public void setSource(Object source) {
+        this.source = source;
+    }
+
+    public T getPayload() {
+        return payload;
+    }
+
+    public void setPayload(T payload) {
+        this.payload = payload;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
     }
 }

@@ -3,6 +3,7 @@ package io.vincent.account.domain.application
 import com.alibaba.dubbo.config.annotation.Service
 import io.vincent.account.domain.model.Account
 import io.vincent.account.domain.model.AccountRepository
+import io.vincent.account.domain.service.AccountService
 import io.vincent.common.vo.Page
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -20,7 +21,8 @@ import java.util.*
         registry = ["\${dubbo.registry.id}"]
 )
 class AccountManagerImpl @Autowired
-constructor(private val accountRepository: AccountRepository) : AccountManager {
+constructor(private val accountRepository: AccountRepository,
+            private val accountService: AccountService) : AccountManager {
 
     override fun create(account: Account): Account {
         return accountRepository.create(account)
@@ -41,4 +43,6 @@ constructor(private val accountRepository: AccountRepository) : AccountManager {
     override fun findPage(pageNumber: Int, pageSize: Int): Page<Account> {
         return accountRepository.findPage(pageNumber, pageSize)
     }
+
+    override fun disable(id: Long): Long? = accountService.disable(id)
 }

@@ -8,23 +8,23 @@ services:
     container_name: redis-dubbo-master
     ports:
       - "5050:6379"
-  # mysql for sample
-  mysql-sample:
-      image: mysql:5.6.23
-      container_name: mysql-sample-master
-      ports:
-        - "9306:3306"
-      environment:
-         MYSQL_ROOT_PASSWORD: asion
-         MYSQL_DATABASE: asion_search
-  # mysql for account
-  mysql-account:
-      image: mysql:5.6.23
-      container_name: mysql-account-master
-      ports:
-        - "2006:3306"
-      environment:
-         MYSQL_ROOT_PASSWORD: asion
-         MYSQL_DATABASE: asion_account
+#  # mysql for sample
+#  mysql-sample:
+#      image: mysql:5.6.23
+#      container_name: mysql-sample-master
+#      ports:
+#        - "9306:3306"
+#      environment:
+#         MYSQL_ROOT_PASSWORD: asion
+#         MYSQL_DATABASE: asion_search
+#  # mysql for account
+#  mysql-account:
+#      image: mysql:5.6.23
+#      container_name: mysql-account-master
+#      ports:
+#        - "2006:3306"
+#      environment:
+#         MYSQL_ROOT_PASSWORD: asion
+#         MYSQL_DATABASE: asion_account
 
 

@@ -27,7 +27,7 @@ constructor(private val itemSearchManager: ItemSearchManager) {
     }
 
     @RequestMapping("/{name}/{pageNumber}")
-    fun findPageByName(@PathVariable name: String, @PathVariable pageNumber: Int): ResponseEntity<List<Item>> {
+    fun findPageByName(@PathVariable name: String, @PathVariable pageNumber: Int): ResponseEntity<Page<Item>> {
         return ResponseEntity.ok(itemSearchManager.findByName(name, pageNumber, 50))
     }
 

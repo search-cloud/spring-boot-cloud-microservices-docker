@@ -11,10 +11,11 @@ import org.unitils.spring.annotation.SpringApplicationContext
 import org.unitils.spring.annotation.SpringBeanByType
 
 /**
+ * classpath:
  * @author Vincent.
  * @since 1.0, 16/5/1.
  */
-@SpringApplicationContext("classpath:/app-context-unit.xml")
+@SpringApplicationContext("/app-context-unit.xml")
 @DataSet("/database/dataset/asion_account.xml")
 class AccountRepositoryImplTest {
 

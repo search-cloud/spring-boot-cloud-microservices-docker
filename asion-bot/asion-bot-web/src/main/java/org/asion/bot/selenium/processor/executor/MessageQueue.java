@@ -17,8 +17,9 @@ public class MessageQueue<T extends Serializable> {
 
     private MessageQueue() {}
 
+    @SuppressWarnings("unchecked")
     static <E extends Serializable>  MessageQueue<E> getInstance() {
-        return instance;
+        return (MessageQueue<E>) instance;
     }
 
     void produce(T message) {

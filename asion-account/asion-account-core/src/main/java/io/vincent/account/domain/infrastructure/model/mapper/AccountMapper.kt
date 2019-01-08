@@ -7,7 +7,7 @@ import org.apache.ibatis.mapping.StatementType
 /**
  * MyBatis Mapper.
  *
- * @author Vincent
+ * @author Vincent.
  * @since 1.0, 11/2/18
  */
 @Mapper
@@ -53,6 +53,9 @@ interface AccountMapper {
      */
     @Select("select $SELECT_COLUMNS from account")
     fun findAll(): List<Account>
+
+    @Update("update account set status=#{statusCode}, updated_at=now() where id=#{id, jdbcType=BIGINT}")
+    fun updateStatus(@Param("id") id: Long, @Param("statusCode") statusCode: Int): Int
 
     companion object {
         private const val SELECT_COLUMNS = "id, code, username, nick_name as nickName, password, used_password as usedPassword, mobile, email, wechat_id as wechatId, enabled, parent_id as parentId, status, last_login_at as lastLoginAt, operation_error_count as operationErrorCount, created_at as createdAt, updated_at as updatedAt"

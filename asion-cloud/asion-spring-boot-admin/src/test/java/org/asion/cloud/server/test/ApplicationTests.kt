@@ -4,18 +4,18 @@ import org.asion.cloud.server.AsionSpringBootAdminApplication
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.springframework.boot.context.embedded.LocalServerPort
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT
 import org.springframework.boot.test.web.client.TestRestTemplate
+import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.http.HttpStatus
 import org.springframework.test.context.junit4.SpringRunner
 
 @RunWith(SpringRunner::class)
 @SpringBootTest(
-        value = *arrayOf("server.port=0"),
+        value = ["server.port=0"],
         webEnvironment = RANDOM_PORT,
-        classes = arrayOf(AsionSpringBootAdminApplication::class)
+        classes = [AsionSpringBootAdminApplication::class]
 )
 class ApplicationTests {
 

@@ -1,12 +1,13 @@
 rootProject.name = 'spring-boot-cloud-microservices-docker'
 
-//
+// ddd
 include 'asion-base'
 
+// utils
 include 'asion-commons'
 include 'asion-commons:asion-common'
 
-// asion-cloud
+// cloud
 include 'asion-cloud',
         'asion-cloud:asion-cloud-registry-server',
         'asion-cloud:asion-cloud-config-server',
@@ -15,6 +16,14 @@ include 'asion-cloud',
 include 'asion-user'
 include "asion-user:asion-user-common"
 include "asion-user:asion-user-spring-boot-starter"
+
+//// email
+//include 'asion-email',
+//        "asion-email:asion-email-common",
+//        "asion-email:asion-email-spring-boot-starter",
+//        "asion-email:asion-email-core",
+//        "asion-email:asion-email-server",
+//        "asion-email:asion-email-web"
 
 // account
 include 'asion-account',
@@ -39,6 +48,21 @@ include 'asion-sample',
         "asion-sample:asion-sample-core",
         "asion-sample:asion-sample-server",
         "asion-sample:asion-sample-web"
+
+//include 'asion-category',
+//        "asion-category:asion-category-common",
+//        "asion-category:asion-category-spring-boot-starter",
+//        "asion-category:asion-category-core",
+//        "asion-category:asion-category-server",
+//        "asion-category:asion-category-crm-web",
+//        "asion-category:asion-category-seller-web"
+//
+//include 'asion-brand',
+//        "asion-brand:asion-brand-common",
+//        "asion-brand:asion-brand-spring-boot-starter",
+//        "asion-brand:asion-brand-core",
+//        "asion-brand:asion-brand-server",
+//        "asion-brand:asion-brand-web"
 
 // search
 include 'asion-search',

@@ -1,7 +1,7 @@
-package org.gradle.buildsrc;
-
-public class BuildSrcClassTest {
-    public void canConstructBuildSrcClass() {
-        new BuildSrcClass();
-    }
-}
+//package org.gradle.buildsrc;
+//
+//public class BuildSrcClassTest {
+//    public void canConstructBuildSrcClass() {
+//        new BuildSrcClass();
+//    }
+//}

@@ -1,9 +1,9 @@
 
 
 description = "Exposes gradle buildSrc for IDE support"
-apply plugin: "groovy"
+apply(plugin= "groovy")
 
 dependencies {
-    compile gradleApi()
-    compile localGroovy()
+//    gradleApi()
+//    localGroovy()
 }

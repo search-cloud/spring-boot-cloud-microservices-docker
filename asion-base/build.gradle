@@ -1,4 +1,0 @@
-dependencies {
-    compile('org.projectlombok:lombok')
-    testCompile("junit:junit:4.12")
-}

@@ -18,4 +18,5 @@ interface AccountManager {
     fun findOne(id: Long): Account?
     fun findById(id: Long): Optional<Account>
     fun findPage(pageNumber: Int, pageSize: Int): Page<Account>
+    fun disable(id: Long): Long?
 }

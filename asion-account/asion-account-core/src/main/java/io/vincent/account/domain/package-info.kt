@@ -2,4 +2,4 @@
  * @author Asion.
  * @since 2017/3/20.
  */
-package io.vincent.account.domain;
+package io.vincent.account.domain

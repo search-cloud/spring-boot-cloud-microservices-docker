@@ -3,7 +3,7 @@
  */
 buildscript {
     ext {
-        kotlinVersion = '1.2.71'
+        kotlinVersion = '1.3.10'
         springBootVersion = '2.0.2.RELEASE'
     }
 
@@ -12,6 +12,7 @@ buildscript {
         jcenter()
         mavenCentral()
         maven { url "https://repo.spring.io/release" }
+        maven { url "https://plugins.gradle.org/m2/" }
         maven { url "https://repo.spring.io/libs-milestone" }
         maven { url "https://repo.spring.io/snapshot" }
     }
@@ -22,7 +23,21 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
         classpath "org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}"
         classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6.2"
+        classpath "org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}"
     }
+}
+
+ext {
+    springBootVersion = '2.0.2.RELEASE'
+    springVersion = '5.0.6.RELEASE'
+    springCloudVersion = 'Finchley.SR2'//'Edgware.SR3'
+    springBootAdminVersion = '2.0.0'
+    platformBomVersion = 'Cairo-SR1'
+    unitilsBom = '3.4.2'
+    assertjVersion = '3.6.2'
+    mybatisSpringBootVersion = '1.3.2'
+    lombokVersion = '1.18.0'
+    dubboStarterVersion = '0.2.0'
 }
 
 /**
@@ -37,21 +52,36 @@ configure(allprojects) { project ->
 //    apply plugin: 'maven'
     apply plugin: 'groovy'
     apply plugin: 'kotlin'
+    apply plugin: "org.jetbrains.kotlin.plugin.allopen"
 //    apply plugin: "org.sonarqube"
 
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
+    compileJava {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+        options.encoding = "UTF-8"
+    }
 
-    ext {
-        springBootVersion = '2.0.2.RELEASE'
-        springVersion = '5.0.6.RELEASE'
-        springCloudVersion = 'Finchley.SR2'//'Edgware.SR3'
-        springBootAdminVersion = '2.0.0'
-        platformBomVersion = 'Cairo-SR1'
-        unitilsBom = '3.4.2'
-        assertjVersion = '3.6.2'
-        mybatisSpringBootVersion = '1.3.2'
-        lombokVersion = '1.18.0'
+    compileTestJava {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+        options.encoding = "UTF-8"
+        options.compilerArgs += "-parameters"
+    }
+
+    compileKotlin {
+        kotlinOptions {
+//            javaTarget = "1.8"
+            freeCompilerArgs = ["-Xjsr305=strict"]
+            apiVersion = "1.2"
+            languageVersion = "1.2"
+        }
+    }
+
+    compileTestKotlin {
+        kotlinOptions {
+//            javaTarget = "1.8"
+            freeCompilerArgs = ["-Xjsr305=strict"]
+        }
     }
 
     repositories {
@@ -65,6 +95,7 @@ configure(allprojects) { project ->
 
     sourceSets {
         main.kotlin.srcDirs += 'src/main/java'
+        main.java.srcDirs += 'src/main/kotlin'
     }
 
     // noinspection GroovyAssignabilityCheck
@@ -146,9 +177,9 @@ configure(rootProject) {
     description = "Asion System"
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.2'
-}
+//task wrapper(type: Wrapper) {
+//    gradleVersion = '4.8'
+//}
 
 /*
  * Support publication of artifacts versioned by topic branch.

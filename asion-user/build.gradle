@@ -5,6 +5,7 @@ project("asion-user-common") {
     dependencies {
         //compile("org.asion:asion-base:${version}")
         compile project(":asion-base")
+        compile project(":asion-security:asion-security-common")
         compile('org.projectlombok:lombok')
     }
 }

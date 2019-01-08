@@ -5,12 +5,7 @@ import io.vincent.account.domain.application.AccountManager
 import io.vincent.account.domain.model.Account
 import io.vincent.common.vo.Response
 import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.PutMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
-
-import javax.validation.Valid
+import org.springframework.web.bind.annotation.*
 
 /**
  * Register Restful controller.
@@ -22,7 +17,7 @@ import javax.validation.Valid
 @RequestMapping("/register")
 class RegisterRestfulController {
 
-    @Reference(version = "1.0.0", application = "\${dubbo.application.id}", url = "dubbo://dubbo.asion.org:2008")
+    @Reference(version = "1.0.0", application = "\${dubbo.application.id}", url = "dubbo://192.168.10.94:9907")
     private val accountManager: AccountManager? = null
 
     /**
@@ -31,14 +26,15 @@ class RegisterRestfulController {
      * @param account 账号信息
      * @return 成功信息
      */
-    @PutMapping("/reg")
-    fun create(@Valid account: Account): ResponseEntity<Response> {
+    @PostMapping("/reg")
+    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseBody
+    fun create(account: Account): Response {
         val savedAccount = accountManager!!.create(account)
-        val response = Response.builder()
+        return Response.builder()
                 .addData("account", savedAccount)
                 .code("A0020200")
                 .message("Successfully Register").build()
-        return ResponseEntity(response, HttpStatus.OK)
     }
 
 }

@@ -8,5 +8,5 @@ import org.springframework.context.annotation.ComponentScan
  * @since 16/5/1.
  */
 @SpringBootApplication
-@ComponentScan(value = "io.vincent.account")
+@ComponentScan(value = ["io.vincent.account"])
 open class AccountTestApplication

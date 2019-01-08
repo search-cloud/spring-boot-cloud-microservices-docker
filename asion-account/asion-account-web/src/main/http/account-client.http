@@ -1,0 +1,8 @@
+POST http://{{host}}:{{port}}/accounts
+Authorization: Basic {{username}} {{password}}
+Content-Type: application/json
+Set-Cookie: JSESSIONID=F376FBF46D0BE27880E2E1142D53B4D3; Path=/; HttpOnly
+
+{{data}}
+
+###

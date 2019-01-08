@@ -66,7 +66,7 @@ public class SampleControllerTest {
     @Test
     public void testCreate() throws Exception {
         Account user = new Account();
-        user.setName("Summary Test");
+        user.setUsername("Summary Test");
         user.setNickName("This matches test text!");
         mockMvc.perform(post("/user/create", user)
                 .accept(MediaType.TEXT_PLAIN))

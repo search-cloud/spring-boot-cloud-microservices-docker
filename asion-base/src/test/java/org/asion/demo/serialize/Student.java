@@ -1,7 +1,5 @@
 package org.asion.demo.serialize;
 
-import lombok.Data;
-
 import java.io.Serializable;
 
 /**
@@ -13,7 +11,6 @@ import java.io.Serializable;
  * @author Asion
  * @version 1.0
  */
-@Data
 public class Student implements Serializable {
     private String name;
     private char sex;
@@ -31,4 +28,35 @@ public class Student implements Serializable {
         this.gpa = gpa;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public char getSex() {
+        return sex;
+    }
+
+    public void setSex(char sex) {
+        this.sex = sex;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public double getGpa() {
+        return gpa;
+    }
+
+    public void setGpa(double gpa) {
+        this.gpa = gpa;
+    }
 }

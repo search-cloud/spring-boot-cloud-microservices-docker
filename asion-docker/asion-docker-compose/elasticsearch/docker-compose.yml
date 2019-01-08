@@ -6,12 +6,12 @@ networks:
 
 services:
   elasticsearch-central:
-    image: elasticsearch:5.6.9
+    image: elasticsearch:5.6.12
     container_name: es-node-1a
     volumes:
       # /* 修改挂载位置 */
-      - /Users/Asion/Workstation/Personal/java-workspace/spring-boot-cloud-microservices-docker/data1:/usr/share/elasticsearch/data
-      - /Users/Asion/Workstation/Personal/java-workspace/spring-boot-cloud-microservices-docker/asion-docker/asion-docker-compose/elasticsearch/config/es-config-1.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - /Users/Vincent/Workstation/Personal/java-workspace/spring-boot-cloud-microservices-docker/data1:/usr/share/elasticsearch/data
+      - /Users/Vincent/Workstation/Personal/java-workspace/spring-boot-cloud-microservices-docker/asion-docker/asion-docker-compose/elasticsearch/config:/usr/share/elasticsearch/config
     environment:
       - ES_CLUSTERNAME=elasticsearch_cluster
     command: elasticsearch
@@ -21,18 +21,18 @@ services:
     networks:
       - esnet
   elasticsearch-data:
-    image: elasticsearch:5.6.9
+    image: elasticsearch:5.6.12
     container_name: es-node-2a
     volumes:
         # /* 修改挂载位置 */
-      - /Users/Asion/Workstation/Personal/java-workspace/spring-boot-cloud-microservices-docker/data2:/usr/share/elasticsearch/data
-      - /Users/Asion/Workstation/Personal/java-workspace/spring-boot-cloud-microservices-docker/asion-docker/asion-docker-compose/elasticsearch/config/es-config-2.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - /Users/Vincent/Workstation/Personal/java-workspace/spring-boot-cloud-microservices-docker/data2:/usr/share/elasticsearch/data
+      - /Users/Vincent/Workstation/Personal/java-workspace/spring-boot-cloud-microservices-docker/asion-docker/asion-docker-compose/elasticsearch/config2:/usr/share/elasticsearch/config
     environment:
       - ES_CLUSTERNAME=elasticsearch_cluster
     command: elasticsearch
     ports:
-      - "9201:9200"
-      - "9301:9300"
+      - "9500:9200"
+      - "9600:9300"
     networks:
       - esnet
     links:

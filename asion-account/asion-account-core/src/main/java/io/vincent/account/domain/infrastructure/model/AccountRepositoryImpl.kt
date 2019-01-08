@@ -1,25 +1,26 @@
 package io.vincent.account.domain.infrastructure.model
 
+import com.github.pagehelper.PageHelper
+import com.github.pagehelper.PageInfo
 import io.vincent.account.domain.infrastructure.model.mapper.AccountMapper
 import io.vincent.account.domain.model.Account
 import io.vincent.account.domain.model.AccountRepository
 import io.vincent.common.vo.Page
+import org.springframework.beans.BeanUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
 import java.util.*
-import org.springframework.beans.BeanUtils
-import com.github.pagehelper.PageInfo
-import com.github.pagehelper.PageHelper
 
 
 
 /**
- * @author Asion
+ * @author Vincent.
  * @since 16/4/30.
  */
 @Repository
 open class AccountRepositoryImpl @Autowired
-constructor(private val accountMapper: AccountMapper) : AccountRepository {
+constructor(@Suppress("SpringJavaInjectionPointsAutowiringInspection") private val accountMapper: AccountMapper) : AccountRepository {
+
     override fun <S : Account> create(entity: S): S {
         accountMapper.create(entity)
         return entity
@@ -45,4 +46,6 @@ constructor(private val accountMapper: AccountMapper) : AccountRepository {
         return page
     }
 
+    override fun updateStatus(id: Long, statusCode: Int): Long? =
+            if (accountMapper.updateStatus(id, statusCode) == 1) id else null
 }

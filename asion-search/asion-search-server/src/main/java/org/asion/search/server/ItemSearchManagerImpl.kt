@@ -24,7 +24,7 @@ constructor(private val itemSearchRepository: ItemSearchRepository,
             private val itemSearchService: ItemSearchService) : ItemSearchManager {
     override fun findByName(name: String): List<Item> = itemSearchRepository.findByName(name)
 
-    override fun findByName(name: String, page: Int, pageSize: Int): List<Item> =
+    override fun findByName(name: String, page: Int, pageSize: Int): Page<Item> =
             itemSearchRepository.findByName(name, PageRequest.of(page, pageSize))
 
 
