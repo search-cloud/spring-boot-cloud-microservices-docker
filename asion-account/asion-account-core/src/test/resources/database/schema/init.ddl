@@ -22,7 +22,7 @@ CREATE TABLE account (
     enabled TINYINT(1) DEFAULT 0 COMMENT '账号是否可用',
     parent_id BIGINT(20) DEFAULT NULL COMMENT '父账号id',
     status INT(8) DEFAULT NULL COMMENT '状态',
-    last_login_at DATETIME NOT NULL DEFAULT now() COMMENT '最后登陆时间',
+    last_login_at DATETIME NULL DEFAULT NULL COMMENT '最后登陆时间',
     operation_error_count INT(8) DEFAULT NULL COMMENT '操作错误次数',
     created_at DATETIME NOT NULL DEFAULT now() COMMENT '创建时间',
     updated_at DATETIME NOT NULL DEFAULT now() COMMENT '更新时间'
