@@ -10,47 +10,52 @@ import java.util.Map;
  * @author Asion.
  * @since 2017/10/13.
  */
-public class Response implements Message, Data, Serializable {
+public class RestResult implements Message, Data, Serializable {
+
+    private static final String DEFAULT_SUCCEED_CODE = "V00-000200";
+    private static final String DEFAULT_FAILED_CODE = "E00-000500";
+    private static final String DEFAULT_SUCCEED_MESSAGE = "SUCCESS";
+    private static final String DEFAULT_FAILED_MESSAGE = "FAIL";
 
     /**
      * 操作成功与否 由后台返回前台
      */
-    private String success = SuccessFlag.TRUE.toString();
+    private String succeed = SuccessFlag.TRUE.value;
 
     /**
      * 处理信息代码
      */
-    private String code = "Y00-000200";
+    private String code = DEFAULT_SUCCEED_CODE;
 
     /**
      * 信息
      */
-    private String message = "SUCCESS";
+    private String message = DEFAULT_SUCCEED_MESSAGE;
 
     /**
      * 返回客户端所带的数据
      */
     private Map<String, Object> data = new LinkedHashMap<>();
 
-    public static Response success() {
-        return Response.builder().success(SuccessFlag.TRUE.toString()).message("SUCCESS").build();
+    public static Builder succeed() {
+        return RestResult.builder().succeed(SuccessFlag.TRUE.value).code(DEFAULT_SUCCEED_CODE).message(DEFAULT_SUCCEED_MESSAGE);
     }
 
-    public static Builder fail() {
-        return Response.builder().success(SuccessFlag.FALSE.toString()).message("FAIL");
+    public static Builder failed() {
+        return RestResult.builder().succeed(SuccessFlag.FALSE.value).code(DEFAULT_FAILED_CODE).message(DEFAULT_FAILED_MESSAGE);
     }
 
     @Override
-    public String getSuccess() {
-        return success;
+    public String getSucceed() {
+        return succeed;
     }
 
     public void setSuccessFalse() {
-        this.success = SuccessFlag.FALSE.value;
+        this.succeed = SuccessFlag.FALSE.value;
     }
 
     public void setSuccessTrue() {
-        this.success = SuccessFlag.TRUE.value;
+        this.succeed = SuccessFlag.TRUE.value;
     }
 
     /**
@@ -59,7 +64,7 @@ public class Response implements Message, Data, Serializable {
      * @return true：成功, false：未成功
      */
     public Boolean isSucceed() {
-        return SuccessFlag.TRUE.toString().equals(success);
+        return SuccessFlag.TRUE.code == 1 && SuccessFlag.TRUE.value.equals(succeed.toLowerCase());
     }
 
     /**
@@ -68,12 +73,12 @@ public class Response implements Message, Data, Serializable {
      * @return true：失败, false：无误
      */
     public Boolean isFailed() {
-        return !SuccessFlag.TRUE.toString().equals(success);
+        return SuccessFlag.FALSE.code == 0 && SuccessFlag.FALSE.value.equals(succeed.toLowerCase());
     }
 
     @Override
-    public void setSuccess(String success) {
-        this.success = success;
+    public void setSucceed(String succeed) {
+        this.succeed = succeed;
     }
 
     @Override
@@ -109,29 +114,29 @@ public class Response implements Message, Data, Serializable {
 
     @Override
     @SuppressWarnings("unchecked")
-    public <T> T getData(String dataName) {
+    public <T> T getData(String key) {
         if (this.data == null) {
             this.data = new LinkedHashMap<>();
         }
-        return (T) this.data.get(dataName);
+        return (T) this.data.get(key);
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public <T> T addData(String dataName, T dataValue) {
-        if (dataName == null) {
+    public <T> T data(String key, T value) {
+        if (key == null) {
             throw new IllegalArgumentException("Model attribute name must not be null");
         }
         if (this.data == null) {
             this.data = new LinkedHashMap<>();
         }
-        this.data.put(dataName, dataValue);
-        return dataValue;
+        this.data.put(key, value);
+        return value;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public <T> Map<String, T> addAllData(Map<String, T> data) {
+    public <T> Map<String, T> data(Map<String, T> data) {
         if (data == null) {
             throw new IllegalArgumentException("Model attribute must not be null");
         }
@@ -144,12 +149,18 @@ public class Response implements Message, Data, Serializable {
 
     public enum SuccessFlag {
 
-        TRUE("TRUE"), FALSE("FALSE");
+        TRUE(1, "true"), FALSE(0, "false");
 
-        String value;
+        private int code;
+        private String value;
 
-        SuccessFlag(String value) {
+        SuccessFlag(int code, String value) {
+            this.code = code;
             this.value = value;
+        }
+
+        public int getCode() {
+            return code;
         }
 
         public String getValue() {
@@ -157,24 +168,24 @@ public class Response implements Message, Data, Serializable {
         }
     }
 
-    public Response() {
+    public RestResult() {
         //默认为true
         setSuccessTrue();
     }
 
-    public Response(String code, String message) {
+    public RestResult(String code, String message) {
         this.code = code;
         this.message = message;
     }
 
-    public Response(String code, String message, Map<String, Object> data) {
+    public RestResult(String code, String message, Map<String, Object> data) {
         this.code = code;
         this.message = message;
         this.data = data;
     }
 
-    private Response(String success, String code, String message, Map<String, Object> data) {
-        this.success = success;
+    private RestResult(String succeed, String code, String message, Map<String, Object> data) {
+        this.succeed = succeed;
         this.code = code;
         this.message = message;
         this.data = data;
@@ -188,17 +199,17 @@ public class Response implements Message, Data, Serializable {
         /**
          * 操作成功与否 由后台返回前台
          */
-        private String success = SuccessFlag.TRUE.toString();
+        private String succeed = SuccessFlag.TRUE.value;
 
         /**
          * 处理信息代码
          */
-        private String code = "Y00-000200";
+        private String code = DEFAULT_SUCCEED_CODE;
 
         /**
          * 信息
          */
-        private String message = "SUCCESS";
+        private String message = DEFAULT_SUCCEED_MESSAGE;
 
         /**
          * 返回客户端所带的数据
@@ -208,8 +219,8 @@ public class Response implements Message, Data, Serializable {
         private Builder() {
         }
 
-        public Builder success(String success) {
-            this.success = success;
+        public Builder succeed(String succeed) {
+            this.succeed = succeed;
             return this;
         }
 
@@ -224,12 +235,18 @@ public class Response implements Message, Data, Serializable {
         }
 
         public Builder data(Map<String, Object> data) {
-            this.data = data;
+            if (this.data == null) {
+                this.data = new LinkedHashMap<>();
+            }
+            if (data == null) {
+                throw new IllegalArgumentException("Model dataMap must not be null");
+            }
+            this.data.putAll(data);
             return this;
         }
 
         @SuppressWarnings("unchecked")
-        public <T> Builder addData(String dataName, T dataValue) {
+        public <T> Builder data(String dataName, T dataValue) {
             if (this.data == null) {
                 this.data = new LinkedHashMap<>();
             }
@@ -240,30 +257,18 @@ public class Response implements Message, Data, Serializable {
             return this;
         }
 
-        public Builder addData(Map<String, Object> dataMap) {
-            if (this.data == null) {
-                this.data = new LinkedHashMap<>();
-            }
-            if (dataMap == null) {
-                throw new IllegalArgumentException("Model dataMap must not be null");
-            }
-            this.data.putAll(dataMap);
-            return this;
-        }
-
-
         @Override
         public String toString() {
             return "Builder{" +
-                    "success='" + success + '\'' +
+                    "succeed='" + succeed + '\'' +
                     ", code='" + code + '\'' +
                     ", message='" + message + '\'' +
                     ", data=" + data +
                     '}';
         }
 
-        public Response build() {
-            return new Response(success, code, message, data);
+        public RestResult build() {
+            return new RestResult(succeed, code, message, data);
         }
     }
 }

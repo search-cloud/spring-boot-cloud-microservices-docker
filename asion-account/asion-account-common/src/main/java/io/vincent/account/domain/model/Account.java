@@ -57,7 +57,7 @@ public class Account implements BaseDomainEntity<Long>, IAccount, Serializable {
 	/**
 	 * 微信用户的unionId
 	 */
-	private String wechatId;
+	private String weChatId;
 
 	/**
 	 * 账号是否可用（是否有效）
@@ -223,12 +223,12 @@ public class Account implements BaseDomainEntity<Long>, IAccount, Serializable {
 		this.email = email;
 	}
 
-	public String getWechatId() {
-		return wechatId;
+	public String getWeChatId() {
+		return weChatId;
 	}
 
-	public void setWechatId(String wechatId) {
-		this.wechatId = wechatId;
+	public void setWeChatId(String weChatId) {
+		this.weChatId = weChatId;
 	}
 
 	@Override

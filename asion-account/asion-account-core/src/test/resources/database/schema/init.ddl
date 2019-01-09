@@ -18,7 +18,7 @@ CREATE TABLE account (
     used_password VARCHAR(64) DEFAULT NULL COMMENT '曾用密码',
     mobile VARCHAR(64) DEFAULT NULL COMMENT '手机号',
     email VARCHAR(64) DEFAULT NULL COMMENT '邮件',
-    wechat_id VARCHAR(64) DEFAULT NULL COMMENT '微信id',
+    we_chat_id VARCHAR(64) DEFAULT NULL COMMENT '微信id',
     enabled TINYINT(1) DEFAULT 0 COMMENT '账号是否可用',
     parent_id BIGINT(20) DEFAULT NULL COMMENT '父账号id',
     status INT(8) DEFAULT NULL COMMENT '状态',

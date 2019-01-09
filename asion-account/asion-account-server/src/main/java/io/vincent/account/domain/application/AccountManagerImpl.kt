@@ -40,6 +40,21 @@ constructor(private val accountRepository: AccountRepository,
         return accountRepository.findById(id)
     }
 
+    override fun findByUsename(username: String): Account? {
+//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return null
+    }
+
+    override fun findByMobile(mobile: String): Account? {
+//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return null
+    }
+
+    override fun findByEmail(email: String): Account? {
+//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return null
+    }
+
     override fun findPage(pageNumber: Int, pageSize: Int): Page<Account> {
         return accountRepository.findPage(pageNumber, pageSize)
     }

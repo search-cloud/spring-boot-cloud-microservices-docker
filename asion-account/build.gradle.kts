@@ -103,6 +103,8 @@ project("asion-account-web") {
 
 //        implementation("de.codecentric:spring-boot-admin-starter-client:${springBootAdminVersion}")
         implementation("org.jolokia:jolokia-core")
+        implementation("com.github.penggle:kaptcha:2.3.2")
+        implementation("org.springframework.boot:spring-boot-starter-data-redis")
 
         implementation("redis.clients:jedis")
         implementation("org.springframework.boot:spring-boot-starter-web")

@@ -5,10 +5,10 @@ Authorization: Basic {{username}} {{password}}
 Content-Type: application/json
 
 {
-  "id": 1000,
-  "code": "testcode1",
-  "username": "test1",
-  "password": "test1"
+  "id": 1001,
+  "code": "testcode2",
+  "username": "test2",
+  "password": "test2"
 }
 
 ### page list
@@ -35,7 +35,7 @@ Content-Type: application/json
   "usedPassword": "test1",
   "mobile": "15333992199",
   "email": "vincent@seekheap.com",
-  "wechatId": "HsianLu",
+  "weChatId": "HsianLu",
   "enabled": true
 }
 
@@ -43,5 +43,20 @@ Content-Type: application/json
 
 DELETE http://{{host}}:{{port}}/accounts/{{accountId}}
 Accept: application/json
+
+### register
+
+GET http://{{host}}:{{port}}/register/15339992199
+Accept: application/json
+
+### captcha
+
+GET http://{{host}}:{{port}}/captcha
+Content-Type: image/jpeg
+
+### validate
+
+POST http://{{host}}:{{port}}/captcha/validate?captcha=np4n
+Set-Cookie: cid=6cedf285-74b1-4f18-a9b3-15a30934d0e3; Max-Age=180; Expires=Wed, 09-Jan-2019 04:21:31 GMT; Domain=localhost; Path=/
 
 ###

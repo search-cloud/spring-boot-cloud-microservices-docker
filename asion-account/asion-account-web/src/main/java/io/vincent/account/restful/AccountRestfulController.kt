@@ -29,6 +29,7 @@ class AccountRestfulController {
      */
     @GetMapping
     @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
     fun list(@RequestParam pageNum: Int, @RequestParam pageSize: Int): Page<Account> {
         return accountManager!!.findPage(pageNum, pageSize)
     }
@@ -54,6 +55,7 @@ class AccountRestfulController {
      */
     @GetMapping("/{id}")
     @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
     fun getOne(@PathVariable("id") id: Long): Account? {
         return accountManager!!.findOne(id)
     }

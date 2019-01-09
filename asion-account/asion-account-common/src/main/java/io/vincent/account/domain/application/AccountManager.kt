@@ -17,6 +17,9 @@ interface AccountManager {
     fun update(account: Account): Account
     fun findOne(id: Long): Account?
     fun findById(id: Long): Optional<Account>
+    fun findByUsename(username: String): Account?
+    fun findByMobile(mobile: String): Account?
+    fun findByEmail(email: String): Account?
     fun findPage(pageNumber: Int, pageSize: Int): Page<Account>
     fun disable(id: Long): Long?
 }

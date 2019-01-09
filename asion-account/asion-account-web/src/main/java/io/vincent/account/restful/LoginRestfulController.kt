@@ -3,12 +3,13 @@ package io.vincent.account.restful
 import com.alibaba.dubbo.config.annotation.Reference
 import io.vincent.account.domain.application.AccountManager
 import io.vincent.account.domain.model.Account
-import io.vincent.common.vo.Response
+import io.vincent.common.vo.RestResult
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
+
 /**
- * Register Restful controller.
+ * Login Restful controller.
  *
  * @author Vincent.
  * @since 2018/11/05.
@@ -29,10 +30,16 @@ class LoginRestfulController {
     @PostMapping("login")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    fun login(account: Account): Response {
-        val savedAccount = accountManager!!.create(account)
-        return Response.builder()
-                .addData("account", savedAccount)
+    fun login(@RequestParam username: String,
+              @RequestParam password: String,
+              @RequestParam(required = false) redirect: String,
+              @RequestParam(required = false) captcha: String,
+              @CookieValue(value = "cid", required = false) cid: String): RestResult {
+
+        val savedAccount = accountManager!!.findByUsename(username)
+
+        return RestResult.builder()
+                .data("account", savedAccount)
                 .code("A0020200")
                 .message("Successfully Register").build()
     }
@@ -46,10 +53,10 @@ class LoginRestfulController {
     @PostMapping("logout")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    fun logout(account: Account): Response {
+    fun logout(account: Account): RestResult {
         val savedAccount = accountManager!!.create(account)
-        return Response.builder()
-                .addData("account", savedAccount)
+        return RestResult.builder()
+                .data("account", savedAccount)
                 .code("A0020200")
                 .message("Successfully Register").build()
     }

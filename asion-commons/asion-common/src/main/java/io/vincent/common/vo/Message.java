@@ -1,7 +1,5 @@
 package io.vincent.common.vo;
 
-import java.util.List;
-
 /**
  * 与客户端交互时，返回的信息
  *
@@ -14,14 +12,14 @@ public interface Message {
      * 返回处理成功与否
      * @return "true" or "false"
      */
-    String getSuccess();
+    String getSucceed();
 
     /**
      * 设置成功与否
      *
-     * @param success 成功与否
+     * @param succeed 成功与否
      */
-    void setSuccess(String success);
+    void setSucceed(String succeed);
 
     /**
      * 返回信息的统一代码
