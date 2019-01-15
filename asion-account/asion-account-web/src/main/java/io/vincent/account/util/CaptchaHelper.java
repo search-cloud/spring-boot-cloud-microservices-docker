@@ -2,13 +2,20 @@ package io.vincent.account.util;
 
 import io.vincent.common.utils.StringUtils;
 import io.vincent.common.vo.RestResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.bind.DatatypeConverter;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -21,6 +28,8 @@ import java.util.concurrent.TimeUnit;
  */
 @Component
 public class CaptchaHelper {
+
+    private final static Logger logger = LoggerFactory.getLogger(CaptchaHelper.class);
 
     private final RedisTemplate<String, String> redisTemplate;
 
@@ -46,8 +55,8 @@ public class CaptchaHelper {
     }
 
     /**
-     * 验证字符验证码.
-     *
+     * Validate normal captcha.
+     * <p>
      * TODO save mobile captcha needed value.
      *
      * @param mobile             手机号
@@ -70,7 +79,7 @@ public class CaptchaHelper {
 
     /**
      * 根据用户名验证字符验证码(登录使用).
-     *
+     * <p>
      * TODO save username captcha needed value.
      *
      * @param username    用户名(手机号)
@@ -148,9 +157,13 @@ public class CaptchaHelper {
                            .data("captchaExpired", true).build();
         }
 
-        Object realCaptchaObject = redisTemplate.opsForValue().get(captchaUuid);
+        String realCaptcha = redisTemplate.opsForValue().get(captchaUuid);
 
-        if (realCaptchaObject == null) {
+        if (logger.isDebugEnabled()) {
+            logger.debug("Server: captcha={}, captchaUuid={}", realCaptcha, captchaUuid);
+        }
+
+        if (realCaptcha == null) {
             return RestResult.failed()
                            .code("E99-100502").message("captcha has expired!")
                            .data("captchaExpired", true).build();
@@ -160,7 +173,7 @@ public class CaptchaHelper {
             doExpireCaptcha(captchaUuid, response);
         }
 
-        if (captcha.equalsIgnoreCase(realCaptchaObject.toString())) {
+        if (captcha.equalsIgnoreCase(realCaptcha)) {
             return RestResult.succeed().build();
         }
 
@@ -182,6 +195,23 @@ public class CaptchaHelper {
         cookie.setDomain(domain);
         response.addCookie(cookie);
         redisTemplate.delete(Collections.singleton(uuid));
+    }
+
+    /**
+     * Encode captcha image to base64.
+     *
+     * @param captchaImg Captcha buffered image.
+     * @return Base64 String.
+     */
+    public static String encodeBase64(BufferedImage captchaImg) {
+        try {
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            ImageIO.write(captchaImg, "png", bos);
+            return DatatypeConverter.printBase64Binary(bos.toByteArray());
+        } catch (IOException e) {
+            logger.error("Encode captcha image to base64, error: ", e);
+            return "";
+        }
     }
 
 }

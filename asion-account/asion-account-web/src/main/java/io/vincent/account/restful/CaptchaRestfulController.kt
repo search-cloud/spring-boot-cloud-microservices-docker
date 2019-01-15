@@ -7,11 +7,10 @@ import io.vincent.common.vo.RestResult
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
-import java.io.IOException
-import javax.imageio.ImageIO
-import javax.servlet.ServletOutputStream
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
+
+
 
 /**
  * Captcha Restful controller.
@@ -25,7 +24,7 @@ class CaptchaRestfulController @Autowired
 constructor(private val captchaProducer: DefaultKaptcha, private val captchaHelper: CaptchaHelper) {
 
     /**
-     * 获取字符验证码.
+     * Get captcha.
      *
      * @param response httpResp.
      * @return Response.
@@ -38,47 +37,37 @@ constructor(private val captchaProducer: DefaultKaptcha, private val captchaHelp
         response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate")
         response.addHeader("Cache-Control", "post-check=0, pre-check=0")
         response.setHeader("Pragma", "no-cache")
-        response.contentType = "image/jpeg"
+        response.contentType = "image/png"
 
         val captcha = captchaProducer.createText()
-        // 缓存验证码
+        // cache captcha
         captchaHelper.cacheCaptcha(captcha, response)
 
-        val bi = captchaProducer.createImage(captcha)
-        var out: ServletOutputStream? = null
-        try {
-            out = response.outputStream
-            ImageIO.write(bi, "jpg", out!!)
-            out.flush()
-        } catch (e: IOException) {
-            logger.error("build captcha error: ", e)
-        } finally {
-            try {
-                out?.close()
-            } catch (e: IOException) {
-                logger.error("build captcha error: ", e)
-            }
+        val captchaImg = captchaProducer.createImage(captcha)
 
-        }
-        return RestResult.succeed().build()
+        return RestResult.succeed().data("captchaBase64", CaptchaHelper.encodeBase64(captchaImg)).build()
     }
 
     /**
-     * 验证验证码.
+     * Validate captcha.
      *
-     * @param captcha  验证码
-     * @param cid      uuid
+     * @param captcha  captcha need to validate.
+     * @param cid      uuid.
      * @param request  httpReq.
      * @param response httpResp.
      * @return validate result.
      */
     @PostMapping("/validate")
     @ResponseBody
-    fun validateCaptcha(@RequestParam("captcha") captcha: String?,
+    fun validateCaptcha(@RequestParam("captcha") captcha: String,
                         @CookieValue(value = "cid", required = false) cid: String,
                         request: HttpServletRequest, response: HttpServletResponse): RestResult {
 
-        return if (captcha == null || captcha == "") {
+        if (logger.isDebugEnabled) {
+            logger.debug("Client: captcha={}, captchaUuid={}", captcha, cid)
+        }
+
+        return if (captcha == "") {
             RestResult.failed().build()
         } else captchaHelper.validateCaptcha(null, captcha, false, IPUtil.getIpAddr(request), cid, false, response)
 

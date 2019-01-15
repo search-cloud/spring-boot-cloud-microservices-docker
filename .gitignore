@@ -92,6 +92,8 @@ hs_err_pid*
 out
 gen
 
+.ideaDataSources
+
 # mpeltonen/sbt-idea plugin
 .idea_modules/
 
