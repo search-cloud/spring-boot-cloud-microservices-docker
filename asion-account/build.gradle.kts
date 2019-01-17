@@ -118,6 +118,9 @@ project("asion-account-web") {
         implementation("org.webjars:vue:2.5.16")
         implementation("org.sitemesh:sitemesh:3.0.1")
 
+        implementation("io.springfox:springfox-swagger2:2.9.2")
+        implementation("io.springfox:springfox-swagger-ui:2.9.2")
+
         testImplementation("org.springframework.boot:spring-boot-starter-test")
     }
 

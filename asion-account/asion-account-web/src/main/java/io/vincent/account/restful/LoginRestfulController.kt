@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*
  * @since 2018/11/05.
  */
 @RestController
-@RequestMapping("/")
+@RequestMapping("/accounts")
 class LoginRestfulController {
 
     @Reference(version = "1.0.0", application = "\${dubbo.application.id}", url = "dubbo://192.168.10.94:9907")
@@ -27,7 +27,7 @@ class LoginRestfulController {
      * @param account 账号信息
      * @return 成功信息
      */
-    @PostMapping("login")
+    @PostMapping("/signin")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     fun login(@RequestParam username: String,
@@ -50,7 +50,7 @@ class LoginRestfulController {
      * @param account 账号信息
      * @return 成功信息
      */
-    @PostMapping("logout")
+    @PostMapping("/signout")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     fun logout(account: Account): RestResult {

@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse
  * @since 2018/11/05.
  */
 @RestController
-@RequestMapping("/captcha")
+@RequestMapping("/accounts/captcha")
 class CaptchaRestfulController @Autowired
 constructor(private val captchaProducer: DefaultKaptcha, private val captchaHelper: CaptchaHelper) {
 

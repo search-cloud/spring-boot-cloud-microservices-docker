@@ -30,7 +30,7 @@ class AccountRestfulController {
     @GetMapping
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    fun list(@RequestParam pageNum: Int, @RequestParam pageSize: Int): Page<Account> {
+    fun list(@RequestParam(defaultValue = "1", required = false) pageNum: Int, @RequestParam(defaultValue = "20", required = false) pageSize: Int): Page<Account> {
         return accountManager!!.findPage(pageNum, pageSize)
     }
 

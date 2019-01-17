@@ -13,10 +13,18 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.Contact;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.servlet.DispatcherType;
-import java.util.EnumSet;
-import java.util.Properties;
+import java.util.*;
+
+import static springfox.documentation.builders.PathSelectors.any;
 
 /**
  * @author Asion.
@@ -25,6 +33,7 @@ import java.util.Properties;
 @SpringBootApplication
 @EnableWebMvc
 @EnableAsync
+@EnableSwagger2
 public class AsionAccountWebApplication implements WebMvcConfigurer {
 
     public static void main(String[] args) {
@@ -41,6 +50,8 @@ public class AsionAccountWebApplication implements WebMvcConfigurer {
 //                builder.addExcludedPath("/jsondoc-ui.html");
                 // 在"/*"下面所有的页面都使用模板页"/static/layout.html"
                 builder.addDecoratorPath("/*", "/static/layout.html");
+                // swagger 单独渲染
+                builder.addExcludedPath("/swagger-ui.html");
             }
         });
         filterRegistrationBean.setDispatcherTypes(EnumSet.allOf(DispatcherType.class));
@@ -49,12 +60,17 @@ public class AsionAccountWebApplication implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+
+        registry.addResourceHandler("swagger-ui.html")
+                .addResourceLocations("classpath:/META-INF/resources/");
+
         if (!registry.hasMappingForPattern("/static/**")) {
-            registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+            registry.addResourceHandler("/static/**")
+                    .addResourceLocations("classpath:/static/");
         }
         if (!registry.hasMappingForPattern("/webjars/**")) {
-            registry.addResourceHandler("/webjars/**").addResourceLocations(
-                    "classpath:/META-INF/resources/webjars/");
+            registry.addResourceHandler("/webjars/**")
+                    .addResourceLocations("classpath:/META-INF/resources/webjars/");
         }
     }
 
@@ -78,5 +94,43 @@ public class AsionAccountWebApplication implements WebMvcConfigurer {
         return defaultKaptcha;
     }
 
+    private static final Contact DEFAULT_CONTACT = new Contact("Vincent.Lu", "http://seekheap.com/about", "luxuexian99@gmail.com");
+
+    private static final ApiInfo DEFAULT_API_INFO = metaData();
+
+    private static final Set<String> DEFAULT_PRODUCES_AND_CONSUMES = new HashSet<>(Collections.singletonList("application/json")); // "application/xml"
+
+    /**
+     * Default api Configuration.
+     * @return swagger Docket.
+     */
+    @Bean
+    public Docket api() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                       .apiInfo(DEFAULT_API_INFO)
+//                       .produces(DEFAULT_PRODUCES_AND_CONSUMES)
+//                       .consumes(DEFAULT_PRODUCES_AND_CONSUMES)
+//                       .pathMapping("/accounts")
+                       .select()
+                       .apis(RequestHandlerSelectors.basePackage("io.vincent.account.restful"))
+                       .paths(any())
+                       .build();
+    }
+
+    /**
+     * Default meta data.
+     * @return swagger ApiInfo.
+     */
+    private static ApiInfo metaData() {
+        return new ApiInfoBuilder()
+                       .title("Vincent Account REST API")
+                       .description("Vincent Account REST API for Online Store")
+                       .termsOfServiceUrl("http://www.seekheap.com")
+                       .contact(DEFAULT_CONTACT)
+                       .license("Apache License Version 2.0")
+                       .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0")
+                       .version("1.0.0")
+                       .build();
+    }
 
 }

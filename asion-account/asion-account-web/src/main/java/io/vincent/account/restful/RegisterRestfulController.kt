@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*
  * @since 2018/11/05.
  */
 @RestController
-@RequestMapping("/register")
+@RequestMapping("/accounts/signup")
 class RegisterRestfulController {
 
     @Reference(version = "1.0.0", application = "\${dubbo.application.id}", url = "dubbo://192.168.10.94:9907")
